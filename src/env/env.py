@@ -2,9 +2,6 @@ import os
 from pydrive2.auth import GoogleAuth
 from pydrive2.drive import GoogleDrive
 
-gauth = GoogleAuth()
-gauth.LocalWebserverAuth()
-drive = GoogleDrive(gauth)
 
 ENV_FILE = '../server/.env'
 FILE_NAME = '.env'
@@ -45,8 +42,12 @@ def push_env():
 if __name__ == "__main__":
     import sys
     if len(sys.argv) != 2:
-        print("Usage: python env.py {pull|push}")
+        print("Usage: python3 env.py {pull|push}")
         sys.exit(1)
+        
+    gauth = GoogleAuth()
+    gauth.LocalWebserverAuth()
+    drive = GoogleDrive(gauth)
     
     if sys.argv[1] == "pull":
         pull_env()
