@@ -84,6 +84,14 @@ Copy code
 **As a standard user, I want to be able to make my group private so other users are unable to find my group.**
 - **Acceptance criteria:** Group admins can set privacy settings for the group to "private," making it unsearchable and accessible only to invited members.
 - **Estimated time:** 3 hours
+  
+**As a standard user, I want to be able to post short clips of explainations of the topic I am studying, so others can find it easier to learn the same topic.**
+- **Acceptance criteria:** I can post a video for my friends to see. Videos are available on my profile. 
+- **Estimated time:** 5 hours
+
+**As a standard user, I want to be able to set a study timer so I can maintain good study habits along with my group.**
+- **Acceptance criteria:** I can set a timer for at least 24 hours and when the timer is done a sound will go off. 
+- **Estimated time:** 3 hours
 
 ### User Communication
 
