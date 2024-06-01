@@ -18,7 +18,7 @@ Once you have the prerequisites in place, follow these steps to build and run th
     Replace `username` with the actual GitHub username or organization name.
 
     ```bash
-    git clone https://github.com/username/StudyBuddies.git
+    git clone [https://github.com/username/StudyBuddies.git](https://github.com/UofT-UTSC-CS-sandbox/StudyBuddies)
     ```
 
 2. Navigate to the project directory in your terminal:
