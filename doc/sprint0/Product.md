@@ -13,10 +13,6 @@ At "commuter schools" such as TMU and UofT many students face social isolation, 
 StudyBuddies caters to a singular umbrella target audience: undergraduate university students attending schools with a large student-commuter population. By utilizing StudyBuddies, students can skip a lot of the awkwardness of trying to create friendships, this is because they can unite under the common theme of academic excellence. This is particularly beneficial for high performing students who experience frustration and even difficulties during their studies due to social isolation or not having a good support system of peers taking the same classes. StudyBuddies aims to streamline this multi-faceted problem of attending post secondary institutions, by providing users with the infrastructure to succeed in their classes while making their time at school worthwhile. By connecting these two key issues, StudyBuddies enhances the overall efficiency and effectiveness of university students trying to enjoy their experience to the fullest!
 
 
-## Personas
-:-------------------------:|:-------------------------:
-Personas can be found in sprint0 folder
-
 ## Why Choose Our Product
 
 By choosing StudyBuddies as a social media platform, users will develop a competitive edge over their peers as they will be immersed into an environment of academic success. Our product takes the novelty of common social media apps like TikTok and Instagram while leveraging what makes them most enjoyable into something productive. Many people don't want the added baggage or distractions that come from traditional social media apps and desire to immerse themselves in the best possible network to ensure their success.
