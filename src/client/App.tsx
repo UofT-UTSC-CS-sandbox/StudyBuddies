@@ -6,6 +6,7 @@ import DocumentData from './assets/Icons/DocumentData';
 import LightBulbPerson from './assets/Icons/LightbulbPerson';
 import Rocket from './assets/Icons/Rocket';
 import Logo from './assets/Icons/Logo';
+import React from 'react';
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
