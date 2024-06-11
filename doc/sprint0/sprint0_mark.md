@@ -106,30 +106,25 @@
     - 2 mark  = Unclear team organization
     - 0 marks = Not completed
 
-    Your mark: 0
-
-    Not found in `product.md`.
+    Your mark: 3
 
   - Decision making (max 2 marks)
     - 2 marks = decision making is described clearly
     - 1 mark  = unclear decision making
     - 0 marks = Not completed
 
-    Your mark: 0 
-    
-    Not found in `product.md`.
+    Your mark: 1
 
   - Meetings (max 2 marks)
     - 2 marks = Meeting plan described clearly
     - 1 mark  = Description is unclear
     - 0 marks = Description is missing; Not completed
   
-    Your mark: 0
+    Your mark: 1
 
-    Not found in `product.md`.
-
+    mark deduction for late submission.
     
-  product.md Total Mark: 43 / 53
+  product.md Total Mark: 48 / 53
 
   
 
@@ -265,4 +260,4 @@ Show some effort in git flow but did not use squash and merge nor conventional c
 
 
 ## Total Mark  
-82.5 / 100
+87.5 / 100
