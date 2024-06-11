@@ -26,4 +26,6 @@ func NewHandler(c *Config) {
 
 	accGroup := c.R.Group("/api/account")
 
+	accGroup.POST("/register", h.Register)
+
 }

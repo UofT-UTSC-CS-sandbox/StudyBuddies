@@ -12,7 +12,7 @@ type UserDatastore struct {
 	DB *gorm.DB
 }
 
-func UserDatastoreFactory(db *gorm.DB) model.UserDataService {
+func UserDatastoreFactory(db *gorm.DB) model.UserDataStore {
 	return &UserDatastore{
 		DB: db,
 	}
@@ -29,16 +29,18 @@ func (ud *UserDatastore) CreateUser(user *model.User) (*model.User, error) {
 	return user, nil
 }
 
-func (ud *UserDatastore) GetUserByEmail(email string) (*model.User, error) {
-	return nil, nil
+func (u *UserDatastore) GetUserByID(id string) (*model.User, error) {
+	var user model.User
+	if err := u.DB.Where("id = ?", id).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
-func (ud *UserDatastore) GetUserByID(id string) (*model.User, error) {
-	return nil, nil
-}
-
-func (ud *UserDatastore) DeleteUser(id string) error {
-
+func (u *UserDatastore) DeleteUser(id string) error {
+	if err := u.DB.Delete(&model.User{}, id).Error; err != nil {
+		return err
+	}
 	return nil
 }
 

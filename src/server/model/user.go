@@ -2,10 +2,10 @@ package model
 
 type User struct {
 	DefaultModel
-	Email    string `gorm:"not null;uniqueIndex" json:"email"`
-	Password string `gorm:"not null" json:"-"`
+	Auth0ID  string `gorm:"not null;uniqueIndex" json:"auth0_id"`
 	Username string `gorm:"not null;uniqueIndex" json:"username"`
 	Avatar   string `json:"image"`
+	Name     string `json:"name"`
 	//more fields to fill in
 }
 
@@ -17,9 +17,8 @@ type UserService interface {
 	DeleteUser(id string) error
 }
 
-type UserDataService interface {
+type UserDataStore interface {
 	CreateUser(user *User) (*User, error)
-	GetUserByEmail(email string) (*User, error)
 	GetUserByID(id string) (*User, error)
 	DeleteUser(id string) error
 }
