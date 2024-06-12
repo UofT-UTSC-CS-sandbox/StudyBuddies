@@ -31,7 +31,7 @@ func (ud *UserDatastore) CreateUser(user *model.User) (*model.User, error) {
 
 func (u *UserDatastore) GetUserByID(id string) (*model.User, error) {
 	var user model.User
-	if err := u.DB.Where("id = ?", id).First(&user).Error; err != nil {
+	if err := u.DB.Where("auth0_id = ?", id).First(&user).Error; err != nil {
 		return nil, err
 	}
 	return &user, nil
