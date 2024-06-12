@@ -1,20 +1,24 @@
-# Getting the server running
+# Getting the Project Running
 
 ## Prerequisites
 - [Docker][docker]
 - [Golang][go]
 - [pgcli][pgcli]
+- [XCode & Simulator][xcode]
+
+## Setting Up Server
 
 [docker]: https://docs.docker.com/desktop/install/mac-install/
 [go]: https://go.dev/doc/install
 [pgcli]: https://www.pgcli.com/install
+[xcode]: https://developer.apple.com/documentation/safari-developer-tools/installing-xcode-and-simulators
 
 Go Ahead and install the above software
 
-## Installing packages
+### Installing packages
 Navigate to `src/server` and run `go mod tidy`
 
-## Setting up postgres db via docker and linking it to server
+### Setting up postgres db via docker and linking it to server
 In a new terminal:
 
 
@@ -25,11 +29,12 @@ In a new terminal:
     CONTAINER ID   IMAGE             COMMAND                  CREATED       STATUS       PORTS                    NAMES
     <some alpha-nums string>   postgres:alpine   "docker-entrypoint.s…"   <1-3s>        <1-3s>   0.0.0.0:5432->5432/tcp   postgres
     ``` 
+1. Check [here](#postgres-navigation) for more about postgres
 1. In the `src/server` directory:
     1. `touch .env`
     1. In your IDE, open the .env file and add the line: `DATABASE_URL=postgresql://root:password@localhost:5432/postgres`
 
-## Running the server
+### Running the server
 1. In the `src/server` directory, run `go run github.com/VibeMerchants/StudyBuddies` 
 1. Confirm output is similar to:
 ```bash
@@ -45,3 +50,17 @@ Database URL:  postgresql://root:password@localhost:5432/postgres
 [GIN-debug] POST   /api/account/register     --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).Register-fm (4 handlers)
 [GIN-debug] POST   /api/account/auth/callback --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).AuthCallbackHandler-fm (4 handlers)
 ```
+## Setting Up Client
+1. Navigate to the `src/client/StudyBuddies` (got to love js bootstrapping tools)
+1. Run `npx expo install && npm install`
+1. If there are any install errors, get to googling
+1. Else, Run `npx expo run ios`
+1. This will launch the iOS simulator with the app
+
+### Postgres Navigation
+1. To connect to the docker image's postgres db, run `pgcli postgresql://root:password@localhost:5432/postgres`
+#### Useful Commands
+- `\l` to list all databases
+- `\d` to list all tables
+- `TABLE <table-name>` to view the contents of a table
+- `TRUNCATE <table-name>` to delete **all** contents of a table. **PLEASE ONLY RUN THIS IN TESTING**
