@@ -87,12 +87,9 @@ func getAuth0IDFromToken(token string, ctx *gin.Context) (string, error) {
 	})
 
 	if err != nil {
-		fmt.Println("Error parsing token: ", err)
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
 		return "", err
 	}
-
-	fmt.Println("Parsed Token: ", parsedToken)
 
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 	if !ok || !parsedToken.Valid {
