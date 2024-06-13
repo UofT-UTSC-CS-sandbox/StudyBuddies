@@ -45,7 +45,7 @@ func main() {
 		if err := srv.ListenAndServe(); err != nil {
 			log.Fatalf("Failed to start server: %v", err)
 		}
-	}() //Start server in a goroutine, shutdown is graceful
+	}() //Server should not block the main thread
 
 	quitChan := make(chan os.Signal, 1)
 
@@ -62,5 +62,12 @@ func main() {
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatalf("Failed to shutdown server: %v", err)
 	}
+
+	select {
+	case <-ctx.Done():
+		log.Println("Server shutdown w/ timeout of 5s exceeded")
+	}
+
+	log.Println("Server shutdown gracefully")
 
 }
