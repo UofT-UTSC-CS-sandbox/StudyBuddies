@@ -17,6 +17,12 @@ func injectServices(d *data, cfg config.Config) (*gin.Engine, error) {
 		UserStore: userStore,
 	})
 
+	courseStore := datastore.CourseDatastoreFactory(d.DB)
+
+	courseService := service.NewCourseService(&service.CourseServiceConfig{
+		CourseStore: courseStore,
+	})
+
 	router := gin.Default()
 
 	cors := cors.New(cors.Options{
@@ -28,8 +34,9 @@ func injectServices(d *data, cfg config.Config) (*gin.Engine, error) {
 	router.Use(cors)
 
 	handlers.NewHandler(&handlers.Config{
-		R:           router,
-		UserService: userService,
+		R:             router,
+		UserService:   userService,
+		CourseService: courseService,
 	})
 
 	return router, nil

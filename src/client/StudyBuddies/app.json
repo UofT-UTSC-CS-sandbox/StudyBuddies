@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "StudyBuddies",
+    "scheme": "studybuddies",
     "slug": "studybuddies",
     "version": "1.0.0",
     "orientation": "portrait",

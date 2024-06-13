@@ -8,17 +8,20 @@ import (
 )
 
 type Handler struct {
-	userService model.UserService
+	userService   model.UserService
+	courseService model.CourseService
 }
 
 type Config struct {
-	R           *gin.Engine
-	UserService model.UserService
+	R             *gin.Engine
+	UserService   model.UserService
+	CourseService model.CourseService
 }
 
 func NewHandler(c *Config) {
 	h := &Handler{
-		userService: c.UserService,
+		userService:   c.UserService,
+		courseService: c.CourseService,
 	}
 	c.R.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"message": "Not Found: Invalid API Route"})
@@ -28,5 +31,10 @@ func NewHandler(c *Config) {
 
 	accGroup.POST("/register", h.Register)
 	accGroup.POST("/auth/callback", h.AuthCallbackHandler)
+	accGroup.POST("/login", h.Login)
+	accGroup.DELETE("/delete", h.Delete)
+	accGroup.GET("/courses", h.GetCourses)
+	accGroup.POST("/courses/join", h.JoinCourse)
+	accGroup.POST("/courses/leave", h.LeaveCourse)
 
 }

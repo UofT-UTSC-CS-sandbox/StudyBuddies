@@ -22,7 +22,7 @@ func (ud *UserDatastore) CreateUser(user *model.User) (*model.User, error) {
 
 	if res := ud.DB.Create(&user); res.Error != nil {
 		if duplicateKeyError(res.Error) {
-			return nil, errors.NewBadReqError(errors.ExistingEmail)
+			return nil, errors.NewBadReqError(errors.ExistingUser)
 		}
 	}
 
@@ -38,9 +38,55 @@ func (u *UserDatastore) GetUserByID(id string) (*model.User, error) {
 }
 
 func (u *UserDatastore) DeleteUser(id string) error {
-	if err := u.DB.Delete(&model.User{}, id).Error; err != nil {
+	if err := u.DB.Where("auth0_id = ?", id).Delete(&model.User{}).Error; err != nil {
 		return err
 	}
+	return nil
+}
+
+func (u *UserDatastore) GetCourses(id string) ([]model.Course, error) {
+	var user model.User
+	if err := u.DB.Where("auth0_id = ?", id).Preload("Courses").First(&user).Error; err != nil {
+		return nil, err
+	}
+	return user.Courses, nil
+}
+
+func (u *UserDatastore) JoinCourse(userID string, courseName string) error {
+	var user model.User
+	var course model.Course
+
+	if err := u.DB.Where("auth0_id = ?", userID).First(&user).Error; err != nil {
+		return err
+	}
+
+	if err := u.DB.Where("name = ?", courseName).First(&course).Error; err != nil {
+		return err
+	}
+
+	if err := u.DB.Model(&user).Association("Courses").Append(&course); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (u *UserDatastore) LeaveCourse(userID string, courseName string) error {
+	var user model.User
+	var course model.Course
+
+	if err := u.DB.Where("auth0_id = ?", userID).First(&user).Error; err != nil {
+		return err
+	}
+
+	if err := u.DB.Where("name = ?", courseName).First(&course).Error; err != nil {
+		return err
+	}
+
+	if err := u.DB.Model(&user).Association("Courses").Delete(&course); err != nil {
+		return err
+	}
+
 	return nil
 }
 

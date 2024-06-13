@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Button, StyleSheet, TextInput } from 'react-native';
 import { Auth0Provider, useAuth0 } from 'react-native-auth0';
 import * as SecureStore from 'expo-secure-store';
 import axios from 'axios';
 
-const LoginButton = ({ setAuth0ID, setIsAuthenticated }) => {
+const LoginButton = ({ setAuth0ID, setIsAuthenticated, setIsRegistered }) => {
   const { authorize, getCredentials } = useAuth0();
 
-  const loginWithGoogle = async () => {
+  const login = async () => {
     try {
-      await authorize({ connection: 'google-oauth2' });
+      await authorize({
+        connection: 'google-oauth2',
+         
+      });
 
       const credentials = await getCredentials();
       if (!credentials) {
@@ -26,14 +29,14 @@ const LoginButton = ({ setAuth0ID, setIsAuthenticated }) => {
       });
 
       if (response.data.message === "New user, please register") {
-        if (response.data.auth0_id) {
-          setAuth0ID(response.data.auth0_id);
-        }
+        setAuth0ID(credentials.idToken);
         setIsAuthenticated(true);
+        setIsRegistered(false);
         console.log('New user, please register');
       } else {
-        setAuth0ID(response.data.auth0_id);
+        setAuth0ID(credentials.idToken);
         setIsAuthenticated(true);
+        setIsRegistered(true);
         console.log('User already registered');
       }
     } catch (error) {
@@ -41,10 +44,10 @@ const LoginButton = ({ setAuth0ID, setIsAuthenticated }) => {
     }
   };
 
-  return <Button onPress={loginWithGoogle} title="Log in with Google" />;
+  return <Button onPress={login} title="Log in with Google" />;
 };
 
-const RegisterForm = ({ auth0ID }) => {
+const RegisterForm = ({ auth0ID, onRegisterComplete }) => {
   const [username, setUsername] = useState<string>('');
   const [name, setName] = useState<string>('');
 
@@ -63,6 +66,7 @@ const RegisterForm = ({ auth0ID }) => {
       });
 
       console.log(response.data);
+      onRegisterComplete();
     } catch (error) {
       console.error(error);
     }
@@ -89,19 +93,38 @@ const RegisterForm = ({ auth0ID }) => {
   );
 };
 
-export default function App() {
+const HomeScreen = ({ onLogout }) => (
+  <View style={styles.homeContainer}>
+    <Text style={styles.title}>Welcome to StudyBuddies!</Text>
+    <Text>You are now logged in.</Text>
+    <Button title="Logout" onPress={onLogout} />
+  </View>
+);
+
+const App = () => {
   const [auth0ID, setAuth0ID] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
-  const { getCredentials } = useAuth0();
+  const { getCredentials, clearSession } = useAuth0();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const checkSession = async () => {
       try {
-        const credentials = await getCredentials();
-        if (credentials) {
-          setAuth0ID(credentials.idToken);
-          setIsAuthenticated(true);
+        const token = await SecureStore.getItemAsync('userToken');
+        if (token) {
+          const response = await axios.post('http://localhost:8080/api/account/auth/callback', null, {
+            headers: {
+              Authorization: `${token}`
+            }
+          });
+
+          if (response.data.message === "User already registered") {
+            setAuth0ID(token);
+            setIsAuthenticated(true);
+            setIsRegistered(true);
+            console.log('User already registered');
+          }
         }
       } catch (error) {
         console.error(error);
@@ -110,18 +133,43 @@ export default function App() {
     checkSession();
   }, []);
 
+  const handleRegisterComplete = () => {
+    setIsRegistered(true);
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await clearSession({ federated: true })
+      await SecureStore.deleteItemAsync('userToken');
+      setIsAuthenticated(false);
+      setIsRegistered(false);
+      setAuth0ID('');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>StudyBuddies</Text>
+      {!isAuthenticated ? (
+        <View style={styles.buttonContainer}>
+          <LoginButton setAuth0ID={setAuth0ID} setIsAuthenticated={setIsAuthenticated} setIsRegistered={setIsRegistered} />
+        </View>
+      ) : isRegistered ? (
+        <HomeScreen onLogout={handleLogout} />
+      ) : (
+        <RegisterForm auth0ID={auth0ID} onRegisterComplete={handleRegisterComplete} />
+      )}
+    </View>
+  );
+};
+
+export default function Root() {
   return (
     <Auth0Provider domain='dev-b5grqf3saaizzpim.us.auth0.com' clientId='rytSm1ChNsc22WcrguxPUCyGi7s3HYgS'>
-      <View style={styles.container}>
-        <Text style={styles.title}>StudyBuddies</Text>
-        {!isAuthenticated ? (
-          <View style={styles.buttonContainer}>
-            <LoginButton setAuth0ID={setAuth0ID} setIsAuthenticated={setIsAuthenticated} />
-          </View>
-        ) : (
-          <RegisterForm auth0ID={auth0ID} />
-        )}
-      </View>
+      <App />
     </Auth0Provider>
   );
 }
@@ -132,6 +180,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
+  },
+  homeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     fontSize: 32,

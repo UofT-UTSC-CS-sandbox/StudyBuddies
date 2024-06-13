@@ -17,7 +17,7 @@ const (
 // Account Errors
 const (
 	InvalidCredentials = "Invalid email or password"
-	ExistingEmail      = "An account with that email already exists"
+	ExistingUser       = "An account already exists for this user"
 	InvalidResetToken  = "Invalid reset token"
 )
 
