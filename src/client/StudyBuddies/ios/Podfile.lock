@@ -16,7 +16,7 @@ PODS:
   - EXJSONUtils (0.13.1)
   - EXManifests (0.14.3):
     - ExpoModulesCore
-  - Expo (51.0.13):
+  - Expo (51.0.12):
     - ExpoModulesCore
   - expo-dev-client (4.0.16):
     - EXManifests
@@ -1249,13 +1249,11 @@ PODS:
   - React-Mapbuffer (0.74.2):
     - glog
     - React-debug
-  - react-native-geolocation-service (5.3.1):
-    - React
-  - react-native-google-maps (1.15.6):
+  - react-native-google-maps (1.14.0):
     - Google-Maps-iOS-Utils (= 4.2.2)
     - GoogleMaps (= 7.4.0)
     - React-Core
-  - react-native-maps (1.15.6):
+  - react-native-maps (1.14.0):
     - React-Core
   - react-native-safe-area-context (4.10.1):
     - React-Core
@@ -1638,7 +1636,6 @@ DEPENDENCIES:
   - React-jsitracing (from `../node_modules/react-native/ReactCommon/hermes/executor/`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
-  - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -1789,8 +1786,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
-  react-native-geolocation-service:
-    :path: "../node_modules/react-native-geolocation-service"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-maps:
@@ -1869,7 +1864,7 @@ SPEC CHECKSUMS:
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
   EXJSONUtils: 30c17fd9cc364d722c0946a550dfbf1be92ef6a4
   EXManifests: c1fab4c3237675e7b0299ea8df0bcb14baca4f42
-  Expo: 5fb0613e7cfc806c500400eabb96b1a75473be1b
+  Expo: be0f48f4f1aa08d863d88480c2810b956e05e813
   expo-dev-client: bdb07dec9277c99f5045b02ef8398575aa3fb907
   expo-dev-launcher: d6d7d43b65527194d855b20d4b7781d417397b7f
   expo-dev-menu: 9b9886b383163f14821e624f3eb51a2084491aa2
@@ -1917,9 +1912,8 @@ SPEC CHECKSUMS:
   React-jsitracing: 0fa7f78d8fdda794667cb2e6f19c874c1cf31d7e
   React-logger: 29fa3e048f5f67fe396bc08af7606426d9bd7b5d
   React-Mapbuffer: bf56147c9775491e53122a94c423ac201417e326
-  react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
-  react-native-google-maps: 7ca1d252585c9ee2bbe2a3f64e4c061801b43d64
-  react-native-maps: 7b2c2cee95271592a92ba485eea1dec66a363a6e
+  react-native-google-maps: 94df984b1647973baffe17c0b7b52828d6b69d94
+  react-native-maps: cbf2f03bfeebfd7ec45966b066db13a075fd2af3
   react-native-safe-area-context: dcab599c527c2d7de2d76507a523d20a0b83823d
   React-nativeconfig: 9f223cd321823afdecf59ed00861ab2d69ee0fc1
   React-NativeModulesApple: ff7efaff7098639db5631236cfd91d60abff04c0
