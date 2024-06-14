@@ -1275,10 +1275,10 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@expo/cli@0.18.17":
-  version "0.18.17"
-  resolved "https://registry.npmjs.org/@expo/cli/-/cli-0.18.17.tgz"
-  integrity sha512-r/u9bMH/HWG1UTqwtlf/7Mek4Y8b4aJB5YphSU2uqAqxz37wDm9Cb+9QAwBj9RUT23BqxqXlM935D5jBE6THyg==
+"@expo/cli@0.18.18":
+  version "0.18.18"
+  resolved "https://registry.npmjs.org/@expo/cli/-/cli-0.18.18.tgz"
+  integrity sha512-57jt0d8EiPwVFjw6E5vTvgmOdk2kSrOCUsQMRLU9050kgp1eK3ed3ESWeC/68j6Oll9j/6i+Ag7QmiGJPs4n+Q==
   dependencies:
     "@babel/runtime" "^7.20.0"
     "@expo/code-signing-certificates" "0.0.5"
@@ -1288,7 +1288,7 @@
     "@expo/env" "~0.3.0"
     "@expo/image-utils" "^0.5.0"
     "@expo/json-file" "^8.3.0"
-    "@expo/metro-config" "~0.18.0"
+    "@expo/metro-config" "~0.18.6"
     "@expo/osascript" "^2.0.31"
     "@expo/package-manager" "^1.5.0"
     "@expo/plist" "^0.1.0"
@@ -1469,10 +1469,10 @@
     json5 "^2.2.2"
     write-file-atomic "^2.3.0"
 
-"@expo/metro-config@~0.18.0", "@expo/metro-config@0.18.5":
-  version "0.18.5"
-  resolved "https://registry.npmjs.org/@expo/metro-config/-/metro-config-0.18.5.tgz"
-  integrity sha512-6jtT8f8sA+qmXWsuG4hGnd1Ogs4GDv+JPyPu0+jUZbbsXBJjk1y5DC2f0mjmtmOlk6q138y6CszaDuzJF5BP2g==
+"@expo/metro-config@~0.18.6", "@expo/metro-config@0.18.6":
+  version "0.18.6"
+  resolved "https://registry.npmjs.org/@expo/metro-config/-/metro-config-0.18.6.tgz"
+  integrity sha512-oJRJpTwDBCVEQKQpfmLogZIuwPXQr0i7+PBwMZQihZMWmqHfUxVS9ROZy7gr3TMAMfBhCkizJ5WN0RWVAc1DLg==
   dependencies:
     "@babel/core" "^7.20.0"
     "@babel/generator" "^7.20.5"
@@ -2894,6 +2894,11 @@
     graceful-fs "^4.1.3"
     prompts "^2.4.2"
     semver "^7.5.2"
+
+"@react-native-picker/picker@^2.7.7":
+  version "2.7.7"
+  resolved "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.7.7.tgz"
+  integrity sha512-CTHthVmx8ujlH/u5AnxLQfsheh/DoEbo+Kbx0HGTlbKVLC1eZ4Kr9jXIIUcwB7JEgOXifdZIPQCsoTc/7GQ0ag==
 
 "@react-native/assets-registry@0.74.84":
   version "0.74.84"
@@ -5726,15 +5731,15 @@ expo-web-browser@~13.0.0, expo-web-browser@~13.0.3:
   integrity sha512-HXb7y82ApVJtqk8tManyudtTrCtx8xcUnVzmJECeHCB0SsWSQ+penVLZxJkcyATWoJOsFMnfVSVdrTcpKKGszQ==
 
 expo@*, expo@>=48.0.0, expo@~51.0.12:
-  version "51.0.12"
-  resolved "https://registry.npmjs.org/expo/-/expo-51.0.12.tgz"
-  integrity sha512-BK0CFw6OEamd8jdGxkpNGAl6GsLCpiFxtUwXyAZvyuf9dJuOQYsu+8vYgstpTwANeIbkjZyxXnNlB2j6JD8lLg==
+  version "51.0.13"
+  resolved "https://registry.npmjs.org/expo/-/expo-51.0.13.tgz"
+  integrity sha512-i7cNdkdscyiXmUPV/ZYY7ne8lHYocQeCbyPAEjnZwr28K0CG69Lrqw6k7J5XqfnikddqTSQMqrto5MTlARQ21w==
   dependencies:
     "@babel/runtime" "^7.20.0"
-    "@expo/cli" "0.18.17"
+    "@expo/cli" "0.18.18"
     "@expo/config" "9.0.1"
     "@expo/config-plugins" "8.0.5"
-    "@expo/metro-config" "0.18.5"
+    "@expo/metro-config" "0.18.6"
     "@expo/vector-icons" "^14.0.0"
     babel-preset-expo "~11.0.9"
     expo-asset "~10.0.8"
@@ -5928,9 +5933,9 @@ for-each@^0.3.3:
     is-callable "^1.1.3"
 
 foreground-child@^3.1.0:
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/foreground-child/-/foreground-child-3.1.1.tgz"
-  integrity sha512-TMKDUnIte6bfb5nWv7V/caI169OHgvwjb7V4WkeUvbQQdjr5rWKqHFiKWb/fcOwB+CzBT+qbWjvj+DVwRskpIg==
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/foreground-child/-/foreground-child-3.2.0.tgz"
+  integrity sha512-CrWQNaEl1/6WeZoarcM9LHupTo3RpZO2Pdk1vktwzPiQTsJnAKJmm3TACKeG5UZbWDfaH2AbvYxzP96y0MT7fA==
   dependencies:
     cross-spawn "^7.0.0"
     signal-exit "^4.0.1"
@@ -8718,7 +8723,7 @@ punycode@^1.4.1:
   resolved "https://registry.npmjs.org/punycode/-/punycode-1.4.1.tgz"
   integrity sha512-jmYNElW7yvO7TV33CjSmvSiE2yco3bV2czu/OzDKdMNVZQWfxCblURLhf+47syQRBntjfLdd/H0egrzIG+oaFQ==
 
-punycode@^2.1.0, punycode@^2.1.1:
+punycode@^2.1.0, punycode@^2.1.1, punycode@^2.3.1:
   version "2.3.1"
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.3.1.tgz"
   integrity sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==
@@ -8849,6 +8854,11 @@ react-native-auth0@^3.2.1:
     prop-types "^15.8.1"
     url "^0.11.0"
 
+react-native-geolocation-service@^5.3.1:
+  version "5.3.1"
+  resolved "https://registry.npmjs.org/react-native-geolocation-service/-/react-native-geolocation-service-5.3.1.tgz"
+  integrity sha512-LTXPtPNmrdhx+yeWG47sAaCgQc3nG1z+HLLHlhK/5YfOgfLcAb9HAkhREPjQKPZOUx8pKZMIpdGFUGfJYtimXQ==
+
 react-native-gesture-handler@~2.16.1:
   version "2.16.2"
   resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.16.2.tgz"
@@ -8869,10 +8879,10 @@ react-native-helmet-async@2.0.4:
     react-fast-compare "^3.2.2"
     shallowequal "^1.1.0"
 
-react-native-maps@1.14.0:
-  version "1.14.0"
-  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.14.0.tgz"
-  integrity sha512-ai7h4UdRLGPFCguz1fI8n4sKLEh35nZXHAH4nSWyAeHGrN8K9GjICu9Xd4Q5Ok4h+WwrM6Xz5pGbF3Qm1tO6iQ==
+react-native-maps@^1.15.6:
+  version "1.15.6"
+  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.15.6.tgz"
+  integrity sha512-RRyjMvpMoV3249kJ9PA1JjZE/8FmYYHrHuloI/Vzkg/DjxFtJAbFnCnhg5AyS/LI5/n2riulbVl4qpiKpuO22Q==
   dependencies:
     "@types/geojson" "^7946.0.13"
 

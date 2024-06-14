@@ -49,6 +49,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#3a3a3c',
     color: '#fff',
   },
+  formGroupPicker: {
+    width: '100%',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#444',
+    borderRadius: 5,
+    backgroundColor: '#3a3a3c',
+    color: '#fff',
+  },
   formSubmitButton: {
     width: '100%',
     padding: 10,
