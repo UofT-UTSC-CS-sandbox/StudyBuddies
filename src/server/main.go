@@ -37,7 +37,7 @@ func main() {
 	}
 
 	srv := &http.Server{
-		Addr:    ":42069",
+		Addr:    ":8080",
 		Handler: router,
 	}
 
