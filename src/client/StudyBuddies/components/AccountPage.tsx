@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import styles from '../app/style/account';
+import styles from '../app/style/account'; // Import the styles without the .ts extension
+
 type Contact = {
   firstName: string;
   lastName: string;
@@ -48,7 +50,7 @@ function ContactDetail({ contact, handleChange, handleSubmit }) {
           />
         </View>
         <TouchableOpacity onPress={handleSubmit} style={styles.formSubmitButton}>
-          <Text style={styles.formGroupLabel}>Save</Text>
+          <Text style={styles.formSubmitButtonText}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -85,3 +87,4 @@ export default function App() {
     </View>
   );
 }
+

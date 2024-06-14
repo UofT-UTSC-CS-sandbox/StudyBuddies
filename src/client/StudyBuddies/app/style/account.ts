@@ -1,5 +1,6 @@
+import { StyleSheet, Dimensions } from 'react-native';
 
-import { StyleSheet } from 'react-native';
+const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   app: {
@@ -7,12 +8,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: '#1c1c1e',
     textAlign: 'center',
-    minHeight: '100vh',
+    minHeight: screenHeight,
     paddingTop: 50,
+    flex: 1,
   },
   appContactDetail: {
     padding: 20,
     textAlign: 'left',
+    flex: 1,
+    justifyContent: 'center',
   },
   contactPhoto: {
     width: 100,
@@ -20,18 +24,18 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: '#444',
     marginBottom: 20,
-    marginHorizontal: 'auto',
+    alignSelf: 'center',
   },
   form: {
     backgroundColor: '#2c2c2e',
     padding: 20,
     borderRadius: 10,
+    marginHorizontal: 20,
   },
   formGroup: {
     marginBottom: 15,
   },
   formGroupLabel: {
-    display: 'block',
     marginBottom: 5,
     fontWeight: 'bold',
     color: '#888',
@@ -49,13 +53,11 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     backgroundColor: '#007aff',
-    border: 'none',
     borderRadius: 5,
-    color: '#fff',
-    cursor: 'pointer',
+    alignItems: 'center',
   },
-  formSubmitButtonHover: {
-    backgroundColor: '#005bb5',
+  formSubmitButtonText: {
+    color: '#fff',
   },
 });
 
