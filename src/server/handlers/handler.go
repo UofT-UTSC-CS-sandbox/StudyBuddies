@@ -36,5 +36,12 @@ func NewHandler(c *Config) {
 	accGroup.GET("/courses", h.GetCourses)
 	accGroup.POST("/courses/join", h.JoinCourse)
 	accGroup.POST("/courses/leave", h.LeaveCourse)
+	accGroup.POST("/courses/create", h.CreateCourse)
+	accGroup.DELETE("/courses/delete", h.DeleteCourse)
+	accGroup.GET("/courses/get", h.GetCourse)
+	accGroup.GET("/courses/get_all", h.GetAllCourses)
+	accGroup.GET("/courses/students", h.GetStudents)
+	accGroup.PUT("/courses/add_student", h.AddStudent)
+	accGroup.PUT("/courses/remove_student", h.RemoveStudent)
 
 }

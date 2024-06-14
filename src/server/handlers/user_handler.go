@@ -125,7 +125,7 @@ func (h *Handler) Register(ctx *gin.Context) {
 		userData.Auth0ID = auth0ID
 	}
 
-	user := model.User{Auth0ID: userData.Auth0ID, Username: userData.Username, Name: userData.Name}
+	user := model.User{Auth0ID: userData.Auth0ID, Username: userData.Username, Name: userData.Name, Courses: []model.Course{}}
 	if _, err := h.userService.Register(&user); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
@@ -200,6 +200,9 @@ func (h *Handler) JoinCourse(ctx *gin.Context) {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
 		return
 	}
+
+	fmt.Println("Auth0 ID: ", auth0ID)
+	fmt.Println("Course Name: ", courseData.CourseName)
 
 	if err := h.userService.JoinCourse(auth0ID, courseData.CourseName); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
