@@ -26,6 +26,7 @@ func NewData(ctx context.Context, cfg config.Config) (*data, error) {
 
 	if err = db.AutoMigrate(
 		&model.User{},
+		&model.Course{},
 	); err != nil {
 		return nil, fmt.Errorf("failed to migrate database: %v", err)
 	}

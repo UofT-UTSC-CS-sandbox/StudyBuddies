@@ -35,7 +35,7 @@ func (h *Handler) CreateCourse(ctx *gin.Context) {
 		return
 	}
 
-	course := model.Course{Name: courseData.CourseName, NumStudents: 0}
+	course := model.Course{Name: courseData.CourseName, NumStudents: 0, Students: []model.User{}}
 	if _, err := h.courseService.CreateCourse(&course); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

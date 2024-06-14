@@ -9,7 +9,7 @@ import (
 // A copy of the gorm.Model pretty much
 
 type DefaultModel struct {
-	ID        string    `gorm:"primary_key" json:"id"`
+	ID        uint      `gorm:"primary_key" json:"id"`
 	CreatedAt time.Time `gorm:"index" json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
