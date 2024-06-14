@@ -65,7 +65,13 @@ func (h *Handler) GetAllCourses(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, gin.H{"courses": courses})
+
+	courseNames := make([]string, len(courses))
+	for i, course := range courses {
+		courseNames[i] = course.Name
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"courses": courseNames})
 }
 
 func (h *Handler) GetStudents(ctx *gin.Context) {
