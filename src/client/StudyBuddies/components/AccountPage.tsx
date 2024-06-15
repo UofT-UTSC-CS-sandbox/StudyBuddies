@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import styles from '../app/style/account'; // Import the styles without the .ts extension
+import styles from '../app/style/account'; // Adjust the import path as necessary
+
+const { width: screenWidth } = Dimensions.get('window');
 
 type Contact = {
   firstName: string;
@@ -9,7 +11,25 @@ type Contact = {
   courses: string[];
 };
 
-function ContactDetail({ contact, handleChange, handleSubmit, handleCourseChange }) {
+const initialAvailableCourses = [
+  'Math',
+  'Science',
+  'History',
+  'Art',
+  'Music'
+];
+
+function ContactDetail({
+  contact,
+  handleChange,
+  handleSubmit,
+  handleCourseSelection,
+  selectedCourse,
+  handleRemoveCourse,
+  showPicker,
+  togglePicker,
+  availableCourses
+}) {
   return (
     <View style={styles.appContactDetail}>
       <View style={styles.contactPhoto}></View>
@@ -37,25 +57,48 @@ function ContactDetail({ contact, handleChange, handleSubmit, handleCourseChange
             required
           />
         </View>
-        <View style={styles.formGroup}>
-          <Text style={styles.formGroupLabel}>Courses</Text>
-          <View style={styles.formGroupPicker}>
-            <Picker
-              selectedValue={contact.courses[0]}
-              onValueChange={(itemValue) => handleCourseChange(itemValue)}
-              style={{ color: '#fff' }} // This inline style ensures the text color is white
-            >
-              <Picker.Item label="Select a course" value="" />
-              <Picker.Item label="Linear Algebra 2" value="MATB42" />
-              <Picker.Item label="Systems Programming" value="CSCB09" />
-              <Picker.Item label="Software Design" value="CSCB07" />
-              {/* Add more courses as needed */}
-            </Picker>
+        <View style={styles.bottomContainer}>
+          <View style={styles.selectedCoursesContainer}>
+            <Text style={styles.formGroupLabel}>Selected Courses</Text>
+            <ScrollView>
+              {contact.courses.map((course, index) => (
+                <View key={index} style={styles.selectedCourseItemContainer}>
+                  <TouchableOpacity onPress={() => handleRemoveCourse(course)} style={styles.removeCourseButton}>
+                    <Text style={styles.removeCourseButtonText}>x</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.selectedCourseItem}>{course}</Text>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+          <View style={styles.pickerContainer}>
+            <TouchableOpacity onPress={togglePicker} style={styles.addCourseButton}>
+              <Text style={styles.addCourseButtonText}>Add Course</Text>
+            </TouchableOpacity>
+            {showPicker && (
+              <>
+                <View style={styles.formGroupPicker}>
+                  <Picker
+                    selectedValue={selectedCourse}
+                    onValueChange={(itemValue) => handleCourseSelection(itemValue)}
+                    style={{ color: '#fff' }} // Ensure the text color is white
+                    itemStyle={styles.pickerItem} // Apply smaller font size
+                  >
+                    <Picker.Item label="Select a course" value="" />
+                    {availableCourses.map((course, index) => (
+                      <Picker.Item key={index} label={course} value={course} />
+                    ))}
+                  </Picker>
+                </View>
+                <View style={styles.fullWidthButtonContainer}>
+                  <TouchableOpacity onPress={handleSubmit} style={styles.formSubmitButton}>
+                    <Text style={styles.formSubmitButtonText}>Save</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
           </View>
         </View>
-        <TouchableOpacity onPress={handleSubmit} style={styles.formSubmitButton}>
-          <Text style={styles.formSubmitButtonText}>Save</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -68,6 +111,10 @@ export default function App() {
     courses: [],
   });
 
+  const [selectedCourse, setSelectedCourse] = useState<string>('');
+  const [showPicker, setShowPicker] = useState<boolean>(false);
+  const [availableCourses, setAvailableCourses] = useState<string[]>(initialAvailableCourses);
+
   const handleChange = (name: string, value: string) => {
     setContact((prevContact) => ({
       ...prevContact,
@@ -75,20 +122,32 @@ export default function App() {
     }));
   };
 
-  const handleCourseChange = (course: string) => {
-    setContact((prevContact) => ({
-      ...prevContact,
-      courses: [course],
-    }));
+  const handleCourseSelection = (course: string) => {
+    setSelectedCourse(course);
   };
 
   const handleSubmit = () => {
+    if (selectedCourse && !contact.courses.includes(selectedCourse)) {
+      setContact((prevContact) => ({
+        ...prevContact,
+        courses: [...prevContact.courses, selectedCourse],
+      }));
+      setAvailableCourses((prevCourses) => prevCourses.filter((course) => course !== selectedCourse));
+    }
+    setSelectedCourse('');
     console.log('Contact Created:', contact);
-    setContact({
-      firstName: '',
-      lastName: '',
-      courses: [],
-    });
+  };
+
+  const handleRemoveCourse = (course: string) => {
+    setContact((prevContact) => ({
+      ...prevContact,
+      courses: prevContact.courses.filter(c => c !== course),
+    }));
+    setAvailableCourses((prevCourses) => [...prevCourses, course]);
+  };
+
+  const togglePicker = () => {
+    setShowPicker(!showPicker);
   };
 
   return (
@@ -97,7 +156,12 @@ export default function App() {
         contact={contact}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        handleCourseChange={handleCourseChange}
+        handleCourseSelection={handleCourseSelection}
+        selectedCourse={selectedCourse}
+        handleRemoveCourse={handleRemoveCourse}
+        showPicker={showPicker}
+        togglePicker={togglePicker}
+        availableCourses={availableCourses}
       />
     </View>
   );
