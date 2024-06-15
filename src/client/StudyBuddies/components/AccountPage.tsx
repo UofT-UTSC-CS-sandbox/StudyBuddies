@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import styles from '../app/style/account'; // Adjust the import path as necessary
+import styles from '../app/style/account';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -13,10 +13,10 @@ type Contact = {
 
 const initialAvailableCourses = [
   'CSCB09',
-  'CSCB07',
-  'CSCB58',
   'CSCC01',
-  'CSCC69'
+  'CSCB63',
+  'CSCB07',
+  'CSCC43'
 ];
 
 function ContactDetail({
@@ -28,11 +28,12 @@ function ContactDetail({
   handleRemoveCourse,
   showPicker,
   togglePicker,
-  availableCourses
+  availableCourses,
+  profileImagePath
 }) {
   return (
     <View style={styles.appContactDetail}>
-      <View style={styles.contactPhoto}></View>
+      <Image source={profileImagePath} style={styles.profileImage} />
       <Text style={styles.formGroupLabel}>Contact Photo & Poster</Text>
       <View style={styles.form}>
         <View style={styles.formGroup}>
@@ -81,8 +82,8 @@ function ContactDetail({
                   <Picker
                     selectedValue={selectedCourse}
                     onValueChange={(itemValue) => handleCourseSelection(itemValue)}
-                    style={{ color: '#fff' }} // Ensure the text color is white
-                    itemStyle={styles.pickerItem} // Apply smaller font size
+                    style={{ color: '#fff' }} 
+                    itemStyle={styles.pickerItem} 
                   >
                     <Picker.Item label="Select a course" value="" />
                     {availableCourses.map((course, index) => (
@@ -114,6 +115,8 @@ export default function App() {
   const [selectedCourse, setSelectedCourse] = useState<string>('');
   const [showPicker, setShowPicker] = useState<boolean>(false);
   const [availableCourses, setAvailableCourses] = useState<string[]>(initialAvailableCourses);
+
+  const profileImagePath = require('../assets/images/lebronjames.png'); 
 
   const handleChange = (name: string, value: string) => {
     setContact((prevContact) => ({
@@ -162,6 +165,7 @@ export default function App() {
         showPicker={showPicker}
         togglePicker={togglePicker}
         availableCourses={availableCourses}
+        profileImagePath={profileImagePath} 
       />
     </View>
   );

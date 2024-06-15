@@ -26,6 +26,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: 'center',
   },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
   form: {
     backgroundColor: '#2c2c2e',
     padding: 20,
@@ -51,25 +58,26 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   formGroupPicker: {
-    width: screenWidth / 2.5, // Adjust picker width to make it narrower
+    width: screenWidth / 2.5, 
     borderWidth: 1,
     borderColor: '#444',
     borderRadius: 5,
     backgroundColor: '#3a3a3c',
     color: '#fff',
-    marginTop: 10, // Add margin to move it down
+    marginTop: 10, 
   },
   pickerItem: {
-    fontSize: 14, // Smaller font size
+    fontSize: 14,
+    color: '#fff'
   },
   formSubmitButton: {
-    width: screenWidth - 200, // Adjust width to align with inner grey area
+    width: screenWidth - 200, 
     padding: 10,
     backgroundColor: '#007aff',
     borderRadius: 5,
     alignItems: 'center',
     marginTop: 20,
-    alignSelf: 'center', // Center the button
+    alignSelf: 'center', 
     marginLeft: -150,
   },
   formSubmitButtonText: {
@@ -87,7 +95,7 @@ const styles = StyleSheet.create({
   pickerContainer: {
     flex: 1,
     paddingLeft: 10,
-    alignItems: 'flex-end', // Align picker to the right
+    alignItems: 'flex-end', 
   },
   selectedCourseItemContainer: {
     flexDirection: 'row',
@@ -99,21 +107,21 @@ const styles = StyleSheet.create({
   },
   selectedCourseItem: {
     color: '#fff',
-    flex: 1, // Ensure the course name takes up remaining space
+    flex: 1, 
   },
   removeCourseButton: {
     paddingHorizontal: 10,
     paddingVertical: 5,
     backgroundColor: '#ff3b30',
     borderRadius: 5,
-    marginRight: 10, // Adjust right margin if needed
+    marginRight: 10, 
   },
   removeCourseButtonText: {
     color: '#fff',
   },
   addCourseButton: {
     paddingHorizontal: 10,
-    paddingVertical: 8, // Reduce vertical padding to make it smaller
+    paddingVertical: 8, 
     backgroundColor: '#007aff',
     borderRadius: 5,
     alignItems: 'center',
@@ -121,7 +129,7 @@ const styles = StyleSheet.create({
   },
   addCourseButtonText: {
     color: '#fff',
-    fontSize: 14, // Reduce font size to make it smaller
+    fontSize: 14, 
   },
   fullWidthButtonContainer: {
     alignSelf: 'center',
