@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "a0318ed0-3012-4d53-a5cd-3ce86314d460",
+		"name": "C01 API Calls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36336690"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/account/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth Callback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/account/auth/callback",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"auth",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/delete",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Courses of Student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Join Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/join",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leave Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/leave",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"leave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Course",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/create",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Course",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/delete",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/get",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Courses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/get_all",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"get_all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Students In Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/students",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/add_student",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"add_student"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/account/courses/remove_student",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"account",
+						"courses",
+						"remove_student"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
