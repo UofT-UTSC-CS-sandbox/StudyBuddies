@@ -96,8 +96,8 @@ const RegisterForm = ({ auth0ID, onRegisterComplete }) => {
 const HomeScreen = ({ onLogout }) => (
   <View style={styles.homeContainer}>
     <Text style={styles.title}>Welcome to StudyBuddies!</Text>
-    <Text>You are now logged in.</Text>
-    <Button title="Logout" onPress={onLogout} />
+    <Text style={styles.label}> You are now logged in.</Text>
+    <Button color="#A259FF" title="Logout" onPress={onLogout} />
   </View>
 );
 
@@ -152,7 +152,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>StudyBuddies</Text>
+      {/* <Text style={styles.title}>StudyBuddies</Text> */}
       {!isAuthenticated ? (
         <View style={styles.buttonContainer}>
           <LoginButton setAuth0ID={setAuth0ID} setIsAuthenticated={setIsAuthenticated} setIsRegistered={setIsRegistered} />
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#1c1c1e',
   },
   homeContainer: {
     flex: 1,
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: '#888',
   },
   buttonContainer: {
     width: '80%',
@@ -204,6 +205,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 5,
+    color: '#888',
   },
   input: {
     width: '100%',
@@ -212,5 +214,15 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     marginBottom: 15,
+  },
+
+  logoutButton: {
+    width: '100%',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderRadius: 5,
+    marginBottom: 15,
+    color: '#A259FF'
   },
 });

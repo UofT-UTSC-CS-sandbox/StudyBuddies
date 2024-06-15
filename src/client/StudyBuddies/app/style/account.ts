@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   formSubmitButton: {
     width: screenWidth - 200, 
     padding: 10,
-    backgroundColor: '#007aff',
+    backgroundColor: '#A259FF"',
     borderRadius: 5,
     alignItems: 'center',
     marginTop: 20,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   addCourseButton: {
     paddingHorizontal: 10,
     paddingVertical: 8, 
-    backgroundColor: '#007aff',
+    backgroundColor: '#A259FF',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
