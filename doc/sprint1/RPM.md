@@ -27,5 +27,4 @@ Modify their personal information including photo, display name, and enrolled co
 
 # Participants:
 Brandan Burgess, Damian Melia, Chimmay Gokhale, Ashwin Mayurathan
-
-![image]()
+![image](https://github.com/UofT-UTSC-CS-sandbox/StudyBuddies/blob/Documentation/src/client/StudyBuddies/assets/images/RPM.png)
