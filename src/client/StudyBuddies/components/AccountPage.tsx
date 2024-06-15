@@ -12,11 +12,11 @@ type Contact = {
 };
 
 const initialAvailableCourses = [
-  'Math',
-  'Science',
-  'History',
-  'Art',
-  'Music'
+  'CSCB09',
+  'CSCB07',
+  'CSCB58',
+  'CSCC01',
+  'CSCC69'
 ];
 
 function ContactDetail({
