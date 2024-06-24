@@ -1,5 +1,7 @@
 package model
 
+import "strconv"
+
 type User struct {
 	DefaultModel
 	Auth0ID  string   `gorm:"not null;uniqueIndex" json:"auth0_id"`
@@ -7,6 +9,24 @@ type User struct {
 	Avatar   string   `json:"image"`
 	Name     string   `json:"name"`
 	Courses  []Course `gorm:"many2many:user_courses;"`
+}
+
+type UserResponse struct {
+	ID       string   `json:"id"`
+	Username string   `json:"username"`
+	Avatar   string   `json:"image"`
+	Name     string   `json:"name"`
+	Courses  []Course `json:"courses"`
+}
+
+func (u *User) Serialize() *UserResponse {
+	return &UserResponse{
+		ID:       strconv.Itoa(int(u.ID)),
+		Username: u.Username,
+		Avatar:   u.Avatar,
+		Name:     u.Name,
+		Courses:  u.Courses,
+	}
 }
 
 // Handler Functions
