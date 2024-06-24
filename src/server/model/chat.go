@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	"strconv"
+	"time"
+)
 
 type Chat struct {
 	DefaultModel
@@ -16,9 +19,21 @@ type ChatResponse struct {
 	Name           string        `json:"name"`
 	OwnerID        string        `json:"owner_id"`
 	Owner          *UserResponse `json:"owner"`
-	CreatedAt      string        `json:"created_at"`
-	LastEvent      string        `json:"last_event"`
+	CreatedAt      time.Time     `json:"created_at"`
+	LastEvent      time.Time     `json:"last_event"`
 	HasNewMessages bool          `json:"has_new_messages"`
+}
+
+func (c *Chat) Serialize() *ChatResponse {
+	return &ChatResponse{
+		ID:             strconv.Itoa(int(c.ID)),
+		Name:           c.Name,
+		OwnerID:        strconv.Itoa(int(c.Owner.ID)),
+		Owner:          c.Owner.Serialize(),
+		CreatedAt:      c.CreatedAt,
+		LastEvent:      c.LastEvent,
+		HasNewMessages: false,
+	}
 }
 
 // Handler Functions
