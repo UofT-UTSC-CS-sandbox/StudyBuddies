@@ -4,11 +4,12 @@ import "strconv"
 
 type User struct {
 	DefaultModel
-	Auth0ID  string   `gorm:"not null;uniqueIndex" json:"auth0_id"`
-	Username string   `gorm:"not null;uniqueIndex" json:"username"`
-	Avatar   string   `json:"image"`
-	Name     string   `json:"name"`
-	Courses  []Course `gorm:"many2many:user_courses;"`
+	Auth0ID  string    `gorm:"not null;uniqueIndex" json:"auth0_id"`
+	Username string    `gorm:"not null;uniqueIndex" json:"username"`
+	Avatar   string    `json:"image"`
+	Name     string    `json:"name"`
+	Courses  []Course  `gorm:"many2many:user_courses;"`
+	Message  []Message `json:"-"`
 }
 
 type UserResponse struct {

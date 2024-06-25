@@ -1,0 +1,95 @@
+package handlers
+
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/VibeMerchants/StudyBuddies/model"
+	"github.com/gin-gonic/gin"
+)
+
+func (h *Handler) GetChat(ctx *gin.Context) {
+	var chatData struct {
+		ChatID string `json:"chat_id"`
+	}
+
+	if err := ctx.ShouldBindJSON(&chatData); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	chat, err := h.chatService.GetChat(chatData.ChatID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, chat)
+}
+
+func (h *Handler) CreateChat(ctx *gin.Context) {
+	var ncd struct {
+		ChatName        string   `json:"chat_name"`
+		OwnerID         string   `json:"owner_id"`
+		AdditionalUsers []string `json:"additional_users"`
+	}
+
+	if err := ctx.ShouldBindJSON(&ncd); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	owner, err := h.userService.GetUser(ncd.OwnerID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	users := []model.User{*owner}
+	for _, user := range ncd.AdditionalUsers {
+		u, err := h.userService.GetUser(user)
+
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error}": fmt.Sprintf("Unable to add user %v, with error %v", u.Name, err.Error())})
+			return
+		}
+
+		users = append(users, *u)
+	}
+
+	chat := model.Chat{
+		Name:  ncd.ChatName,
+		Owner: *owner,
+		Users: []model.User{*owner},
+	}
+
+	if _, err := h.chatService.CreateChat(&chat); err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Chat created successfully"})
+}
+
+func (h *Handler) UpdateChat(ctx *gin.Context) {
+	var ucd struct {
+		NewName string `json:"name"`
+	}
+
+}
+
+func (h *Handler) DeleteChat(ctx *gin.Context) {
+	// need to ensure that the user making this request is owner
+	// on the client side, should only show option to delete if user is not an owner
+}
+
+func (h *Handler) GetAllChats(ctx *gin.Context) {
+	// get all chats in which the user is a member of
+}
+
+func (h *Handler) AddUser(ctx *gin.Context) {
+	// grab current userid and chatid, add to chat_users table
+}
+
+func (h *Handler) RemoveUser(ctx *gin.Context) {
+	// grab current userid and chatid, remove from chat_users table
+}
