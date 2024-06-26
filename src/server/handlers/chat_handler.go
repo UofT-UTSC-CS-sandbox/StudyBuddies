@@ -72,14 +72,63 @@ func (h *Handler) CreateChat(ctx *gin.Context) {
 
 func (h *Handler) UpdateChat(ctx *gin.Context) {
 	var ucd struct {
-		NewName string `json:"name"`
+		Name string `json:"name"`
+        ChatID string `json:"chat_id"`
 	}
 
+    if err := ctx.ShouldBindJSON(&ucd); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    chat, err := h.chatService.GetChat(ucd.ChatID)
+    
+    if err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    
+    oldName := chat.Name
+    chat.Name = ucd.Name
+
+    if _, err := h.chatService.UpdateChat(chat); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Chat Name Successfully changed from %v to %v", oldName, chat.Name)})
 }
 
 func (h *Handler) DeleteChat(ctx *gin.Context) {
 	// need to ensure that the user making this request is owner
 	// on the client side, should only show option to delete if user is not an owner
+    var cd struct {
+        ChatID string `json:"chat_id"`
+        UserID string `json:"user_id"`
+    }
+    if err := ctx.ShouldBindJSON(&cd); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    chat, err := h.chatService.GetChat(cd.ChatID)
+    
+    if err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    if chat.Owner.GetId() != cd.UserID {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": fmt.Sprintf("The user with id %v is not the owner of the chat", cd.UserID)})
+        return
+    }
+    
+    if err := h.chatService.DeleteChat(cd.ChatID); err != nil {
+         ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+         return
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("The chat %v was successfully deleted", chat.Name)})
+
 }
 
 func (h *Handler) GetAllChats(ctx *gin.Context) {

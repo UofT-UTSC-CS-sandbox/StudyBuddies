@@ -30,6 +30,10 @@ func (u *User) Serialize() *UserResponse {
 	}
 }
 
+func (u *User) GetId() string {
+    return strconv.Itoa(int(u.ID)) 
+}
+
 // Handler Functions
 type UserService interface {
 	Register(user *User) (*User, error)
