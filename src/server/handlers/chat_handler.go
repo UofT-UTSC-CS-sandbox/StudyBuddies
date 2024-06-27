@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/VibeMerchants/StudyBuddies/model"
+	"github.com/VibeMerchants/StudyBuddies/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -133,12 +134,64 @@ func (h *Handler) DeleteChat(ctx *gin.Context) {
 
 func (h *Handler) GetAllChats(ctx *gin.Context) {
 	// get all chats in which the user is a member of
+    var ud struct {
+        UserID string `json:"user_id"`
+    }
+
+    if err := ctx.ShouldBindJSON(&ud); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("Request is missing data `user_id` | %v", err.Error())})
+        return
+    }
+
+    chats, err := h.chatService.GetAllChats(ud.UserID)
+
+    if err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+   
+    serializedChats := utils.Map(chats, func (c model.Chat) *model.ChatDetailsResponse { return c.SerializeChatDetails() })
+
+    ctx.JSON(http.StatusOK, gin.H{"message": serializedChats})
+
 }
 
 func (h *Handler) AddUser(ctx *gin.Context) {
 	// grab current userid and chatid, add to chat_users table
+    var cd struct {
+        UserID string `json:"user_id"`
+        ChatId string `json:"chat_id"`
+    }
+
+    if err := ctx.ShouldBindJSON(&cd); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    if err := h.chatService.AddUser(cd.ChatId, cd.UserID); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Successfully added user with id %v to the chat", cd.UserID)})
 }
 
 func (h *Handler) RemoveUser(ctx *gin.Context) {
 	// grab current userid and chatid, remove from chat_users table
+    var cd struct {
+        UserID string `json:"user_id"`
+        ChatId string `json:"chat_id"`
+    }
+
+    if err := ctx.ShouldBindJSON(&cd); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    if err := h.chatService.RemoveUser(cd.ChatId, cd.UserID); err != nil {
+        ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": fmt.Sprintf("Successfully removed user with id %v from the chat", cd.UserID)})
 }

@@ -3,6 +3,8 @@ package model
 import (
 	"strconv"
 	"time"
+
+	"github.com/VibeMerchants/StudyBuddies/utils"
 )
 
 type Chat struct {
@@ -17,23 +19,45 @@ type Chat struct {
 type ChatResponse struct {
 	ID             string        `json:"id"`
 	Name           string        `json:"name"`
-	OwnerID        string        `json:"owner_id"`
-	Owner          *UserResponse `json:"owner"`
+
 	CreatedAt      time.Time     `json:"created_at"`
 	LastEvent      time.Time     `json:"last_event"`
-	HasNewMessages bool          `json:"has_new_messages"`
+	
+    HasNewMessages bool          `json:"has_new_messages"`
 }
 
-func (c *Chat) Serialize() *ChatResponse {
+type ChatDetailsResponse struct {
+    ID string `json:"id"`
+    Name string `json:"name"`
+    Users []*UserResponse `json:"users"`
+    Owner *UserResponse `json:"Owner"`
+    Messages []Message `json:"messages"`
+}
+
+func (c *Chat) SerializeChat() *ChatResponse {
 	return &ChatResponse{
 		ID:             strconv.Itoa(int(c.ID)),
-		Name:           c.Name,
-		OwnerID:        strconv.Itoa(int(c.Owner.ID)),
-		Owner:          c.Owner.Serialize(),
-		CreatedAt:      c.CreatedAt,
+		
+        Name:           c.Name,
+		
+        CreatedAt:      c.CreatedAt,
 		LastEvent:      c.LastEvent,
-		HasNewMessages: false,
+		
+        HasNewMessages: false,
 	}
+}
+
+func (c *Chat) SerializeChatDetails() *ChatDetailsResponse {
+    
+    serializedUsers := utils.Map(c.Users, func(u User) *UserResponse { return u.Serialize() })
+
+    return &ChatDetailsResponse{
+        ID: strconv.Itoa(int(c.ID)),
+        Name: c.Name,
+        Users: serializedUsers,
+        Messages: c.Messages,
+        Owner: c.Owner.Serialize(),
+    }
 }
 
 // Handler Functions

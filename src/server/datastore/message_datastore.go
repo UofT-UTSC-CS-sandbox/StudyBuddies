@@ -25,9 +25,35 @@ type messageData struct {
     UserID string
 }
 
-func (r *messageDatastore) GetMessages(userID, position string, chat *model.Chat) {
-    var message []messageData
+func (mds *messageDatastore) CreateMessage(m *model.Message) (*model.Message, error) {
+
+	if result := mds.DB.Save(&m).Error; result != nil {
+		return nil, result
+	}
+	return m, nil
+}
+
+func (mds *messageDatastore) DeleteMessage(m *model.Message) error {
+
+    if result := mds.DB.Where("id = ?", m.ID).Delete(&model.Message{}).Error; result != nil {
+		return result
+	}
+	return nil
+}
+
+func (mds *messageDatastore) GetMessagesFromChat(chat *model.Chat) (*[]model.Message, error){
+    var messages []messageData
+
+    cid := chat.ID
 
 }
 
-// implement chat first, this will follow
+func (mds *messageDatastore) UpdateMessage(chat *model.Message) error {
+
+    
+	if result := mds.DB.Save(&chat).Error; result != nil {
+		return result 
+	}
+	return  nil
+
+}

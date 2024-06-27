@@ -1,6 +1,7 @@
 package model
 
 import (
+	"strconv"
 	"time"
 )
 
@@ -20,19 +21,27 @@ type MessageResponse struct {
 	User      UserResponse `json:"user"`
 }
 
+func (m *Message) serializeMessage(user UserResponse) *MessageResponse {
+    return &MessageResponse{
+        ID: strconv.Itoa(int(m.ID)),
+        Content: m.Content,
+        CreatedAt: m.CreatedAt,
+        UpdateAt: m.UpdatedAt,
+        User: user,
+    }
+}
+
 // Handler Functions
 type MessageService interface {
 	CreateMessage(message *Message) (*Message, error)
-	GetMessages(chatId, position string) (*[]MessageResponse, error)
+	GetMessages(chat *Chat) (*[]MessageResponse, error)
 	UpdateMessage(message *Message) error
 	DeleteMessage(message *Message) error
-	GetMessage(id string) (*Message, error)
 }
 
 type MessageDatastore interface {
 	CreateMessage(message *Message) (*Message, error)
-	GetMessages(chatId, position string) (*[]Message, error)
+	GetMessagesFromChat(chat *Chat) (*[]Message, error)
 	UpdateMessage(message *Message) error
 	DeleteMessage(message *Message) error
-	GetMessageByID(id string) (*Message, error)
 }
