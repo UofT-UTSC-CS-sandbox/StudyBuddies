@@ -22,8 +22,7 @@ type ChatResponse struct {
 
 	CreatedAt      time.Time     `json:"created_at"`
 	LastEvent      time.Time     `json:"last_event"`
-	
-    HasNewMessages bool          `json:"has_new_messages"`
+	HasNewMessages bool          `json:"has_new_messages"`
 }
 
 type ChatDetailsResponse struct {
@@ -36,14 +35,11 @@ type ChatDetailsResponse struct {
 
 func (c *Chat) SerializeChat() *ChatResponse {
 	return &ChatResponse{
-		ID:             strconv.Itoa(int(c.ID)),
-		
-        Name:           c.Name,
-		
-        CreatedAt:      c.CreatedAt,
+		ID:             utils.IdToString(c.ID),
+		Name:           c.Name,
+		CreatedAt:      c.CreatedAt,
 		LastEvent:      c.LastEvent,
-		
-        HasNewMessages: false,
+		HasNewMessages: false,
 	}
 }
 
@@ -52,7 +48,7 @@ func (c *Chat) SerializeChatDetails() *ChatDetailsResponse {
     serializedUsers := utils.Map(c.Users, func(u User) *UserResponse { return u.Serialize() })
 
     return &ChatDetailsResponse{
-        ID: strconv.Itoa(int(c.ID)),
+        ID: utils.IdToString(c.ID),
         Name: c.Name,
         Users: serializedUsers,
         Messages: c.Messages,

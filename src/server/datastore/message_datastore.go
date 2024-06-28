@@ -1,7 +1,6 @@
 package datastore
 
 import (
-	"time"
 
 	"github.com/VibeMerchants/StudyBuddies/model"
 	"gorm.io/gorm"
@@ -15,14 +14,6 @@ func MessageDatastoreFactory(db *gorm.DB) model.MessageDatastore {
 	return &messageDatastore{
 		DB: db,
 	}
-}
-
-type messageData struct {
-    ID string
-    Text *string //can be empty, so we use a pointer
-    CreatedAt time.Time
-    UpdatedAt time.Time
-    UserID string
 }
 
 func (mds *messageDatastore) CreateMessage(m *model.Message) (*model.Message, error) {
@@ -41,11 +32,18 @@ func (mds *messageDatastore) DeleteMessage(m *model.Message) error {
 	return nil
 }
 
-func (mds *messageDatastore) GetMessagesFromChat(chat *model.Chat) (*[]model.Message, error){
-    var messages []messageData
+func (mds *messageDatastore) GetMessagesFromChat(chat *model.Chat) (*[]model.MessageWithUser, error){
+    var messages *[]model.MessageWithUser
 
-    cid := chat.ID
+    if err := mds.DB.Table("messages").
+        Select("messages.*, users.Username").
+        Joins("left join users on users.ID = messages.SenderID").
+        Where("messages.chatID = ?", chat.ID).
+        Scan(&messages).Error; err != nil {
+            return nil, err
+    }
 
+    return messages, nil
 }
 
 func (mds *messageDatastore) UpdateMessage(chat *model.Message) error {

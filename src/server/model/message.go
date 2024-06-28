@@ -1,8 +1,9 @@
 package model
 
 import (
-	"strconv"
 	"time"
+
+	"github.com/VibeMerchants/StudyBuddies/utils"
 )
 
 type Message struct {
@@ -10,6 +11,11 @@ type Message struct {
 	Content  *string
 	SenderId string `gorm:"index;constraint:OnDelete:CASCADE"`
 	ChatId   string `gorm:"index;constraint:OnDelete:CASCADE"`
+}
+
+type MessageWithUser struct {
+    Msg Message
+    User User
 }
 
 type MessageResponse struct {
@@ -21,9 +27,9 @@ type MessageResponse struct {
 	User      UserResponse `json:"user"`
 }
 
-func (m *Message) serializeMessage(user UserResponse) *MessageResponse {
+func (m *Message) Serialize(user UserResponse) *MessageResponse {
     return &MessageResponse{
-        ID: strconv.Itoa(int(m.ID)),
+        ID: utils.IdToString(m.ID),
         Content: m.Content,
         CreatedAt: m.CreatedAt,
         UpdateAt: m.UpdatedAt,
@@ -34,14 +40,14 @@ func (m *Message) serializeMessage(user UserResponse) *MessageResponse {
 // Handler Functions
 type MessageService interface {
 	CreateMessage(message *Message) (*Message, error)
-	GetMessages(chat *Chat) (*[]MessageResponse, error)
+	GetMessages(chat *Chat) (*[]MessageWithUser, error)
 	UpdateMessage(message *Message) error
 	DeleteMessage(message *Message) error
 }
 
 type MessageDatastore interface {
 	CreateMessage(message *Message) (*Message, error)
-	GetMessagesFromChat(chat *Chat) (*[]Message, error)
+	GetMessagesFromChat(chat *Chat) (*[]MessageWithUser, error)
 	UpdateMessage(message *Message) error
 	DeleteMessage(message *Message) error
 }

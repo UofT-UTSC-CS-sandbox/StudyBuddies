@@ -1,6 +1,9 @@
 package model
 
-import "strconv"
+import (
+
+	"github.com/VibeMerchants/StudyBuddies/utils"
+)
 
 type User struct {
 	DefaultModel
@@ -22,7 +25,7 @@ type UserResponse struct {
 
 func (u *User) Serialize() *UserResponse {
 	return &UserResponse{
-		ID:       strconv.Itoa(int(u.ID)),
+		ID:       utils.IdToString(u.ID),
 		Username: u.Username,
 		Avatar:   u.Avatar,
 		Name:     u.Name,
@@ -31,7 +34,7 @@ func (u *User) Serialize() *UserResponse {
 }
 
 func (u *User) GetId() string {
-    return strconv.Itoa(int(u.ID)) 
+    return utils.IdToString(u.ID) 
 }
 
 // Handler Functions
