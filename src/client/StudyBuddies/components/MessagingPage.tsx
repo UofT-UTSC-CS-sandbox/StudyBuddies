@@ -1,43 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { addMessage } from '../store';
-import messagingStyle from '../app/style/messaging';
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
+import styles from '../app/style/messaging';
 
-const MessagingPage = ({ route }) => {
-  const { chatId } = route.params;
-  const messages = useSelector((state) => state.messages[chatId]) || [];
-  const dispatch = useDispatch();
-  const [text, setText] = useState('');
-
-  const handleSend = () => {
-    if (text.trim()) {
-      dispatch(addMessage({ chatId, message: { text, isSender: true } }));
-      setText('');
-    }
-  };
+const MessagingPage = () => {
+  const messages = [
+    { text: 'um hi ^_^', isSender: true },
+    { text: 'uwu', isSender: false },
+  ];
 
   return (
-    <SafeAreaView style={messagingStyle.app}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={messagingStyle.container} keyboardVerticalOffset={80}>
-        <ScrollView contentContainerStyle={messagingStyle.messageList}>
+    <SafeAreaView style={styles.app}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+        keyboardVerticalOffset={80}
+      >
+        <View style={styles.header}>
+          <Image source={require('../assets/images/lebronjames.png')} style={styles.profileImage} />
+          <Text style={styles.headerText}>big D</Text>
+        </View>
+        <ScrollView contentContainerStyle={styles.messageList}>
           {messages.map((msg, index) => (
-            <View key={index} style={[messagingStyle.messageBubble, msg.isSender ? messagingStyle.sender : messagingStyle.receiver]}>
-              <Text style={messagingStyle.messageText}>{msg.text}</Text>
+            <View key={index} style={[styles.messageBubble, msg.isSender ? styles.sender : styles.receiver]}>
+              <Text style={styles.messageText}>{msg.text}</Text>
             </View>
           ))}
         </ScrollView>
-        <View style={messagingStyle.inputContainer}>
+        <View style={styles.inputContainer}>
           <TextInput
-            style={messagingStyle.input}
+            style={styles.input}
             placeholder="iMessage"
             placeholderTextColor="#888"
-            value={text}
-            onChangeText={setText}
-            autoCorrect={true}
           />
-          <TouchableOpacity style={messagingStyle.sendButton} onPress={handleSend}>
-            <Text style={messagingStyle.sendButtonText}>Send</Text>
+          <TouchableOpacity style={styles.sendButton}>
+            <Text style={styles.sendButtonText}>Send</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
