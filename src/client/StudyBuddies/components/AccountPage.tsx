@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import styles from '../app/style/account';
+import accountStyle from '../app/style/account';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -32,14 +32,14 @@ function ContactDetail({
   profileImagePath
 }) {
   return (
-    <View style={styles.appContactDetail}>
-      <Image source={profileImagePath} style={styles.profileImage} />
-      <Text style={styles.formGroupLabel}>Contact Photo & Poster</Text>
-      <View style={styles.form}>
-        <View style={styles.formGroup}>
-          <Text style={styles.formGroupLabel}>First name</Text>
+    <View style={accountStyle.appContactDetail}>
+      <Image source={profileImagePath} style={accountStyle.profileImage} />
+      <Text style={accountStyle.formGroupLabel}>Contact Photo & Poster</Text>
+      <View style={accountStyle.form}>
+        <View style={accountStyle.formGroup}>
+          <Text style={accountStyle.formGroupLabel}>First name</Text>
           <TextInput
-            style={styles.formGroupInput}
+            style={accountStyle.formGroupInput}
             id="firstName"
             name="firstName"
             value={contact.firstName}
@@ -47,10 +47,10 @@ function ContactDetail({
             required
           />
         </View>
-        <View style={styles.formGroup}>
-          <Text style={styles.formGroupLabel}>Last name</Text>
+        <View style={accountStyle.formGroup}>
+          <Text style={accountStyle.formGroupLabel}>Last name</Text>
           <TextInput
-            style={styles.formGroupInput}
+            style={accountStyle.formGroupInput}
             id="lastName"
             name="lastName"
             value={contact.lastName}
@@ -58,32 +58,32 @@ function ContactDetail({
             required
           />
         </View>
-        <View style={styles.bottomContainer}>
-          <View style={styles.selectedCoursesContainer}>
-            <Text style={styles.formGroupLabel}>Selected Courses</Text>
+        <View style={accountStyle.bottomContainer}>
+          <View style={accountStyle.selectedCoursesContainer}>
+            <Text style={accountStyle.formGroupLabel}>Selected Courses</Text>
             <ScrollView>
               {contact.courses.map((course, index) => (
-                <View key={index} style={styles.selectedCourseItemContainer}>
-                  <TouchableOpacity onPress={() => handleRemoveCourse(course)} style={styles.removeCourseButton}>
-                    <Text style={styles.removeCourseButtonText}>x</Text>
+                <View key={index} style={accountStyle.selectedCourseItemContainer}>
+                  <TouchableOpacity onPress={() => handleRemoveCourse(course)} style={accountStyle.removeCourseButton}>
+                    <Text style={accountStyle.removeCourseButtonText}>x</Text>
                   </TouchableOpacity>
-                  <Text style={styles.selectedCourseItem}>{course}</Text>
+                  <Text style={accountStyle.selectedCourseItem}>{course}</Text>
                 </View>
               ))}
             </ScrollView>
           </View>
-          <View style={styles.pickerContainer}>
-            <TouchableOpacity onPress={togglePicker} style={styles.addCourseButton}>
-              <Text style={styles.addCourseButtonText}>Add Course</Text>
+          <View style={accountStyle.pickerContainer}>
+            <TouchableOpacity onPress={togglePicker} style={accountStyle.addCourseButton}>
+              <Text style={accountStyle.addCourseButtonText}>Add Course</Text>
             </TouchableOpacity>
             {showPicker && (
               <>
-                <View style={styles.formGroupPicker}>
+                <View style={accountStyle.formGroupPicker}>
                   <Picker
                     selectedValue={selectedCourse}
                     onValueChange={(itemValue) => handleCourseSelection(itemValue)}
                     style={{ color: '#fff' }} 
-                    itemStyle={styles.pickerItem} 
+                    itemStyle={accountStyle.pickerItem} 
                   >
                     <Picker.Item label="Select a course" value="" />
                     {availableCourses.map((course, index) => (
@@ -91,9 +91,9 @@ function ContactDetail({
                     ))}
                   </Picker>
                 </View>
-                <View style={styles.fullWidthButtonContainer}>
-                  <TouchableOpacity onPress={handleSubmit} style={styles.formSubmitButton}>
-                    <Text style={styles.formSubmitButtonText}>Save</Text>
+                <View style={accountStyle.fullWidthButtonContainer}>
+                  <TouchableOpacity onPress={handleSubmit} style={accountStyle.formSubmitButton}>
+                    <Text style={accountStyle.formSubmitButtonText}>Save</Text>
                   </TouchableOpacity>
                 </View>
               </>
@@ -154,7 +154,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.app}>
+    <View style={accountStyle.app}>
       <ContactDetail
         contact={contact}
         handleChange={handleChange}
