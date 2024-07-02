@@ -1,7 +1,6 @@
 package model
 
 import (
-	"strconv"
 	"time"
 
 	"github.com/VibeMerchants/StudyBuddies/utils"
@@ -12,7 +11,7 @@ type Chat struct {
 	Name      string `gorm:"not null;uniqueIndex"`
 	Messages  []Message
 	Users     []User    `gorm:"many2many:chat_users;"`
-	Owner     User      `gorm:"foreignKey:OwnerID"`
+	OwnerID   uint
 	LastEvent time.Time `gorm: autoCreateTime`
 }
 
@@ -29,7 +28,7 @@ type ChatDetailsResponse struct {
     ID string `json:"id"`
     Name string `json:"name"`
     Users []*UserResponse `json:"users"`
-    Owner *UserResponse `json:"Owner"`
+    OwnerID uint `json:"owner_id"`
     Messages []Message `json:"messages"`
 }
 
@@ -52,7 +51,7 @@ func (c *Chat) SerializeChatDetails() *ChatDetailsResponse {
         Name: c.Name,
         Users: serializedUsers,
         Messages: c.Messages,
-        Owner: c.Owner.Serialize(),
+        OwnerID: c.OwnerID,
     }
 }
 

@@ -12,7 +12,7 @@ type User struct {
 	Avatar   string    `json:"image"`
 	Name     string    `json:"name"`
 	Courses  []Course  `gorm:"many2many:user_courses;"`
-	Message  []Message `json:"-"`
+    Message  []Message `gorm:"foreignKey:SenderId" json:"-"`
 }
 
 type UserResponse struct {

@@ -31,7 +31,7 @@ func (h *Handler) GetChat(ctx *gin.Context) {
 func (h *Handler) CreateChat(ctx *gin.Context) {
 	var ncd struct {
 		ChatName        string   `json:"chat_name"`
-		OwnerID         string   `json:"owner_id"`
+		OwnerID         uint   `json:"owner_id"`
 		AdditionalUsers []string `json:"additional_users"`
 	}
 
@@ -40,7 +40,7 @@ func (h *Handler) CreateChat(ctx *gin.Context) {
 		return
 	}
 
-	owner, err := h.userService.GetUser(ncd.OwnerID)
+	owner, err := h.userService.GetUser(utils.IdToString(ncd.OwnerID))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -59,8 +59,8 @@ func (h *Handler) CreateChat(ctx *gin.Context) {
 
 	chat := model.Chat{
 		Name:  ncd.ChatName,
-		Owner: *owner,
-		Users: []model.User{*owner},
+		OwnerID: ncd.OwnerID,
+		Users: users,
 	}
 
 	if _, err := h.chatService.CreateChat(&chat); err != nil {
@@ -104,7 +104,7 @@ func (h *Handler) DeleteChat(ctx *gin.Context) {
 	// on the client side, should only show option to delete if user is not an owner
     var cd struct {
         ChatID string `json:"chat_id"`
-        UserID string `json:"user_id"`
+        UserID uint `json:"user_id"`
     }
     if err := ctx.ShouldBindJSON(&cd); err != nil {
         ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -118,7 +118,7 @@ func (h *Handler) DeleteChat(ctx *gin.Context) {
         return
     }
 
-    if chat.Owner.GetId() != cd.UserID {
+    if chat.OwnerID != cd.UserID {
         ctx.JSON(http.StatusUnauthorized, gin.H{"error": fmt.Sprintf("The user with id %v is not the owner of the chat", cd.UserID)})
         return
     }

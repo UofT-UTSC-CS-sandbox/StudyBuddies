@@ -22,3 +22,9 @@ func (m *messageService) UpdateMessage(message *model.Message) error {
 func (m *messageService) DeleteMessage(message *model.Message) error {
    return m.MessageStore.UpdateMessage(message) 
 }
+
+func NewMessageService(m *MessageServiceConfig) model.MessageService {
+    return &messageService{
+        MessageStore: m.MessageStore,
+    }
+}

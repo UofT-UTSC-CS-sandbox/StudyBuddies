@@ -3,6 +3,7 @@ package websockets
 import (
 	"bytes"
 	"log"
+	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -25,6 +26,9 @@ var (
 )
 
 var upgrader = websocket.Upgrader{
+    CheckOrigin: func(r *http.Request) bool {
+        return true
+    },
 	ReadBufferSize:  2048,
 	WriteBufferSize: 2048,
 }
@@ -112,6 +116,9 @@ func (c *Client) writePump() {
 
 func (c *Client) disconnect() {
 	c.hub.unregister <- c
+    for pool := range c.pools {
+        pool.unregister <- c
+    }
 	close(c.send)
 	_ = c.conn.Close()
 }

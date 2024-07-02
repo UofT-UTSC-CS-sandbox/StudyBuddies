@@ -41,3 +41,9 @@ func (c *chatService) AddUser(ID, userID string) error {
 func (c *chatService) RemoveUser(ID, userID string) error {
 	return c.ChatStore.RemoveUser(ID, userID)
 }
+
+func NewChatService(c *ChatServiceConfig) model.ChatService {
+    return &chatService{
+        ChatStore: c.ChatStore,
+    }
+}

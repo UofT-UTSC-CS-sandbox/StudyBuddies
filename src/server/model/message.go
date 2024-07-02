@@ -9,7 +9,7 @@ import (
 type Message struct {
 	DefaultModel
 	Content  *string
-	SenderId string `gorm:"index;constraint:OnDelete:CASCADE"`
+    SenderId string `gorm:"index;constraint:OnDelete:CASCADE" json:"sender_id"`
 	ChatId   string `gorm:"index;constraint:OnDelete:CASCADE"`
 }
 

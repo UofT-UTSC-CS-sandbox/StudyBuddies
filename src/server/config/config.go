@@ -10,6 +10,7 @@ import (
 
 type Config struct {
 	DatabaseURL string `env:"DATABASE_URL,required"`
+    RedisURL string `env:"REDIS_URL,required"`
 }
 
 func LoadConfig(ctx context.Context) (config Config, err error) {
