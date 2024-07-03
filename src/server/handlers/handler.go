@@ -8,20 +8,29 @@ import (
 )
 
 type Handler struct {
-	userService   model.UserService
-	courseService model.CourseService
+	userService     model.UserService
+	courseService   model.CourseService
+	buildingService model.BuildingService
+	roomService     model.RoomService
+	groupService    model.GroupService
 }
 
 type Config struct {
-	R             *gin.Engine
-	UserService   model.UserService
-	CourseService model.CourseService
+	R               *gin.Engine
+	UserService     model.UserService
+	CourseService   model.CourseService
+	BuildingService model.BuildingService
+	RoomService     model.RoomService
+	GroupService    model.GroupService
 }
 
 func NewHandler(c *Config) {
 	h := &Handler{
-		userService:   c.UserService,
-		courseService: c.CourseService,
+		userService:     c.UserService,
+		courseService:   c.CourseService,
+		buildingService: c.BuildingService,
+		roomService:     c.RoomService,
+		groupService:    c.GroupService,
 	}
 	c.R.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"message": "Not Found: Invalid API Route"})
