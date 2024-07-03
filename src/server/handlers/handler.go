@@ -13,6 +13,9 @@ type Handler struct {
 	chatService   model.ChatService
     messageService model.MessageService
     websocketService model.WebsocketService
+	buildingService model.BuildingService
+	roomService     model.RoomService
+	groupService    model.GroupService
 }
 
 type Config struct {
@@ -22,6 +25,9 @@ type Config struct {
 	ChatService   model.ChatService
     MessageService model.MessageService
     WebsocketService model.WebsocketService
+	BuildingService model.BuildingService
+	RoomService     model.RoomService
+	GroupService    model.GroupService
 }
 
 func NewHandler(c *Config) {
@@ -31,6 +37,9 @@ func NewHandler(c *Config) {
 		chatService:   c.ChatService,
         messageService: c.MessageService,
         websocketService: c.WebsocketService,
+		buildingService: c.BuildingService,
+		roomService:     c.RoomService,
+		groupService:    c.GroupService,
 	}
 	c.R.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"message": "Not Found: Invalid API Route"})
