@@ -9,7 +9,8 @@ import (
 
 func (h *Handler) GetRoom(ctx *gin.Context) {
 	var roomData struct {
-		RoomName string `json:"room_name"`
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
 	}
 
 	if err := ctx.ShouldBindJSON(&roomData); err != nil {
@@ -17,7 +18,13 @@ func (h *Handler) GetRoom(ctx *gin.Context) {
 		return
 	}
 
-	room, err := h.roomService.GetRoom(roomData.RoomName)
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	room, err := h.roomService.GetRoom(roomData.RoomName, roomData.BuildingName)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -29,20 +36,20 @@ func (h *Handler) GetRoom(ctx *gin.Context) {
 func (h *Handler) CreateRoom(ctx *gin.Context) {
 	var roomData struct {
 		RoomName     string `json:"room_name"`
-		BuildingCode string `json:"building_code"`
+		BuildingName string `json:"building_name"`
 	}
 	if err := ctx.ShouldBindJSON(&roomData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	building, err := h.buildingService.GetBuilding(roomData.BuildingCode)
+	building, err := h.buildingService.GetBuilding(roomData.BuildingName)
 	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Building not found"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	room := model.Room{RoomNumber: roomData.RoomName, BuildingCode: *building, Capacity: 0, Students: []model.User{}, Occupancy: 0}
+	room := model.Room{RoomNumber: roomData.RoomName, BuildingCode: *building, Students: []model.User{}}
 	if _, err := h.roomService.CreateRoom(&room); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -52,14 +59,21 @@ func (h *Handler) CreateRoom(ctx *gin.Context) {
 
 func (h *Handler) DeleteRoom(ctx *gin.Context) {
 	var roomData struct {
-		RoomName string `json:"room_name"`
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
 	}
 	if err := ctx.ShouldBindJSON(&roomData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if err := h.roomService.DeleteRoom(roomData.RoomName); err != nil {
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := h.roomService.DeleteRoom(roomData.RoomName, roomData.BuildingName); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -68,14 +82,22 @@ func (h *Handler) DeleteRoom(ctx *gin.Context) {
 
 func (h *Handler) GetCourses(ctx *gin.Context) {
 	var roomData struct {
-		RoomName string `json:"room_name"`
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
 	}
+
 	if err := ctx.ShouldBindJSON(&roomData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	courses, err := h.roomService.GetCourses(roomData.RoomName)
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	courses, err := h.roomService.GetCourses(roomData.RoomName, roomData.BuildingName)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -85,22 +107,24 @@ func (h *Handler) GetCourses(ctx *gin.Context) {
 }
 
 func (h *Handler) AddCourse(ctx *gin.Context) {
-	var courseData struct {
-		RoomName   string `json:"room_name"`
-		CourseName string `json:"course_name"`
+	var roomData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+		CourseName   string `json:"course_name"`
 	}
-	if err := ctx.ShouldBindJSON(&courseData); err != nil {
+
+	if err := ctx.ShouldBindJSON(&roomData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := h.courseService.GetCourse(courseData.CourseName)
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
 	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Course not found"})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	if err := h.roomService.AddCourse(courseData.RoomName, courseData.CourseName); err != nil {
+	if err := h.roomService.AddCourse(roomData.RoomName, roomData.BuildingName, roomData.CourseName); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -109,16 +133,24 @@ func (h *Handler) AddCourse(ctx *gin.Context) {
 }
 
 func (h *Handler) RemoveCourse(ctx *gin.Context) {
-	var courseData struct {
-		RoomName   string `json:"room_name"`
-		CourseName string `json:"course_name"`
+	var roomData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+		CourseName   string `json:"course_name"`
 	}
-	if err := ctx.ShouldBindJSON(&courseData); err != nil {
+
+	if err := ctx.ShouldBindJSON(&roomData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if err := h.roomService.RemoveCourse(courseData.RoomName, courseData.CourseName); err != nil {
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := h.roomService.RemoveCourse(roomData.RoomName, roomData.BuildingName, roomData.CourseName); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -126,99 +158,25 @@ func (h *Handler) RemoveCourse(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "Course removed successfully"})
 }
 
-func (h *Handler) GetOccupants(ctx *gin.Context) {
-	var roomData struct {
-		RoomName string `json:"room_name"`
-	}
-	if err := ctx.ShouldBindJSON(&roomData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	students, err := h.roomService.GetOccupants(roomData.RoomName)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	ctx.JSON(http.StatusOK, gin.H{"students": students})
-}
-
-func (h *Handler) AddOccupant(ctx *gin.Context) {
-	var occupantData struct {
-		RoomName string `json:"room_name"`
-		UserID   string `json:"user_id"`
-	}
-	if err := ctx.ShouldBindJSON(&occupantData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	_, err := h.userService.GetUser(occupantData.UserID)
-	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
-		return
-	}
-
-	if err := h.roomService.AddOccupant(occupantData.RoomName, occupantData.UserID); err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	ctx.JSON(http.StatusOK, gin.H{"message": "User added successfully"})
-}
-
-func (h *Handler) RemoveOccupant(ctx *gin.Context) {
-	var occupantData struct {
-		RoomName string `json:"room_name"`
-		UserID   string `json:"user_id"`
-	}
-	if err := ctx.ShouldBindJSON(&occupantData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	if err := h.roomService.RemoveOccupant(occupantData.RoomName, occupantData.UserID); err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	ctx.JSON(http.StatusOK, gin.H{"message": "User removed successfully"})
-}
-
-func (h *Handler) SetBuilding(ctx *gin.Context) {
-	var roomData struct {
-		RoomName     string `json:"room_name"`
-		BuildingCode string `json:"building_code"`
-	}
-	if err := ctx.ShouldBindJSON(&roomData); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	_, err := h.buildingService.GetBuilding(roomData.BuildingCode)
-	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Building not found"})
-		return
-	}
-
-	if err := h.roomService.SetBuilding(roomData.RoomName, roomData.BuildingCode); err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-	ctx.JSON(http.StatusOK, gin.H{"message": "Building set successfully"})
-}
-
 func (h *Handler) SetCapacity(ctx *gin.Context) {
-	var roomData struct {
-		RoomName string `json:"room_name"`
-		Capacity int    `json:"capacity"`
+	var buildingData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+		Capacity     int    `json:"capacity"`
 	}
-	if err := ctx.ShouldBindJSON(&roomData); err != nil {
+
+	if err := ctx.ShouldBindJSON(&buildingData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if err := h.roomService.SetCapacity(roomData.RoomName, roomData.Capacity); err != nil {
+	_, err := h.buildingService.GetBuilding(buildingData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := h.roomService.SetCapacity(buildingData.RoomName, buildingData.BuildingName, buildingData.Capacity); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
@@ -227,19 +185,105 @@ func (h *Handler) SetCapacity(ctx *gin.Context) {
 }
 
 func (h *Handler) SetOccupancy(ctx *gin.Context) {
-	var roomData struct {
-		RoomName  string `json:"room_name"`
-		Occupancy int    `json:"occupancy"`
+	var buildingData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+		Occupancy    int    `json:"occupancy"`
 	}
-	if err := ctx.ShouldBindJSON(&roomData); err != nil {
+
+	if err := ctx.ShouldBindJSON(&buildingData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if err := h.roomService.SetOccupancy(roomData.RoomName, roomData.Occupancy); err != nil {
+	_, err := h.buildingService.GetBuilding(buildingData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := h.roomService.SetOccupancy(buildingData.RoomName, buildingData.BuildingName, buildingData.Occupancy); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{"message": "Occupancy set successfully"})
+}
+
+func (h *Handler) AddOccupant(ctx *gin.Context) {
+	var roomData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+		StudentID    string `json:"student_id"`
+	}
+
+	if err := ctx.ShouldBindJSON(&roomData); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := h.roomService.AddOccupant(roomData.RoomName, roomData.BuildingName, roomData.StudentID); err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Occupant added successfully"})
+}
+
+func (h *Handler) RemoveOccupant(ctx *gin.Context) {
+	var roomData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+		StudentID    string `json:"student_id"`
+	}
+
+	if err := ctx.ShouldBindJSON(&roomData); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := h.roomService.RemoveOccupant(roomData.RoomName, roomData.BuildingName, roomData.StudentID); err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "Occupant removed successfully"})
+}
+
+func (h *Handler) GetOccupants(ctx *gin.Context) {
+	var roomData struct {
+		RoomName     string `json:"room_name"`
+		BuildingName string `json:"building_name"`
+	}
+
+	if err := ctx.ShouldBindJSON(&roomData); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	_, err := h.buildingService.GetBuilding(roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	occupants, err := h.roomService.GetOccupants(roomData.RoomName, roomData.BuildingName)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"occupants": occupants})
 }

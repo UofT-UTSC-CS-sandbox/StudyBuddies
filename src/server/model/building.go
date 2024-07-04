@@ -20,7 +20,7 @@ type BuildingService interface {
 
 type BuildingDatastore interface {
 	CreateBuilding(building *Building) (*Building, error)
-	GetBuildingByCode(code string) (*Building, error)
+	GetBuilding(code string) (*Building, error)
 	DeleteBuilding(code string) error
 	GetRooms(code string) ([]Room, error)
 	AddRoom(buildingCode string, roomNumber string) error
