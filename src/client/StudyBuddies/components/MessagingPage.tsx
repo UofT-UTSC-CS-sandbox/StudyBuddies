@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addMessage } from '../store';
@@ -6,7 +6,7 @@ import messagingStyle from '../app/style/messaging';
 
 const MessagingPage = ({ route }) => {
   const { chatId } = route.params;
-  const messages = useSelector((state) => state.messages[chatId]);
+  const messages = useSelector((state) => state.messages[chatId]) || []; // Fallback to empty array
   const dispatch = useDispatch();
   const [text, setText] = useState('');
 
