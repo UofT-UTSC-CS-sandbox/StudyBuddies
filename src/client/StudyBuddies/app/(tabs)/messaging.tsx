@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import ChatListScreen from '@/components/ChatListPage';
+import React from 'react';
 import { Provider } from 'react-redux';
-import store from '/Users/cgokhale/Desktop/chinmay/utsc_3year/c01/StudyBuddies/src/client/StudyBuddies/store.js';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from '/Users/cgokhale/Desktop/chinmay/utsc_3year/c01/StudyBuddies/src/client/StudyBuddies/store';
 import AppNavigator from '@/components/AppNavigator';
-
 
 const ChatListScreen1 = () => {
   return (
     <Provider store={store}>
-      <AppNavigator />
+      <PersistGate loading={null} persistor={persistor}>
+        <AppNavigator />
+      </PersistGate>
     </Provider>
   );
 };
 
 export default ChatListScreen1;
-
-
