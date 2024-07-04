@@ -1,12 +1,40 @@
 package model
 
+import (
+
+	"github.com/VibeMerchants/StudyBuddies/utils"
+)
+
 type User struct {
 	DefaultModel
-	Auth0ID  string   `gorm:"not null;uniqueIndex" json:"auth0_id"`
-	Username string   `gorm:"not null;uniqueIndex" json:"username"`
+	Auth0ID  string    `gorm:"not null;uniqueIndex" json:"auth0_id"`
+	Username string    `gorm:"not null;uniqueIndex" json:"username"`
+	Avatar   string    `json:"image"`
+	Name     string    `json:"name"`
+	Courses  []Course  `gorm:"many2many:user_courses;"`
+    Message  []Message `gorm:"foreignKey:SenderId" json:"-"`
+}
+
+type UserResponse struct {
+	ID       string   `json:"id"`
+	Username string   `json:"username"`
 	Avatar   string   `json:"image"`
 	Name     string   `json:"name"`
-	Courses  []Course `gorm:"many2many:user_courses;"`
+	Courses  []Course `json:"courses"`
+}
+
+func (u *User) Serialize() *UserResponse {
+	return &UserResponse{
+		ID:       utils.IdToString(u.ID),
+		Username: u.Username,
+		Avatar:   u.Avatar,
+		Name:     u.Name,
+		Courses:  u.Courses,
+	}
+}
+
+func (u *User) GetId() string {
+    return utils.IdToString(u.ID) 
 }
 
 // Handler Functions
