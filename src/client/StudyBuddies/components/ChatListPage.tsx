@@ -3,15 +3,12 @@ import { View, Text, FlatList, TouchableOpacity, Image, TextInput } from 'react-
 import { useSelector } from 'react-redux';
 import chatListStyles from '../app/style/chatList';
 
-const chats = [
-  { id: '1', name: 'Person 1', message: '', time: '11:41' },
-  { id: '2', name: 'Person 2', message: '', time: '10:55' },
-];
-
 const ChatListScreen = ({ navigation }) => {
+  const chats = useSelector((state) => state.chatList);
+
   const renderItem = ({ item }) => (
     <TouchableOpacity style={chatListStyles.chatItem} onPress={() => navigation.navigate('MessagingPage', { chatId: item.id })}>
-      <Image source={require('../assets/images/lebronjames.png')} style={chatListStyles.profileImage} />
+      <Image source={require('@/assets/images/lebronjames.png')} style={chatListStyles.profileImage} />
       <View style={chatListStyles.chatDetails}>
         <Text style={chatListStyles.chatName}>{item.name}</Text>
         <Text style={chatListStyles.chatMessage} numberOfLines={1}>{item.message}</Text>
