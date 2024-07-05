@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   itemFull: {
     padding: 20,
-    backgroundColor: 'rgba(162, 89, 255, 0.01)', // Translucent #A259FF
+    backgroundColor: 'rgb(44,44,46)', // #2c2c2e
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -20, // Adjust this to move the full item view up
