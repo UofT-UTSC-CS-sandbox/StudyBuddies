@@ -2,14 +2,23 @@ import { configureStore, createSlice, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Define chatListSlice
 const chatListSlice = createSlice({
   name: 'chatList',
   initialState: [
     { id: '1', name: 'Person 1', message: '', time: '11:41' },
   ],
-  reducers: {},
+  reducers: {
+    addChat: (state, action) => {
+      state.push(action.payload);
+    },
+    deleteChat: (state, action) => {
+      return state.filter(chat => chat.id !== action.payload);
+    },
+  },
 });
 
+// Define messageSlice
 const messageSlice = createSlice({
   name: 'messages',
   initialState: {
@@ -26,16 +35,22 @@ const messageSlice = createSlice({
       }
       state[chatId].push(message);
     },
+    deleteMessagesForChat: (state, action) => {
+      delete state[action.payload];
+    },
   },
 });
 
-export const { addMessage } = messageSlice.actions;
+export const { addChat, deleteChat } = chatListSlice.actions;
+export const { addMessage, deleteMessagesForChat } = messageSlice.actions;
 
+// Combine reducers
 const rootReducer = combineReducers({
   chatList: chatListSlice.reducer,
   messages: messageSlice.reducer,
 });
 
+// Configure persist
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -43,6 +58,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Configure store
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>

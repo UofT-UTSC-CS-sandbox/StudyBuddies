@@ -1,29 +1,32 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const chatListStyle = StyleSheet.create({
+const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+
+const chatListStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
   headerContainer: {
-    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
   header: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
-    padding: 10,
   },
-  searchBarContainer: {
+  addButton: {
     padding: 10,
+    backgroundColor: '#007aff',
+    borderRadius: 5,
   },
-  searchBar: {
-    backgroundColor: '#eee',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+  addButtonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   chatItem: {
     flexDirection: 'row',
@@ -42,17 +45,96 @@ const chatListStyle = StyleSheet.create({
     flex: 1,
   },
   chatName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   chatMessage: {
     fontSize: 14,
-    color: '#666',
+    color: '#555',
   },
   chatTime: {
     fontSize: 12,
-    color: '#666',
+    color: '#999',
+  },
+  searchBarContainer: {
+    marginTop: 10,
+  },
+  searchBar: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderRadius: 5,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  modalItem: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  modalItemText: {
+    fontSize: 18,
+  },
+  modalCloseButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: '#007aff',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  modalCloseButtonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  modalAddButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: '#007aff',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  modalAddButtonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  errorMessage: {
+    color: 'red',
+    marginTop: 10,
+  },
+  leftAction: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: 'red',
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  actionButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  actionButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
-export default chatListStyle;
+export default chatListStyles;
