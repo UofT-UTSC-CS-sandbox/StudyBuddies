@@ -44,11 +44,13 @@ const messageSlice = createSlice({
 export const { addChat, deleteChat } = chatListSlice.actions;
 export const { addMessage, deleteMessagesForChat } = messageSlice.actions;
 
+// Combine reducers
 const rootReducer = combineReducers({
   chatList: chatListSlice.reducer,
   messages: messageSlice.reducer,
 });
 
+// Configure persist
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -56,6 +58,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Configure store
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>

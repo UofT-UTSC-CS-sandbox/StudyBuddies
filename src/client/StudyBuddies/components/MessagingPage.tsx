@@ -6,7 +6,7 @@ import messagingStyle from '../app/style/messaging';
 
 const MessagingPage = ({ route }) => {
   const { chatId } = route.params;
-  const messages = useSelector((state) => state.messages[chatId]) || []; // Fallback to empty array
+  const messages = useSelector((state) => state.messages[chatId]) || [];
   const dispatch = useDispatch();
   const [text, setText] = useState('');
 
