@@ -1,141 +1,181 @@
-// SwipeUpMenu.tsx
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Modal } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Modal, Button } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
 
-// ItemMini Component
-const ItemMini = ({ show }) => (
-  <View style={styles.itemMini}>
-    <Text>Mini Item</Text>
-  </View>
-);
-
-
 type Room = {
-    id: number 
-    roomNumber: number
-    building: string
-    capacity: number
-    occupancy: number
-    students: Array<Student>
-}
-
-type Building = {
-    name: string
-    rooms: Array<Room>
-}
-
-type Student = {
-    name: string
-    img: string | null
-    isStudying: boolean
-    course: string | null
-}
-
-function NewStudent(name: string, img: string | null,  isStudying: boolean, course: string | null): Student {
-
-    let returnImage = "<link-to-default-img>"
-    let activeCourse = "Socializing"
-
-    if (img != null) {
-        returnImage = img
-    }
-
-    if (course != null) {
-        activeCourse = course
-    }
-
-    return {
-        name: name,
-        img: returnImage,
-        isStudying: isStudying,
-        course: activeCourse,
-    }
-}
-
-
-// ItemFull Component
-const ItemFull = ({ hide, onCardClick }) => {
-  const [cards, setCards] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
-
-  // Example effect to fetch cards from database (replace with your own fetch logic)
-  useEffect(() => {
-    fetchCardsFromDatabase(); // Assuming this function fetches cards from your database
-  }, []);
-
-  // Function to fetch cards from database (example)
-  const fetchCardsFromDatabase = () => {
-    // Replace with actual database fetch logic
-    const fetchedCards = [
-      NewStudent("jeff", "someurl", true, "CSCB09")
-      { id: 2, title: 'Room 2', description: 'Description for Room 2', capacity: 8, details: ['Detail 4', 'Detail 5'] },
-      { id: 3, title: 'Room 3', description: 'Description for Room 3', capacity: 10, details: ['Detail 6', 'Detail 7', 'Detail 8'] },
-      { id: 4, title: 'Room 4', description: 'Description for Room 4', capacity: 6, details: ['Detail 9'] },
-      { id: 5, title: 'Room 5', description: 'Description for Room 5', capacity: 4, details: ['Detail 10', 'Detail 11'] },
-      // Add more rooms as needed
-    ];
-    setCards(fetchedCards);
-  };
-
-  // Handle card click
-  const handleCardClick = (cardId) => {
-    const clickedCard = cards.find(card => card.id === cardId);
-    setSelectedCard(clickedCard);
-    onCardClick();
-  };
-
-  return (
-    <View style={styles.itemFull}>
-      <ScrollView>
-        {cards.map((card) => (
-          <TouchableOpacity key={card.id} onPress={() => handleCardClick(card.id)}>
-            <View style={styles.card}>
-              <Text style={styles.cardTitle}>{card.title}</Text>
-              <Text>{card.description}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-      <Modal visible={selectedCard !== null} transparent>
-        <View style={styles.modalBackground}>
-          {selectedCard && (
-            <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>{selectedCard.title}</Text>
-              <Text>Capacity: {selectedCard.capacity}</Text>
-              <ScrollView style={styles.detailsScrollView}>
-                {selectedCard.details.map((detail, index) => (
-                  <View key={index} style={styles.detailCard}>
-                    <Text>{detail}</Text>
-                  </View>
-                ))}
-              </ScrollView>
-              <TouchableOpacity style={styles.closeButton} onPress={() => setSelectedCard(null)}>
-                <Text style={styles.closeButtonText}>Close</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-      </Modal>
-    </View>
-  );
+  id: number;
+  roomNumber: number;
+  building: string;
+  capacity: number;
+  students: Array<Student>;
+  occupancy: number; // Calculate occupancy dynamically
 };
 
-// SwipeUpMenu Component
-const SwipeUpMenu = () => {
+type Building = {
+  name: string;
+  rooms: Array<Room>;
+};
+
+type Student = {
+  name: string;
+  img: string | null;
+  isStudying: boolean;
+  course: string | null;
+};
+
+function NewStudent(name: string, img: string | null, isStudying: boolean, course: string | null): Student {
+  let returnImage = "<link-to-default-img>";
+  let activeCourse = "Socializing";
+
+  if (img != null) {
+    returnImage = img;
+  }
+
+  if (course != null) {
+    activeCourse = course;
+  }
+
+  return {
+    name: name,
+    img: returnImage,
+    isStudying: isStudying,
+    course: activeCourse,
+  };
+}
+
+const SwipeUpDownMenu = () => {
   const [swipeHeight, setSwipeHeight] = useState(95);
   const [isFullView, setIsFullView] = useState(false);
+  const [buildings, setBuildings] = useState<Building[]>([]);
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [currentUser, setCurrentUser] = useState<Student>(NewStudent("Current User", null, true, "CS101"));
+  const [fetchedBuildings, setFetchedBuildings] = useState<Building[]>([]);
 
-  const toggleFullView = () => {
-    setIsFullView(!isFullView);
-    setSwipeHeight(isFullView ? 94 : Dimensions.get('window').height * 0.75);
+  useEffect(() => {
+    fetchBuildingsFromDatabase();
+  }, []);
+
+  useEffect(() => {
+    // When selectedRoom changes (i.e., when the user joins or leaves a room),
+    // update the occupancy in fetchedBuildings state
+    if (selectedRoom) {
+      setFetchedBuildings(prevBuildings =>
+        prevBuildings.map(building =>
+          building.name === selectedRoom.building
+            ? {
+                ...building,
+                rooms: building.rooms.map(room => (room.id === selectedRoom.id ? selectedRoom : room)),
+              }
+            : building
+        )
+      );
+    }
+  }, [selectedRoom]);
+
+  const fetchBuildingsFromDatabase = () => {
+    const fetchedBuildings: Building[] = [
+      {
+        name: 'Building A',
+        rooms: [
+          { id: 1, roomNumber: 101, building: 'A', capacity: 5, students: [NewStudent('Alice', null, true, 'Math101'), NewStudent('Bob', null, true, 'CS102')], occupancy: 2 },
+          { id: 2, roomNumber: 102, building: 'A', capacity: 8, students: [NewStudent('Charlie', null, true, 'CS103')], occupancy: 1 },
+        ],
+      },
+      {
+        name: 'Building B',
+        rooms: [
+          { id: 3, roomNumber: 201, building: 'B', capacity: 10, students: [NewStudent('Dave', null, true, 'CS101')], occupancy: 1 },
+          { id: 4, roomNumber: 202, building: 'B', capacity: 6, students: [], occupancy: 0 },
+        ],
+      },
+    ];
+
+    // Add current user to each room's students list
+    fetchedBuildings.forEach(building => {
+      building.rooms.forEach(room => {
+        if (!room.students.some(student => student.name === currentUser.name)) {
+          room.students.push(currentUser);
+          room.occupancy++;
+        }
+      });
+    });
+
+    setBuildings(fetchedBuildings);
+    setFetchedBuildings(fetchedBuildings); // Initialize fetchedBuildings state
+  };
+
+  const handleRoomClick = (room: Room) => {
+    setSelectedRoom(room);
+  };
+
+  const handleJoinLeaveRoom = () => {
+    if (!selectedRoom) return;
+
+    const isCurrentUserInRoom = selectedRoom.students.some(student => student.name === currentUser.name);
+
+    const updatedRoom = {
+      ...selectedRoom,
+      students: isCurrentUserInRoom
+        ? selectedRoom.students.filter(student => student.name !== currentUser.name)
+        : [...selectedRoom.students, currentUser],
+      occupancy: isCurrentUserInRoom ? selectedRoom.occupancy - 1 : selectedRoom.occupancy + 1,
+    };
+
+    setSelectedRoom(updatedRoom);
   };
 
   return (
     <SwipeUpDown
-      itemMini={(show) => <ItemMini show={show} />}
-      itemFull={(hide) => <ItemFull hide={hide} onCardClick={toggleFullView} />}
+      itemMini={(show) => (
+        <View style={styles.itemMini}>
+          <Text> </Text>
+        </View>
+      )}
+      itemFull={(hide) => (
+        <View style={styles.itemFull}>
+          <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            {buildings.map((building) => (
+              <View key={building.name}>
+                <Text style={styles.buildingTitle}>{building.name}</Text>
+                {building.rooms.map((room) => (
+                  <TouchableOpacity key={room.id} onPress={() => handleRoomClick(room)}>
+                    <View style={styles.card}>
+                      <Text style={styles.cardTitle}>{`Room ${room.roomNumber}`}</Text>
+                      <Text>{`Capacity: ${room.capacity}`}</Text>
+                      <Text>{`Occupancy: ${room.occupancy}`}</Text>
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ))}
+          </ScrollView>
+          <Modal visible={!!selectedRoom} transparent animationType="slide">
+            <View style={styles.modalBackground}>
+              {selectedRoom && (
+                <View style={styles.modalContent}>
+                  <Text style={styles.modalTitle}>{`Room ${selectedRoom.roomNumber}`}</Text>
+                  <Text>{`Capacity: ${selectedRoom.capacity}`}</Text>
+                  <ScrollView style={styles.detailsScrollView}>
+                    {selectedRoom.students.map((student, index) => (
+                      <View key={index} style={styles.detailCard}>
+                        <Text>{student.name}</Text>
+                        <Text>{student.course}</Text>
+                      </View>
+                    ))}
+                  </ScrollView>
+                  <Button
+                    title={selectedRoom.students.some(student => student.name === currentUser.name) ? 'Leave Room' : 'Join Room'}
+                    onPress={handleJoinLeaveRoom}
+                  />
+                  <TouchableOpacity style={styles.closeButton} onPress={() => setSelectedRoom(null)}>
+                    <Text style={styles.closeButtonText}>Close</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+          </Modal>
+        </View>
+      )}
       onShowMini={() => {
         console.log('mini');
         setSwipeHeight(94); // Update swipeHeight to 95 when onShowMini is triggered
@@ -144,7 +184,7 @@ const SwipeUpMenu = () => {
       animation="easeInEaseOut"
       disableSwipeIcon
       extraMarginTop={100} // Adjust this to move the swipe-up menu up when in mini item mode
-      iconColor='yellow'
+      iconColor="yellow"
       iconSize={30}
       miniItemSize={100} // Adjust this to set the height of the mini item
       style={styles.swipeUpDown}
@@ -166,18 +206,26 @@ const styles = StyleSheet.create({
   },
   itemMini: {
     padding: 20,
-    backgroundColor: 'rgb(44,44,46)', // #2c2c2e
+    backgroundColor: 'rgba(162, 89, 255, 0.01)', // Translucent #A259FF
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -15, // Adjust this to move the mini item view up
   },
   itemFull: {
     padding: 20,
-    backgroundColor: 'rgb(44,44,46)', // #2c2c2e
+    backgroundColor: 'rgba(162, 89, 255, 0.01)', // Translucent #A259FF
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     marginTop: -20, // Adjust this to move the full item view up
     zIndex: 1, // Ensure the full item view is above the background
+  },
+  scrollViewContent: {
+    marginTop: 20, // Add space between the top part and the scroll view
+  },
+  buildingTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   card: {
     backgroundColor: '#fff',
@@ -216,17 +264,17 @@ const styles = StyleSheet.create({
   detailCard: {
     backgroundColor: '#f0f0f0',
     padding: 10,
-    borderRadius: 8,
+    borderRadius: 10,
     marginBottom: 10,
   },
   closeButton: {
+    marginTop: 20,
     alignSelf: 'flex-end',
-    marginTop: 10,
   },
   closeButtonText: {
-    color: 'blue',
     fontSize: 16,
+    color: 'blue',
   },
 });
 
-export default SwipeUpMenu;
+export default SwipeUpDownMenu;
