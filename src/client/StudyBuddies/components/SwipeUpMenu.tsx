@@ -1,108 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Modal, Button } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, Modal, Dimensions, StyleSheet } from 'react-native';
 import SwipeUpDown from 'react-native-swipe-up-down';
+
+type Student = {
+  name: string;
+  image: any;
+  isOnline: boolean;
+  course: string;
+};
 
 type Room = {
   id: number;
   roomNumber: number;
   building: string;
   capacity: number;
-  students: Array<Student>;
-  occupancy: number; // Calculate occupancy dynamically
+  students: Student[];
+  occupancy: number;
 };
 
 type Building = {
   name: string;
-  rooms: Array<Room>;
+  rooms: Room[];
 };
 
-type Student = {
-  name: string;
-  img: string | null;
-  isStudying: boolean;
-  course: string | null;
-};
+const initialBuildings: Building[] = [
+  {
+    name: 'Building A',
+    rooms: [
+      {
+        id: 1,
+        roomNumber: 101,
+        building: 'A',
+        capacity: 5,
+        students: [{ name: 'Alice', image: null, isOnline: true, course: 'Math101' }],
+        occupancy: 1,
+      },
+      {
+        id: 2,
+        roomNumber: 102,
+        building: 'A',
+        capacity: 8,
+        students: [{ name: 'Bob', image: null, isOnline: true, course: 'CS102' }],
+        occupancy: 1,
+      },
+    ],
+  },
+  {
+    name: 'Building B',
+    rooms: [
+      {
+        id: 3,
+        roomNumber: 201,
+        building: 'B',
+        capacity: 10,
+        students: [{ name: 'Dave', image: null, isOnline: true, course: 'CS101' }],
+        occupancy: 1,
+      },
+      {
+        id: 4,
+        roomNumber: 202,
+        building: 'B',
+        capacity: 6,
+        students: [],
+        occupancy: 0,
+      },
+    ],
+  },
+];
 
-function NewStudent(name: string, img: string | null, isStudying: boolean, course: string | null): Student {
-  let returnImage = "<link-to-default-img>";
-  let activeCourse = "Socializing";
-
-  if (img != null) {
-    returnImage = img;
-  }
-
-  if (course != null) {
-    activeCourse = course;
-  }
-
-  return {
-    name: name,
-    img: returnImage,
-    isStudying: isStudying,
-    course: activeCourse,
-  };
-}
-
-const SwipeUpDownMenu = () => {
-  const [swipeHeight, setSwipeHeight] = useState(95);
-  const [isFullView, setIsFullView] = useState(false);
-  const [buildings, setBuildings] = useState<Building[]>([]);
+const App = () => {
+  const [buildings, setBuildings] = useState<Building[]>(initialBuildings);
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-  const [currentUser, setCurrentUser] = useState<Student>(NewStudent("Current User", null, true, "CS101"));
-  const [fetchedBuildings, setFetchedBuildings] = useState<Building[]>([]);
+  const [swipeHeight, setSwipeHeight] = useState<number>(94);
 
-  useEffect(() => {
-    fetchBuildingsFromDatabase();
-  }, []);
-
-  useEffect(() => {
-    // When selectedRoom changes (i.e., when the user joins or leaves a room),
-    // update the occupancy in fetchedBuildings state
-    if (selectedRoom) {
-      setFetchedBuildings(prevBuildings =>
-        prevBuildings.map(building =>
-          building.name === selectedRoom.building
-            ? {
-                ...building,
-                rooms: building.rooms.map(room => (room.id === selectedRoom.id ? selectedRoom : room)),
-              }
-            : building
-        )
-      );
-    }
-  }, [selectedRoom]);
-
-  const fetchBuildingsFromDatabase = () => {
-    const fetchedBuildings: Building[] = [
-      {
-        name: 'Building A',
-        rooms: [
-          { id: 1, roomNumber: 101, building: 'A', capacity: 5, students: [NewStudent('Alice', null, true, 'Math101'), NewStudent('Bob', null, true, 'CS102')], occupancy: 2 },
-          { id: 2, roomNumber: 102, building: 'A', capacity: 8, students: [NewStudent('Charlie', null, true, 'CS103')], occupancy: 1 },
-        ],
-      },
-      {
-        name: 'Building B',
-        rooms: [
-          { id: 3, roomNumber: 201, building: 'B', capacity: 10, students: [NewStudent('Dave', null, true, 'CS101')], occupancy: 1 },
-          { id: 4, roomNumber: 202, building: 'B', capacity: 6, students: [], occupancy: 0 },
-        ],
-      },
-    ];
-
-    // Add current user to each room's students list
-    fetchedBuildings.forEach(building => {
-      building.rooms.forEach(room => {
-        if (!room.students.some(student => student.name === currentUser.name)) {
-          room.students.push(currentUser);
-          room.occupancy++;
-        }
-      });
-    });
-
-    setBuildings(fetchedBuildings);
-    setFetchedBuildings(fetchedBuildings); // Initialize fetchedBuildings state
-  };
+  const currentUser = { name: 'TestUser' }; // Replace with actual user object
 
   const handleRoomClick = (room: Room) => {
     setSelectedRoom(room);
@@ -111,24 +82,40 @@ const SwipeUpDownMenu = () => {
   const handleJoinLeaveRoom = () => {
     if (!selectedRoom) return;
 
-    const isCurrentUserInRoom = selectedRoom.students.some(student => student.name === currentUser.name);
+    const updatedBuildings = buildings.map((building) => {
+      const updatedRooms = building.rooms.map((room) => {
+        if (room.id === selectedRoom.id) {
+          const isStudentInRoom = room.students.some((student) => student.name === currentUser.name);
 
-    const updatedRoom = {
-      ...selectedRoom,
-      students: isCurrentUserInRoom
-        ? selectedRoom.students.filter(student => student.name !== currentUser.name)
-        : [...selectedRoom.students, currentUser],
-      occupancy: isCurrentUserInRoom ? selectedRoom.occupancy - 1 : selectedRoom.occupancy + 1,
-    };
+          if (isStudentInRoom) {
+            // Leave room
+            const updatedStudents = room.students.filter((student) => student.name !== currentUser.name);
+            const updatedOccupancy = updatedStudents.length;
+            console.log(`Room ${room.roomNumber} now has ${updatedOccupancy} students.`);
+            return { ...room, students: updatedStudents, occupancy: updatedOccupancy };
+          } else {
+            // Join room
+            const newStudent: Student = { name: currentUser.name, image: null, isOnline: true, course: 'CSCC01' }; // Replace with actual student data
+            const updatedStudents = [...room.students, newStudent];
+            const updatedOccupancy = updatedStudents.length;
+            console.log(`Room ${room.roomNumber} now has ${updatedOccupancy} students.`);
+            return { ...room, students: updatedStudents, occupancy: updatedOccupancy };
+          }
+        }
+        return room;
+      });
+      return { ...building, rooms: updatedRooms };
+    });
 
-    setSelectedRoom(updatedRoom);
+    setBuildings(updatedBuildings);
+    setSelectedRoom(null); // Close modal after join/leave
   };
 
   return (
     <SwipeUpDown
       itemMini={(show) => (
         <View style={styles.itemMini}>
-          <Text> </Text>
+          <Text>Swipe up for more</Text>
         </View>
       )}
       itemFull={(hide) => (
@@ -163,11 +150,15 @@ const SwipeUpDownMenu = () => {
                       </View>
                     ))}
                   </ScrollView>
-                  <Button
-                    title={selectedRoom.students.some(student => student.name === currentUser.name) ? 'Leave Room' : 'Join Room'}
-                    onPress={handleJoinLeaveRoom}
-                  />
-                  <TouchableOpacity style={styles.closeButton} onPress={() => setSelectedRoom(null)}>
+                  <TouchableOpacity style={styles.joinLeaveButton} onPress={handleJoinLeaveRoom}>
+                    <Text style={styles.joinLeaveButtonText}>
+                      {selectedRoom.students.some(student => student.name === currentUser.name) ? 'Leave Room' : 'Join Room'}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() => setSelectedRoom(null)}
+                  >
                     <Text style={styles.closeButtonText}>Close</Text>
                   </TouchableOpacity>
                 </View>
@@ -177,19 +168,15 @@ const SwipeUpDownMenu = () => {
         </View>
       )}
       onShowMini={() => {
-        console.log('mini');
-        setSwipeHeight(94); // Update swipeHeight to 95 when onShowMini is triggered
+        console.log('Swipe up menu minimized');
+        setSwipeHeight(94);
       }}
-      onShowFull={() => console.log('full')}
+      onShowFull={() => console.log('Swipe up menu expanded')}
       animation="easeInEaseOut"
       disableSwipeIcon
-      extraMarginTop={100} // Adjust this to move the swipe-up menu up when in mini item mode
-      iconColor="yellow"
-      iconSize={30}
-      miniItemSize={100} // Adjust this to set the height of the mini item
-      style={styles.swipeUpDown}
       swipeHeight={swipeHeight}
       swipeFullHeight={Dimensions.get('window').height * 0.75}
+      style={styles.swipeUpDown}
     />
   );
 };
@@ -267,14 +254,25 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
   },
+  joinLeaveButton: {
+    backgroundColor: 'rgba(162, 89, 255, 0.5)', // Translucent #A259FF
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  joinLeaveButtonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
   closeButton: {
     marginTop: 20,
     alignSelf: 'flex-end',
   },
   closeButtonText: {
     fontSize: 16,
-    color: 'blue',
+    color: 'rgba(162, 89, 255, 0.5)', // Translucent #A259FF
   },
 });
 
-export default SwipeUpDownMenu;
+export default App;
