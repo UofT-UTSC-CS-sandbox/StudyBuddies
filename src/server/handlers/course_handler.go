@@ -23,19 +23,22 @@ func (h *Handler) GetCourse(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, course)
+	var course_serial = course.SerializeCourse()
+
+	ctx.JSON(http.StatusOK, course_serial)
 }
 
 func (h *Handler) CreateCourse(ctx *gin.Context) {
 	var courseData struct {
 		CourseName string `json:"course_name"`
+		CourseCode string `json:"course_code"`
 	}
 	if err := ctx.ShouldBindJSON(&courseData); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	course := model.Course{Name: courseData.CourseName, NumStudents: 0, Students: []model.User{}}
+	course := model.Course{Name: courseData.CourseName, Code: courseData.CourseCode, NumStudents: 0, Students: []model.User{}}
 	if _, err := h.courseService.CreateCourse(&course); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

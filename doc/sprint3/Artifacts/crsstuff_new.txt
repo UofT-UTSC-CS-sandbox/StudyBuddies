@@ -1,0 +1,1371 @@
+ACMB10|Equity and Diversity in the Arts
+ACMC01|ACMEE Applied Practice I
+ACMD01|ACMEE Applied Practice II
+ACMD02|ACMEE Applied Practice III
+ACMD91|Supervised Readings
+ACMD92|Supervised Readings
+ACMD93|Supervised Readings
+ACTB40|Fundamentals of Investment and Credit
+AFSA01|Africa in the World: An Introduction
+AFSA03|Experiencing Development in Africa
+AFSB51|Africa from the Colonial Conquests to Independence
+AFSC03|Contemporary Africa: State, Society, and Politics
+AFSC19|Community-Driven Development: Cooperatives, Social Enterprises and the Black Social Economy
+AFSC97|Women and Power in Africa
+AFSD07|Extractive Industries in Africa
+AFSD20|Thinking Conflict, Security, and Development
+AFSD53|Africa and Asia in the First World War
+ANTA01|Introduction to Anthropology: Becoming Human
+ANTA02|Introduction to Anthropology: Society, Culture and Language
+ANTB01|Political Ecology
+ANTB11|World Prehistory
+ANTB12|Anthropology of Science Fiction
+ANTB14|Evolutionary Anthropology
+ANTB15|Contemporary Human Evolution and Variation
+ANTB16|Canadian Cultural Identities
+ANTB19|Ethnography and the Comparative Study of Human Societies
+ANTB20|Ethnography and the Global Contemporary
+ANTB22|Primate Behaviour
+ANTB26|The Middle East and North Africa : Past and Present
+ANTB33|The Future of Work
+ANTB35|Kids These Days: Youth, Language and Media
+ANTB64|Are You What You Eat? : The Anthropology of Food
+ANTB65|An Introduction to Pacific Island Societies
+ANTB80|Introduction to Archaeology: Methods, Theories, and Practices
+ANTC03|Directed Reading in Anthropology
+ANTC04|Directed Reading in Anthropology
+ANTC09|Sex, Love, and Intimacy: Anthropological Approaches to Kinship and Marriage
+ANTC10|Anthropological Perspectives on Development
+ANTC16|The Foundation and Theory of Human Origins
+ANTC17|Human Origins: New Discoveries
+ANTC19|Producing People and Things: Economics and Social Life
+ANTC20|Gifts, Money and Morality
+ANTC27|Primate Sociality
+ANTC29|Archaeologies of North America
+ANTC33|Of Gods and Humans: Anthropological Approaches to Religion
+ANTC47|Human and Primate Comparative Osteology
+ANTC48|Advanced Topics In Human Osteology
+ANTC58|Constructing the Other: Orientalism through Time and Place
+ANTC61|Medical Anthropology: Illness and Healing in Cultural Perspective
+ANTC65|Anthropology of Science, Medicine, and Technology
+ANTC66|Anthropology of Tourism
+ANTC67|Foundations in Epidemiology
+ANTC70|Ethnographic Methods in Anthropology: Past, Present, and Future
+ANTC71|Climate, Palaeoecology, and Policy: Archaeology of Humans in the Environment
+ANTC80|Race and Racism: Anthropological Insights
+ANTC88|Special Topics
+ANTD04|The Anthropology of Violence and Suffering
+ANTD05|Advanced Fieldwork Methods in Social and Cultural Anthropology
+ANTD06|Reading Ethnography
+ANTD10|The Anthropology of 'Life' Itself
+ANTD15|Frontiers of Socio-Cultural Anthropology
+ANTD17|Medical Osteology: Public Health Perspectives on Human Skeletal Health
+ANTD18|Palaeolithic Archaeology
+ANTD19|Primate Conservation
+ANTD25|Medical Primatology: Public Health Perspectives on Zoonotic Diseases
+ANTD26|Caveman, Farmer, Herder, Trader: Evolution of Diet in Society
+ANTD35|Bioarchaeology
+ANTD40|Topics in Emerging Scholarship in Evolutionary Anthropology
+ANTD41|Topics in Emerging Scholarship in Socio-Cultural Anthropology
+ANTD99|Advanced Topics in Primate Evolution
+ASTB23|Astrophysics of Stars, Galaxies and the Universe
+ASTC02|Practical Astronomy: Instrumentation and Data Analysis
+ASTC25|Astrophysics of Planetary Systems
+BIOA01|Life on Earth: Unifying Principles
+BIOA02|Life on Earth: Form, Function and Interactions
+BIOA11|Introduction to the Biology of Humans
+BIOB10|Cell Biology
+BIOB11|Molecular Aspects of Cellular and Genetic Processes
+BIOB12|Cell and Molecular Biology Laboratory
+BIOB20|Introduction to Computational Biology
+BIOB32|Animal Physiology Laboratory
+BIOB33|Human Development and Anatomy
+BIOB34|Animal Physiology
+BIOB35|Essentials of Human Physiology
+BIOB38|Plants and Society
+BIOB50|Ecology
+BIOB51|Evolutionary Biology
+BIOB52|Ecology and Evolutionary Biology Laboratory
+BIOB90|Integrative Research Poster Project
+BIOB97|Bio-CURE: Course-based Undergraduate Research in Biological Sciences
+BIOB98|Supervised Introductory Research in Biology
+BIOB99|Supervised Introductory Research in Biology
+BIOC10|Cell Biology: Proteins from Life to Death
+BIOC12|Biochemistry I: Proteins &amp; Enzymes
+BIOC13|Biochemistry II: Bioenergetics and Metabolism
+BIOC14|Genes, Environment and Behaviour
+BIOC15|Genetics
+BIOC16|Evolutionary Genetics and Genomics
+BIOC17|Microbiology
+BIOC19|Animal Developmental Biology
+BIOC20|Principles of Virology
+BIOC21|Vertebrate Histology: Cells and Tissues
+BIOC23|Practical Approaches to Biochemistry
+BIOC31|Plant Development and Biotechnology
+BIOC32|Human Physiology I
+BIOC34|Human Physiology II
+BIOC35|Principles in Parasitology
+BIOC37|Plants: Life on the Edge
+BIOC39|Immunology
+BIOC40|Plant Physiology
+BIOC50|Macroevolution
+BIOC52|Ecology Field Course
+BIOC54|Animal Behaviour
+BIOC58|Biological Consequences of Global Change
+BIOC59|Advanced Population Ecology
+BIOC60|Winter Ecology
+BIOC61|Community Ecology and Environmental Biology
+BIOC62|Role of Zoos and Aquariums in Conservation
+BIOC63|Conservation Biology
+BIOC70|An Introduction to Bias in the Sciences
+BIOC90|Integrative Multimedia Documentary Project
+BIOC99|Biology Team Research
+BIOD06|Advanced Topics in Neural Basis of Motor Control
+BIOD07|Advanced Topics and Methods in Neural Circuit Analysis
+BIOD12|Protein Homeostasis
+BIOD15|Mechanism of Gene Regulation in Health and Disease
+BIOD17|Seminars in Cellular Microbiology
+BIOD19|Epigenetics in Health and Disease
+BIOD20|Special Topics in Virology
+BIOD21|Advanced Molecular Biology Laboratory
+BIOD23|Special Topics in Cell Biology
+BIOD24|Human Stem Cell Biology and Regenerative Medicine
+BIOD25|Genomics
+BIOD26|Fungal Biology and Pathogenesis
+BIOD27|Vertebrate Endocrinology
+BIOD29|Pathobiology of Human Disease
+BIOD30|Plant Research and Biotechnology: Addressing Global Problems
+BIOD32|Human Respiratory Pathophysiology
+BIOD33|Comparative Animal Physiology
+BIOD34|Conservation Physiology
+BIOD37|Biology of Plant Stress
+BIOD43|Animal Movement and Exercise
+BIOD45|Animal Communication
+BIOD48|Ornithology
+BIOD54|Applied Conservation Biology
+BIOD59|Models in Ecology, Epidemiology and Conservation
+BIOD60|Spatial Ecology
+BIOD63|From Individuals to Ecosystems: Advanced Topics in Ecology
+BIOD65|Pathologies of the Nervous System
+BIOD67|Inter-University Biology Field Course
+BIOD95|Supervised Study in Biology
+BIOD98|[No course title available]
+BIOD99|Directed Research in Biology
+CDPD00|Combined Degree Program Graduate Crs 1
+CDPD01|Combined Degree Program Graduate Crs 2
+CHMA10|Introductory Chemistry I: Structure and Bonding
+CHMA11|Introductory Chemistry II: Reactions and Mechanisms
+CHMA12|Advanced General Chemistry
+CHMB16|Techniques in Analytical Chemistry
+CHMB20|Chemical Thermodynamics and Elementary Kinetics
+CHMB21|Chemical Structure and Spectroscopy
+CHMB23|Introduction to Chemical Thermodynamics and Kinetics: Theory and Practice
+CHMB31|Introduction to Inorganic Chemistry
+CHMB41|Organic Chemistry I
+CHMB42|Organic Chemistry II
+CHMB55|Environmental Chemistry
+CHMB62|Introduction to Biochemistry
+CHMC11|Principles of Analytical Instrumentation
+CHMC16|Analytical Instrumentation
+CHMC20|Intermediate Physical Chemistry
+CHMC31|Intermediate Inorganic Chemistry
+CHMC42|Organic Synthesis
+CHMC47|Bio-Organic Chemistry
+CHMC71|Medicinal Chemistry
+CHMD11|Application of Spectroscopy in Chemical Structure Determination
+CHMD16|Environmental and Analytical Chemistry
+CHMD39|Topics in Inorganic Chemistry
+CHMD47|Advanced Bio-Organic Chemistry
+CHMD59|Modelling the Fate of Organic Chemicals in the Environment
+CHMD69|Chemical Elements in Living Systems
+CHMD79|Topics in Biological Chemistry
+CHMD90|Directed Research
+CHMD91|Directed Research
+CITA01|Foundations of City Studies
+CITA02|Studying Cities
+CITB01|Canadian Cities and Planning
+CITB03|Social Planning and Community Development
+CITB04|City Politics
+CITB05|Researching the City: An An Introduction to Methods
+CITB08|Economy of Cities
+CITC03|Housing Policy and Planning
+CITC04|Current Municipal and Planning Policy and Practice in Toronto
+CITC07|Urban Social Policy
+CITC12|City Structures, Problems, and Decisions: Field Research in Urban Policy Making
+CITC14|Environmental Planning
+CITC15|Money Matters: How Municipal Finance Shapes the City
+CITC16|Planning and Governing the Metropolis
+CITC17|Civic Engagement in Urban Politics
+CITD01|City Issues and Strategies
+CITD05|City Studies Workshop I
+CITD06|City Studies Workshop II
+CITD12|Planning and Building Public Spaces in Toronto
+CITD30|Supervised Research Project
+CLAA04|The Ancient Mediterranean World
+CLAA05|Ancient Mythology I: Mesopotamia and Egypt
+CLAA06|Ancient Mythology II: Greece and Rome
+CLAB05|History and Culture of the Greek World
+CLAB06|History and Culture of the Roman World
+CLAB09|Between Two Empires: The World of Late Antiquity
+CLAB20|The Ancient World in Film
+CLAC24|Race and Ethnicity in the Ancient Mediterranean and West Asian Worlds
+CLAC68|Constructing the Other: Orientalism through Time and Place
+CLAC94|The Bible and the Qur'an
+COPB11|Advancing Your Career Exploration Part I
+COPB12|Advancing Your Career Exploration Part II
+COPB13|Advancing Your Career Exploration Management International Business Part I
+COPB14|Advancing Your Career Exploration Management International Business Part II
+COPB30|[No course title available]
+COPB31|Passport to Placement II
+COPB33|Passport to Placement III
+COPB50|Foundations for Success in Art and Science Co-op
+COPB51|Preparing to Compete for your Work Term
+COPB52|Managing Your Job Search and Transition to the Workplace
+COPB53|Continuing your Co-op Job Search
+COPC98|Integrating Your Work Term Experience Part I
+COPC99|Integrating Your Work Term Experience II
+CSCA08|Introduction to Computer Science I
+CSCA20|Introduction to Programming
+CSCA48|Introduction to Computer Science II
+CSCA67|Discrete Mathematics
+CSCB07|Software Design
+CSCB09|Software Tools and Systems Programming
+CSCB20|Introduction to Databases and Web Applications
+CSCB36|Introduction to the Theory of Computation
+CSCB58|Computer Organization
+CSCB63|Design and Analysis of Data Structures
+CSCC01|Introduction to Software Engineering
+CSCC09|Programming on the Web
+CSCC10|Human-Computer Interaction
+CSCC11|Introduction to Machine Learning and Data Mining
+CSCC24|Principles of Programming Languages
+CSCC37|Introduction to Numerical Algorithms for Computational Mathematics
+CSCC43|Introduction to Databases
+CSCC63|Computability and Computational Complexity
+CSCC69|Operating Systems
+CSCC73|Algorithm Design and Analysis
+CSCC85|Fundamentals of Robotics and Automated Systems
+CSCD01|Engineering Large Software Systems
+CSCD03|Social Impact of Information Technology
+CSCD18|Computer Graphics
+CSCD25|Advanced Data Analysis
+CSCD27|Computer and Network Security
+CSCD37|Analysis of Numerical Algorithms for Computational Mathematics
+CSCD43|Database System Technology
+CSCD54|Technology Innovation and Entrepreneurship
+CSCD58|Computer Networks
+CSCD70|Compiler Optimization
+CSCD71|Topics in Computer Science
+CSCD84|Artificial Intelligence
+CSCD90|The Startup Sandbox
+CSCD92|Readings in Computer Science
+CSCD94|Computer Science Project
+CSCD95|Computer Science Project
+CTLA01|Foundations in Effective Academic Communication
+CTLB03|Introduction to Community Engaged Learning
+ECTB58|Foundations of Translation
+ECTB60|Agri-Food, Cultures, and Translation
+ECTB61|English and Chinese Translation: Theory and Practice
+ECTB66|English and Chinese Interpreting Skills and Practices
+ECTC61|Translation Studies in Literature
+ECTC63|Translation and the Environment
+ECTC67|Special Topics in Translation
+ECTD65|Translation Studies and Theory After the Cultural Turn
+ECTD68|Translation for Business
+ECTD70|Transcultural Translations of the Wild
+EESA01|Introduction to Environmental Science
+EESA06|Introduction to Planet Earth
+EESA07|Water
+EESA09|Wind
+EESA10|Human Health and the Environment
+EESA11|Environmental Pollution
+EESB02|Principles of Geomorphology
+EESB03|Principles of Climatology
+EESB04|Principles of Hydrology
+EESB05|Principles of Soil Science
+EESB15|Earth History
+EESB16|Feeding Humans - The Cost to the Planet
+EESB18|Natural Hazards
+EESB19|Mineralogy
+EESB20|Sedimentology and Stratigraphy
+EESB22|Environmental Geophysics
+EESC02|Invaded Environments
+EESC03|Geographic Information Systems and Remote Sensing
+EESC04|Biodiversity and Biogeography
+EESC07|Groundwater
+EESC13|Environmental Impact Assessment and Auditing
+EESC16|Field Camp I
+EESC18|Limnology
+EESC19|Oceanography
+EESC20|Geochemistry
+EESC22|Exploration Geophysics
+EESC24|Advanced Readings in Environmental Science
+EESC25|Urban Climatology
+EESC26|Seismology and Seismic Methods
+EESC30|Environmental Microbiology
+EESC31|Glacial Geology
+EESC33|Environmental Science Field Course
+EESC34|Sustainability in Practice
+EESC36|Petrology
+EESC37|Structural Geology
+EESD02|Contaminant Hydrogeology
+EESD06|Climate Change Impact Assessment
+EESD07|Field Camp II
+EESD09|Research Project in Environmental Science
+EESD10|Research Project in Environmental Science
+EESD13|Environmental Law, Policy and Ethics
+EESD15|Fundamentals of Site Remediation
+EESD17|Cohort Capstone Course in Environmental Studies
+EESD18|Environmental Studies Seminar Series
+EESD19|Professional Development Seminars in Geoscience
+EESD20|Geological Evolution and Environmental History of North America
+EESD21|Geophysical and Climate Data Analysis
+EESD28|Fundamentals of Environmental Modelling
+EESD31|Applied Climatology
+ENGA01|What Is Literature?
+ENGA02|Critical Writing About Literature
+ENGA03|Introduction to Creative Writing
+ENGA10|Literature and Film for Our Time: Visions and Revisions
+ENGA11|Literature and Film for Our Time: Dawn of the Digital
+ENGB01|Introduction to Indigenous Literatures of Turtle Island
+ENGB04|How to Read a Poem
+ENGB06|Canadian Literature to 1900
+ENGB12|Life Writing
+ENGB17|Contemporary Literature from the Caribbean
+ENGB25|The Canadian Short Story
+ENGB26|Inferno
+ENGB27|Charting Literary History I
+ENGB28|Charting Literary History II
+ENGB29|Shakespeare and Film
+ENGB30|Classical Myth and Literature
+ENGB32|Shakespeare in Context I
+ENGB35|Children's Literature
+ENGB38|The Graphic Novel
+ENGB39|Tolkien's Middle Ages
+ENGB60|Creative Writing: Poetry I
+ENGB61|Creative Writing: Fiction I
+ENGB63|Creative Writing: Creative Nonfiction I
+ENGB78|The Digital Text: From Digitized Literature to Born-Digital Works
+ENGC04|Creative Writing: Screenwriting
+ENGC05|Creative Writing: Poetry, Experimentation, and Activism
+ENGC09|Canadian Poetry
+ENGC10|Studies in Shakespeare
+ENGC15|Introduction to Theory and Criticism
+ENGC19|Transnational Literature
+ENGC25|Victorian Poetry and Prose
+ENGC28|The Fairy Tale
+ENGC45|Queer Literature and Theory
+ENGC46|[No course title available]
+ENGC51|Contemporary Arab Women Writers
+ENGC60|Indigenous Drama of Turtle Island
+ENGC69|Gothic Literature
+ENGC74|Persuasive Writing and Community-Engaged Learning
+ENGC79|Above and Beyond: Superheroes in Fiction and Film
+ENGC86|Creative Writing: Poetry II
+ENGC87|Creative Writing: Fiction II
+ENGC88|Creative Writing: Creative Nonfiction II
+ENGC89|Creative Writing and Performance
+ENGD02|Teaching Academic Writing: Theories, Methods and Service Learning
+ENGD14|Topics in Early Modern English Literature and Culture
+ENGD22|Special Topics in Creative Writing II
+ENGD26|Independent Studies in Creative Writing: Poetry
+ENGD27|Independent Studies in Creative Writing: Prose
+ENGD28|Independent Studies in Creative Writing: Open  Genre
+ENGD43|Topics in Romanticism, 1750-1850
+ENGD48|Studies in Major Victorian Writers
+ENGD55|Literature, Politics, Revolution
+ENGD58|Topics in Canadian Literature
+ENGD59|Topics in American Poetry
+ENGD60|Topics in American Prose
+ENGD95|Creative Writing as a Profession
+ENGD98|Senior Essay and Capstone Seminar
+ESTB01|Introduction to Environmental Studies
+ESTB02|Whose Land Indigenous-Canada- Land Relations
+ESTB03|Land
+ESTB04|Addressing the Climate Crisis
+ESTC34|Sustainability in Practice
+ESTC35|Environmental Science and Technology in Society
+ESTC36|Knowledge, Ethics and Environmental Decision-Making
+ESTC37|Energy and Sustainability
+ESTC40|Technical Methods for Climate Change Mitigation
+ESTD17|Cohort Capstone Course in Environmental Studies
+ESTD18|Environmental Studies Seminar Series
+ESTD19|Risk
+FLDA01|Placement Fee Arts Management
+FLDC01|Arts Management Field Placement I
+FLDD01|Arts Management Field Placement II
+FLDD02|Arts Management Field Placement III
+FLMA70|How to Read a Film
+FLMB71|Writing About Movies
+FLMB75|Cinema and Modernity
+FLMB77|Cinema and Colonialism
+FLMC44|Self and Other in Literature and Film
+FLMC75|Freaks and Geeks: Children in Contemporary Film and Media
+FLMC84|Cinema and Migration
+FLMC92|Film Theory
+FLMC95|Indian Cinemas: Bollywood, Before and Beyond
+FLMD93|Theoretical Approaches to Cinema
+FREA01|Language Practice I
+FREA02|Language Practice II
+FREA96|Introductory French I
+FREA97|Introductory French II
+FREA98|Intermediate French I
+FREA99|Intermediate French II
+FREB01|Language Practice III
+FREB02|Language Practice IV
+FREB08|Practical Translation I
+FREB11|French Language in the School System
+FREB20|Teaching Children's Literature in French
+FREB36|The 20th Century Quebec Novel
+FREB44|Introduction to Linguistics: French Phonetics and Phonology
+FREB45|Introduction to Linguistics: French Morphology and Syntax
+FREB46|History of the French Language
+FREB50|Introduction to Literature in French I
+FREB51|Literary History in Context: From the Middle Ages to the 17th Century
+FREB70|Introduction to Film Analysis in French
+FREC01|Language Practice V
+FREC02|Language Practice VI
+FREC11|Teaching French as a Second Language
+FREC18|Translation for Business and Professional Needs
+FREC54|Paris through the Ages
+FREC57|French Fiction of the 19th Century
+FREC64|French Fiction of the 20th and 21st Centuries
+FREC70|Cinema, Movements and Genres
+FREC83|Cultural Identities and Stereotypes in the French-Speaking World
+FRED01|Language practice VII: Written French
+FRED02|Supervised Reading
+FRED03|Supervised Reading
+FRED04|Supervised Reading
+FRED05|Supervised Reading
+FRED06|Language Practice VIII: Oral French
+FRED07|Supervised Reading
+FRED14|Advanced Topics in the Literature of Quebec
+FRED90|Supervised Reading
+FSTA01|Foods That Changed the World
+FSTB01|Methodologies in Food Studies
+FSTC02|Mondo Vino: The History and Culture of Wine Around the World
+FSTC24|Gender in the Kitchen
+FSTC43|Social Geographies of Street Food
+FSTD01|Independent Studies: Senior Research Project
+FSTD02|Special Topics in Food Studies
+FSTD11|Food and Media: Documenting Culinary Traditions Through Photography and Videography
+GASA01|Introducing Global Asia and its Histories
+GASB05|Media and Globalization
+GASB33|Global Buddhism in Historical and Contemporary Societies
+GASB57|Sub-Continental Histories: South Asia in the World
+GASB58|Modern Chinese History
+GASB65|West Asia and the Modern World
+GASC20|Gendering Global Asia
+GASC33|Critical Perspectives in Global Buddhism
+GASC50|Comparative Studies of East Asian Legal Cultures
+GASC51|From Opium to Maximum City: Narrating Political Economy in China and India
+GASC57|China and the World
+GASC59|The Making of Tamil Worlds
+GASC73|Making the Global South
+GASD53|Africa and Asia in the First World War
+GASD54|Aqueous History: Water-Stories for a Future
+GASD55|Transnational Asian Thought
+GASD71|Cuisine, Culture, and Societies Across Global Asia
+GGRA02|The Geography of Global Processes
+GGRA03|Cities and Environments
+GGRA30|Geographic Information Systems (GIS) and Empirical Reasoning
+GGRB02|The Logic of Geographical Thought
+GGRB03|Writing Geography
+GGRB05|Urban Geography
+GGRB13|Social Geography
+GGRB18|Whose Land Indigenous-Canada- Land Relations
+GGRB21|Political Ecology: Nature, Society and Environmental Change
+GGRB28|Geographies of Disease
+GGRB30|Fundamentals of GIS I
+GGRB32|Fundamentals of GIS II
+GGRC10|Urbanization and Development
+GGRC12|Transportation Geography
+GGRC13|Urban Political Geography
+GGRC15|Spatial Databases and Applications
+GGRC24|Socio-Natures and the Cultural Politics of 'The Environment'
+GGRC26|Geographies of Environmental Governance
+GGRC28|Indigenous Peoples, Environment and Justice
+GGRC30|Advanced GIS
+GGRC31|Qualitative Geographical Methods: Place and Ethnography
+GGRC32|Essential Spatial Analysis
+GGRC34|Crowd-sourced Urban Geographies
+GGRC42|Making Sense of Data: Applied Multivariate Analysis
+GGRC43|Social Geographies of Street Food
+GGRC44|Environmental Conservation and Sustainable Development
+GGRC50|Geographies of Education
+GGRD01|Supervised Research Project
+GGRD08|Research Seminar in Environmental Geography
+GGRD10|Health and Sexuality
+GGRD12|Seminar in Selected Topics in Human Geography
+GGRD14|Social Justice and the City
+GGRD15|Queer Geographies
+GGRD16|Work and Livelihoods in the GTA
+GGRD30|GIS Research Project
+GGRD31|Independent Research Project
+GGRD49|Land and Land Conflicts in the America
+GLBC01|Global Leadership: Theory, Research and Practice
+HISA06|Introducing Global Asia and its Histories
+HISA07|The Ancient Mediterranean World
+HISA08|Africa in the World: An Introduction
+HISB02|The British Empire: A Short History
+HISB03|Critical Writing and Research for Historians
+HISB09|Between Two Empires: The World of Late Antiquity
+HISB10|History and Culture of the Greek World
+HISB11|History and Culture of the Roman World
+HISB12|The Ancient World in Film
+HISB22|From Freedom Runners to #BlackLivesMatter: Histories of Black Feminism in Canada
+HISB31|History of the United States since the Civil War
+HISB41|Making of Modern Canada
+HISB51|Africa from the Colonial Conquests to Independence
+HISB57|Sub-Continental Histories: South Asia in the World
+HISB58|Modern Chinese History
+HISB59|Science, Technology, Medicine and Empire
+HISB63|Muhammad to the Mongols: Islamic History 600-1300
+HISB64|The Making of the Modern Middle East: Islamic History 1300-2000
+HISB65|West Asia and the Modern World
+HISC01|History and Evidence
+HISC07|Data, Text, and the Future of the Past
+HISC08|Colonialism on Film
+HISC11|Race and Ethnicity in the Ancient Mediterranean and West Asian Worlds
+HISC27|The History of European Sexuality: From Antiquity to the Present
+HISC32|The Emergence of Modern America, 1877-1933
+HISC45|Immigrants and Race Relations in Canadian History
+HISC46|Canada and the World
+HISC51|From Opium to Maximum City: Narrating Political Economy in China and India
+HISC56|Comparative Studies of East Asian Legal Cultures
+HISC57|China and the World
+HISC58|Delhi and London: Imperial Cities, Mobile People
+HISC59|The Making of Tamil Worlds
+HISC68|Constructing the Other: Orientalism through Time and Place
+HISC73|Making the Global South
+HISC77|Soccer and the Modern World
+HISC94|The Bible and the Qur'an
+HISC97|Women and Power in Africa
+HISD01|Independent Studies: Senior Research Project
+HISD02|Independent Studies: Senior Research Project
+HISD03|Selected Topics in Historical Research
+HISD14|Selected Topics in Modern European History
+HISD16|Socialist Feminism in Global Context
+HISD18|Digital History
+HISD36|From New Deal to New Right: American Politics since 1933
+HISD45|Canadian Settler Colonialism in Comparative Context
+HISD53|Africa and Asia in the First World War
+HISD55|Transnational Asian Thought
+HISD66|Documenting Conflict and Peacemaking in the Modern Modern Middle East
+HISD72|History of Beer and Brewing
+HISD93|The Politics of the Past: Memories, Monuments and Museums
+HLTA02|Exploring Health and Society: Theories, Perspectives, and Patterns
+HLTA03|Navigating Health and Society: Research, Practice, and Policy
+HLTA20|Physiology Through the Life Course: From Birth Through Death
+HLTB11|Human Nutrition
+HLTB15|Health Research Methodologies
+HLTB16|Public Health
+HLTB22|Biological Determinants of Health
+HLTB24|Aging with Agility
+HLTB27|Applied Statistics for Public Health
+HLTB30|Current Issues in Health and Society
+HLTB33|Human Development and Anatomy
+HLTB40|Health Policy and Health Systems
+HLTB41|Social Determinants of Health
+HLTB42|Perspectives of Culture, Illness, and Healing
+HLTB44|Pathophysiology and Etiology of Disease
+HLTB50|Introduction to Health Humanities
+HLTB60|Introduction to Interdisciplinary Disability Studies
+HLTC16|Health Information Systems
+HLTC17|Rehabilitation Sciences
+HLTC19|Chronic Diseases
+HLTC22|Health, Aging, and the Life Cycle
+HLTC23|Child Health and Development
+HLTC24|Environment and Health
+HLTC25|Infectious Diseases
+HLTC27|Community Health and Epidemiology
+HLTC28|Special Topics in Health Sciences
+HLTC29|Special Topics in Health Sciences
+HLTC30|Understanding Cancer: From Cells to Communities
+HLTC42|Emerging Health Issues and Policy Needs
+HLTC43|Politics of Canadian Health Policy
+HLTC44|Comparative Health Policy Systems
+HLTC46|Globalization, Gender, and Health
+HLTC48|Special Topics in Health and Society
+HLTC49|Indigenous Health
+HLTC51|Special Topics in Health and Society
+HLTC55|Methods in Arts Based Health Research
+HLTC56|Drawing Illness
+HLTC81|Health Professions and Practice
+HLTD01|Directed Readings in Health and Society
+HLTD07|Advanced Rehabilitation Sciences: Disability Studies and Lived Experiences of 'Normalcy'
+HLTD08|Advanced Topics in Health Sciences
+HLTD12|Advanced Topics in Health and Society
+HLTD18|Dental Sciences
+HLTD20|Advanced Topics in Sex, Gender, and the Life Course
+HLTD22|Advanced Topics in Health and Society
+HLTD25|Advanced Topics in Environmental Health
+HLTD28|Innovations for Global Health
+HLTD40|The Politics of Care, Self- Care, and Mutual Aid
+HLTD49|Global Health Governance: Thinking Alongside the World's Leaders
+HLTD50|Advanced Topics in Health Humanities
+HLTD54|Toronto's Stories of Health and Illness
+HLTD71|Directed Research in Health and Society
+HLTD80|Critical Health Education
+HLTD82|Black Community Health: Education and Promotion
+HLTD96|Directed Research in Paramedicine
+IDSA01|Introduction to International Development Studies
+IDSA02|Experiencing Development in Africa
+IDSB01|Political Economy of International Development
+IDSB02|Development and Environment
+IDSB04|Introduction to International/Global Health
+IDSB06|Equity, Ethics and Justice in International Development
+IDSB07|Confronting Developments Racist Past and Present
+IDSB10|Political Economy of Knowledge Technology and Development
+IDSB11|Global Development in Comparative Perspective
+IDSC01|Research Design for Development Fieldwork
+IDSC03|Contemporary Africa: State, Society, and Politics
+IDSC04|Project Management I
+IDSC07|Project Management II
+IDSC13|State Formation and the Politics of Development in the Global South: Explaining Divergent Outcomes
+IDSC14|The Political Economy of Food
+IDSC15|Topics in International Development Studies
+IDSC16|Populism, Development, and Globalization in the Global South
+IDSC17|Development, Citizen Action and Social Change in the Global South
+IDSC18|New Paradigms in Development: The Role of Emerging Powers
+IDSC19|Community-driven Development: Cooperatives, Social Enterprises and the Black Social Economy
+IDSD01|Post-placement Seminar and Thesis
+IDSD02|Advanced Research Seminar in Critical Development Studies
+IDSD05|Historical Perspectives on Global Health and Development
+IDSD06|Feminist and Postcolonial Perspectives in Development Studies
+IDSD07|Extractive Industries in Africa
+IDSD14|Directed Reading
+IDSD15|Directed Research
+IDSD19|The Role of Researcher-Practitioner Engagement in Development
+IDSD20|Thinking Conflict, Security, and Development
+JOUA01|Introduction to Journalism and News Literacy I
+JOUA02|Introduction to Journalism II
+JOUA06|Contemporary Issues in Law and Ethics
+JOUB01|Covering Immigration and Transnational Issues
+JOUB02|Critical Journalism
+JOUB05|Advanced Video and Audio Production
+JOUB11|News Reporting
+JOUB14|Mobile Journalism
+JOUB18|[No course title available]
+JOUB19|Data Management and Presentation
+JOUB20|Interactive: Data and Analytics
+JOUB24|Journalism in the Age of Digital Media
+JOUB39|Fundamentals of Journalistic Writing
+JOUC18|Storyworks
+JOUC19|Social Media and Mobile Storytelling
+JOUC20|Emerging Tools and Technology
+JOUC22|Advanced Video and Documentary Storytelling
+JOUC30|Critical Approaches to Style, Form and Narrative
+JOUC60|Diasporic Media
+JOUC63|Media Ethics
+JOUC80|Understanding Audiences in the Digital Age
+JOUD10|Senior Seminar in Journalism
+JOUD11|Senior Research Seminar in Media and Journalism
+LGGA10|Beginner Korean I
+LGGA12|Beginner Korean II
+LGGA60|Introductory Standard Chinese I
+LGGA61|Introductory Standard Chinese II
+LGGA74|Introductory Tamil I
+LGGA75|Introductory Tamil II
+LGGB60|Intermediate Chinese I
+LGGB61|Intermediate Chinese II
+LGGC64|Reading Chinese and English: China from the Inside Out
+LGGC65|Reading Chinese and English: Global Perspectives
+LINA01|Introduction to Linguistics
+LINA02|Applications of Linguistics
+LINB04|Phonology I
+LINB06|Syntax I
+LINB09|Phonetics: The Study of Speech Sounds
+LINB10|Morphology
+LINB18|English Grammar
+LINB20|Sociolinguistics
+LINB29|Quantitative Methods in Linguistics
+LINB30|Programming for Linguists
+LINB60|Comparative Study of English and Chinese
+LINB62|Structure of American Sign Language
+LINB98|Supervised Introductory Research in Linguistics
+LINC02|Phonology II
+LINC10|Linguistic Analysis and Argumentation
+LINC11|Syntax II
+LINC12|Semantics: The Study of Meaning
+LINC13|Language Diversity and Universals
+LINC28|Language and Gender
+LINC35|Introduction to Computational Linguistics
+LINC47|Pidgin and Creole Languages
+LINC98|Supervised Research in Linguistics
+LIND01|Independent Study in Linguistics
+LIND02|Independent Study in Linguistics
+LIND03|Independent Study in Linguistics
+LIND07|Independent Study in Linguistics
+LIND09|Phonetic Analysis
+LIND11|Advanced Sociolinguistic Theory and Method
+MATA02|The Magic of Numbers
+MATA22|Linear Algebra I for Mathematical Sciences
+MATA23|Linear Algebra I
+MATA29|Calculus I for the Life Sciences
+MATA30|Calculus I for Physical Sciences
+MATA31|Calculus I for Mathematical Sciences
+MATA34|Calculus for Management
+MATA35|Calculus II for Biological Sciences
+MATA36|Calculus II for Physical Sciences
+MATA37|Calculus II for Mathematical Sciences
+MATA67|Discrete Mathematics
+MATB24|Linear Algebra II
+MATB41|Techniques of the Calculus of Several Variables I
+MATB42|Techniques of the Calculus of Several Variables II
+MATB43|Introduction to Analysis
+MATB44|Differential Equations I
+MATB61|Linear Programming and Optimization
+MATC01|Groups and Symmetry
+MATC09|Introduction to Mathematical Logic
+MATC15|Introduction to Number Theory
+MATC27|Introduction to Topology
+MATC32|Graph Theory and Algorithms for its Applications
+MATC34|Complex Variables
+MATC37|Introduction to Real Analysis
+MATC44|Introduction to Combinatorics
+MATC46|Differential Equations II
+MATC58|An Introduction to Mathematical Biology
+MATC63|Differential Geometry
+MATC90|Beginnings of Mathematics
+MATD01|Fields and Groups
+MATD02|Classical Plane Geometries and their Transformations
+MATD09|Set Theory
+MATD12|Topics in Mathematics
+MATD16|Coding Theory and Cryptography
+MATD34|Complex Variables II
+MATD67|Differentiable Manifolds
+MATD92|Mathematics Project
+MATD93|Mathematics Project
+MATD94|Readings in Mathematics
+MATD95|Readings in Mathematics
+MDSA10|Media Foundations
+MDSA11|Media Ethics
+MDSA13|Media Histories
+MDSB05|Media and Globalization
+MDSB09|Kids These Days:  Youth, Language and Media
+MDSB12|Visual Culture
+MDSB14|Human, Animal, Machine
+MDSB16|Indigenous Media Studies
+MDSB20|Media, Science and Technology Studies
+MDSB22|Feminist Media Studies
+MDSB23|Media and Militarization
+MDSB29|New Media Futures
+MDSB33|Media and Consumer Cultures
+MDSB34|Comparative Media Industries
+MDSC12|Trans-Feminist Queer Media Studies
+MDSC13|Popular Music and Media Cultures
+MDSC22|Understanding Scandals
+MDSC23|Black Media Studies
+MDSC24|Selfies and Society
+MDSC25|Understanding Audiences in the Digital Age
+MDSC31|Platforms and Cultural Production
+MDSC32|Chinese Media and Politics
+MDSC33|Games and Play
+MDSC34|Diasporic Media
+MDSC41|Media and Popular Culture in East Asia
+MDSC61|Alternative Media
+MDSC64|Media and Technology
+MDSD10|Senior Seminar: Topics in Media and Arts
+MDSD11|Senior Research Seminar in Media and Journalism
+MDSD20|Senior Seminar: Topics in Media and Society
+MGAB01|Introductory Financial Accounting I
+MGAB02|Introductory Financial Accounting II
+MGAB03|Introductory Management Accounting
+MGAC01|Intermediate Financial Accounting I
+MGAC02|Intermediate Financial Accounting II
+MGAC03|Intermediate Management Accounting
+MGAC10|Auditing
+MGAC50|Canadian Income Taxation I
+MGAC70|Management Information Systems
+MGAD20|Advanced Auditing
+MGAD40|Management Control Systems
+MGAD45|Corporate Governance and Strategy - CPA Perspective
+MGAD50|Advanced Financial Accounting
+MGAD65|Canadian Income Taxation II
+MGAD70|Advanced Accounting Case Analysis: A Capstone Course
+MGEA01|Introduction to Microeconomics
+MGEA02|Introduction to Microeconomics: A Mathematical Approach
+MGEA05|Introduction to Macroeconomics
+MGEA06|Introduction to Macroeconomics: A Mathematical Approach
+MGEB01|Price Theory
+MGEB02|Price Theory: A Mathematical Approach
+MGEB05|Macroeconomic Theory and Policy
+MGEB06|Macroeconomic Theory and Policy: A Mathematical Approach
+MGEB11|Quantitative Methods in Economics I
+MGEB12|Quantitative Methods in Economics II
+MGEB32|Economic Aspects of Public Policy
+MGEC02|Topics in Price Theory
+MGEC06|Topics in Macroeconomic Theory
+MGEC08|Economics of Markets and Financial Decision Making
+MGEC11|Introduction to Regression Analysis
+MGEC26|Special Topics in Economics
+MGEC31|Economics of the Public Sector: Taxation
+MGEC32|Economics of the Public Sector: Expenditures
+MGEC34|Economics of Health Care
+MGEC37|Law and Economics
+MGEC38|The Economics of Canadian Public Policy
+MGEC40|Economics of Organization and Management
+MGEC41|Industrial Organization
+MGEC45|Sports Data, Analysis and Economics
+MGEC51|Labour Economics I
+MGEC58|Economics of Human Resource Management
+MGEC61|International Economics: Finance
+MGEC62|International Economics: Trade Theory
+MGEC71|Money and Banking
+MGEC81|Economic Development
+MGEC82|International Aspects of Development Policy
+MGEC92|Economics of Markets and Pricing
+MGED02|Advanced Microeconomic Theory
+MGED06|Advanced Macroeconomic Theory
+MGED11|Theory and Practice of Regression Analysis
+MGED50|Workshop in Economic Research
+MGED63|Financial Crises: Causes, Consequences and Policy Implications
+MGED90|Supervised Reading
+MGED91|Supervised Reading
+MGFB10|Principles of Finance
+MGFC10|Intermediate Finance
+MGFC20|Personal Financial Management
+MGFC30|Introduction to Derivatives Markets
+MGFC35|Investments
+MGFC45|Portfolio Management: Theory and Practice
+MGFC50|International Financial Management
+MGFC60|Financial Statement Analysis and Security Valuation
+MGFD25|Financial Technologies and Applications (FinTech)
+MGFD30|Risk Management
+MGFD40|Investor Psychology and Behavioural Finance
+MGFD50|Mergers and Acquisitions: Theory and Practice
+MGFD60|Financial Modeling and Trading Strategies
+MGFD70|Advanced Financial Management
+MGFD85|Advanced Special Topics in Finance
+MGHA12|Human Resource Management
+MGHB02|Managing People and Groups in Organizations
+MGHC02|Management Skills
+MGHC23|Diversity in the Workplace
+MGHC52|Business Negotiation
+MGHC53|Introduction to Industrial Relations
+MGHD14|Leadership
+MGHD24|Occupational Health and Safety Management
+MGHD25|Human Resources Recruitment and Selection
+MGHD26|Training and Development
+MGHD27|Human Resources Planning and Strategy
+MGHD28|Compensation
+MGIA01|Principles of International Marketing
+MGIA12|International Human Resources
+MGIB02|International Organizational Behaviour
+MGIC01|International Corporate Strategy
+MGIC02|International Leadership Skills
+MGID40|Introduction to International Business Law
+MGID79|International Capstone Case Analysis
+MGMA01|Principles of Marketing
+MGMB01|Marketing Management
+MGMC01|Market Research
+MGMC02|Consumer Behaviour
+MGMC11|Product Management and Branding
+MGMC12|Advertising: From Theory to Practice
+MGMC13|Pricing Strategy
+MGMC14|Sales and Distribution Management
+MGMD01|Applied Marketing Models
+MGMD02|Judgement and Decision Making
+MGMD10|Seminar in Consumer Psychology I
+MGMD11|Seminar in Consumer Psychology II
+MGMD21|Competitive Marketing in Action
+MGOC10|Analytics for Decision Making
+MGOC15|Introductory Business Data Analytics
+MGOC20|Operations Management
+MGSB01|Introduction to Strategy
+MGSB22|Entrepreneurship
+MGSC01|Strategic Management I
+MGSC03|Public Management
+MGSC05|The Changing World of Business - Government Relations
+MGSC14|Management Ethics
+MGSC20|Consulting and Contracting: New Ways of Work
+MGSC30|The Legal Environment of Business I
+MGSC35|Innovation
+MGSD01|Senior Seminar in Strategic Management
+MGSD05|Strategic Management II
+MGSD15|Managing in the Information Economy
+MGSD24|New Venture Creation and Planning
+MGSD55|Strategy and Technology
+MGTA01|Introduction to Business
+MGTA02|Managing the Business Organization
+MGTA38|Management Communications
+MGTC28|Computer Programming Applications for Business
+MGTD80|Supervised Reading In Management
+MGTD81|Supervised Reading In Management
+MGTD82|Supervised Reading In Management
+MUZA60|Concert Band Ia
+MUZA61|Concert Band Ib
+MUZA62|Concert Choir Ia
+MUZA63|Concert Choir Ib
+MUZA64|String Orchestra Ia
+MUZA65|String Orchestra Ib
+MUZA66|Small Ensembles Ia
+MUZA67|Small Ensembles Ib
+MUZA80|Foundations in Musicianship
+MUZA81|Introduction to Music Industry and Technology
+MUZA99|Listening to Music
+MUZB01|Introduction to Community Music
+MUZB02|Introduction to Music Teaching, Facilitation, and Learning
+MUZB20|Music in the Contemporary World
+MUZB40|Music and Technology
+MUZB60|Concert Band IIa
+MUZB61|Concert Band IIb
+MUZB62|Concert Choir IIa
+MUZB63|Concert Choir IIb
+MUZB64|String Orchestra IIa
+MUZB65|String Orchestra IIb
+MUZB66|Small Ensembles IIa
+MUZB67|Small Ensembles IIb
+MUZB80|Developing Musicianship
+MUZC01|Exploring Community Music
+MUZC20|Movies, Music and Meaning
+MUZC23|Critical Issues in Music and Society
+MUZC60|Concert Band IIIa
+MUZC61|Concert Band IIIb
+MUZC62|Concert Choir IIIa
+MUZC63|Concert Choir IIIb
+MUZC64|String Orchestra IIIa
+MUZC65|String Orchestra IIIb
+MUZC66|Small Ensembles IIIa
+MUZC67|Small Ensembles IIIb
+MUZD80|Music and Culture Senior Project
+MUZD81|Independent Study in Music
+NMEA01|Digital Fundamentals
+NMEA02|Introduction to New Media Communications
+NMEA03|The Language of Design
+NMEA04|Interface Design, Navigation and Interaction I
+NMEB05|Interface Design, Navigation and Interaction II
+NMEB06|Project Development and Presentation
+NMEB08|Application Software for Interactive Media
+NMEB09|Sound Design
+NMEB10|New Media Design
+NMEC01|Theory and Practice of New Media
+NMED10|New Media Senior Project
+NROB60|Neuroanatomy Laboratory
+NROB61|Neurophysiology
+NROC34|Neuroethology
+NROC36|Molecular Neuroscience
+NROC60|Cellular Neuroscience Laboratory
+NROC61|Learning and Motivation
+NROC63|Behavioural Neuroscience Laboratory
+NROC64|Sensorimotor Systems
+NROC69|Synaptic Organization and Physiology of the Brain
+NROC90|Supervised Study in Neuroscience
+NROC93|Supervised Study in Neuroscience
+NROD60|Current Topics in Neuroscience
+NROD98|Thesis in Neuroscience
+PHLA10|Reason and Truth
+PHLA11|Introduction to Ethics
+PHLB02|Environmental Ethics
+PHLB04|Philosophy and Literature
+PHLB05|Social Issues
+PHLB07|Ethics
+PHLB09|Biomedical Ethics
+PHLB11|Philosophy of Law
+PHLB17|Introduction to Political Philosophy
+PHLB18|Ethics of Artificial Intelligence
+PHLB20|Belief, Knowledge, and Truth
+PHLB31|Introduction to Ancient Philosophy
+PHLB35|Introduction to Early Modern Philosophy
+PHLB50|Symbolic Logic I
+PHLB55|Puzzles and Paradoxes
+PHLB81|Theories of Mind
+PHLB91|Theories of Human Nature
+PHLB99|Philosophical Writing Methodology
+PHLC05|Ethical Theory
+PHLC06|Topics in Ethical Theory
+PHLC07|Death and Dying
+PHLC09|Topics in Continental Philosophy
+PHLC10|Topics in Bioethics
+PHLC14|Topics in Non-Western Philosophy
+PHLC22|Topics in Theory of Knowledge
+PHLC31|Topics in Ancient Philosophy: Plato
+PHLC35|Topics in Early Modern Philosophy: Rationalism
+PHLC36|Topics in Early Modern Philosophy: Empiricism
+PHLC37|Kant
+PHLC45|Advanced Topics in Philosophy
+PHLC51|Symbolic Logic II
+PHLC60|Metaphysics
+PHLC80|Philosophy of Language
+PHLC92|Political Philosophy
+PHLC99|Philosophical Development Seminar
+PHLD05|Advanced Seminar in Ethics
+PHLD09|Advanced Seminar in Bioethics
+PHLD31|Advanced Seminar in Ancient Philosophy
+PHLD78|Advanced Seminar in Political Philosophy
+PHLD85|Advanced Seminar in Philosophy: Socrates Project Mentorship
+PHLD86|Advanced Seminar in Philosophy: Socrates Project Mentorship
+PHLD88|Advanced Seminar in Philosophy : Socrates Project
+PHLD90|Independent Study
+PHLD91|Independent Study
+PHLD92|Independent Study
+PHLD93|Independent Study
+PHLD94|Independent Study
+PHLD95|Independent Study
+PHLD96|Independent Study
+PHLD97|Independent Study
+PHLD98|Independent Study
+PHLD99|Independent Study
+PHYA10|Physics I for Physical Sciences
+PHYA11|Physics I for Life Sciences
+PHYA21|Physics II for the Physical Sciences
+PHYA22|Physics II for the Life Sciences
+PHYB10|Intermediate Physics Laboratory I
+PHYB21|Electricity and Magnetism
+PHYB52|Thermal Physics
+PHYB54|Mechanics: From Oscillations to Chaos
+PHYB56|Introduction to Quantum Physics
+PHYB57|Introduction to Scientific Computing
+PHYC11|Intermediate Physics Laboratory II
+PHYC50|Electromagnetic Theory
+PHYC54|Classical Mechanics
+PHYC56|Quantum Mechanics I
+PHYC83|Introduction to General Relativity
+PHYD01|Research Project in Physics and Astrophysics
+PHYD02|Extended Research Project in Physics and Astrophysics
+PHYD37|Introduction to Fluid Mechanics
+PHYD38|Nonlinear Systems and Chaos
+PHYD57|Advanced Computational Methods in Physics
+PHYD72|Supervised Reading in Physics and Astrophysics
+PLIC24|First Language Acquisition
+PLIC54|[No course title available]
+PLIC55|Psycholinguistics
+PLIC75|Language and the Brain
+PLID01|Independent Study in Psycholinguistics
+PLID02|Independent Study in Psycholinguistics
+PLID03|Independent Study in Psycholinguistics
+PLID07|Independent Study in Psycholinguistics
+PLID44|Acquisition of the Mental Lexicon
+PLID53|Sentence Processing
+PLID56|Special Topics in Language Disorders in Children
+PLID74|Language and Aging
+PMDB22|Pre-hospital Care 1: Theory and Lab
+PMDB25|Therapeutic Communications and Crisis Intervention
+PMDB30|Alterations of Human Body Function I
+PMDB32|Pre-hospital Care 2: Theory, Lab and Clinical
+PMDB33|Anatomy
+PMDB36|Pharmacology for Allied Health
+PMDB41|Professional and Legal Issues, Research, Responsibilities and Leadership
+PMDC40|Alterations of Human Body Function II
+PMDC42|Pre-hospital Care 3: Theory, Lab and Field
+PMDC43|Medical Directed Therapeutics and Paramedic Responsibilities
+PMDC54|Pre-hospital Care 4: Theory, Lab and Field
+PMDC56|Primary Care Paramedic Integration and Decision Making
+POLA01|Critical Issues in Politics I
+POLA02|Critical Issues in Politics II
+POLB30|Law, Justice and Rights
+POLB40|Quantitative Reasoning For Political Science and Public Policy
+POLB56|Canadian Politics and Government
+POLB57|The Canadian Constitution and the Charter of Rights
+POLB72|Introduction to Political Theory
+POLB80|Introduction to International Relations I
+POLB81|Introduction to International Relations II
+POLB90|Comparative Development in International Perspective
+POLB91|Introduction to Comparative Politics
+POLC09|International Security: Conflict, Crisis and War
+POLC11|Applied Statistics for Politics and Public Policy
+POLC12|Global Public Policy and the Sustainable Development Goals (SDGs)
+POLC13|Program Evaluation
+POLC16|Chinese Politics
+POLC30|Law, Politics and Technology
+POLC32|The Canadian Judicial System
+POLC33|Politics of International Human Rights
+POLC34|The Politics of Crime
+POLC36|Law and Public Policy
+POLC38|International Law
+POLC39|Comparative Law and Politics
+POLC40|Current Topics in Politics
+POLC42|Topics in Comparative Politics
+POLC52|Indigenous Nations and the Canadian State
+POLC53|Canadian Environmental Policy
+POLC54|Intergovernmental Relations in Canada
+POLC56|Indigenous Politics and Law
+POLC57|Intergovernmental Relations and Public Policy
+POLC58|The Politics of National Identity and Diversity
+POLC69|Political Economy: International and Comparative Perspectives
+POLC70|Political Thought: Democracy, Justice and Power
+POLC73|Modern Political Theory
+POLC78|Political Analysis I
+POLC79|Feminist Political Thought
+POLC87|Great Power Politics
+POLC88|The New International Agenda
+POLC92|U.S. Government and Politics
+POLC94|Globalization, Gender and Development
+POLC98|International Political Economy of Finance
+POLD02|Senior Research Seminar in Political Science
+POLD30|Legal Reasoning
+POLD38|Law and Global Business
+POLD45|Constitutionalism
+POLD46|Public Law and the Canadian Immigration System
+POLD50|Political Interests, Political Identity, and Public Policy
+POLD52|Immigration and Canadian Political Development
+POLD54|Michi-Saagiig Nishnaabeg Nation Governance and Politics
+POLD56|Politics and Computational Social Science
+POLD59|Politics of Disability
+POLD67|The Limits of Rationality
+POLD75|Property and Power
+POLD82|Politics and Literature
+POLD87|Rational Choice and International Cooperation
+POLD89|Global Environmental Politics
+POLD91|Protests and Social Movements in Comparative Perspective
+POLD92|Survival and Demise of Dictatorships
+POLD95|Supervised Research
+POLD98|Supervised Reading
+PPGB11|Policy Communications with Data
+PPGB66|Public Policy Making
+PPGC67|Public Policy in Canada
+PPGD64|Comparative Public Policy
+PPGD68|Capstone: The Policy Process in Theory and Practice
+PSCB90|Physical Sciences Research Experience
+PSCD02|Current Questions in Mathematics and Science
+PSCD11|Communicating Science: Film, Media, Journalism, and Society
+PSYA01|Introduction to Biological and Cognitive Psychology
+PSYA02|Introduction to Clinical, Developmental, Personality and Social Psychology
+PSYB03|Introduction to Computers in Psychological Research
+PSYB07|Data Analysis in Psychology
+PSYB10|Introduction to Social Psychology
+PSYB20|Introduction to Developmental Psychology
+PSYB30|Introduction to Personality
+PSYB32|Introduction to Clinical Psychology
+PSYB38|Introduction to Behaviour Modification
+PSYB51|Introduction to Perception
+PSYB55|Introduction to Cognitive Neuroscience
+PSYB57|Introduction to Cognitive Psychology
+PSYB64|Introduction to Behavioural Neuroscience
+PSYB70|Methods in Psychological Science
+PSYB80|Psychology in Context
+PSYB90|Supervised Introductory Research in Psychology
+PSYC02|Scientific Communication in Psychology
+PSYC08|Advanced Data Analysis in Psychology
+PSYC09|Applied Multiple Regression in Psychology
+PSYC10|Judgment and Decision Making
+PSYC12|The Psychology of Prejudice
+PSYC13|Social Cognition: Understanding Ourselves and Others
+PSYC14|Cross-Cultural Social Psychology
+PSYC15|Foundations in Community Psychology
+PSYC16|Psychology of Imagination
+PSYC17|Meeting Minds: The Psychology of Interpersonal Interactions
+PSYC18|The Psychology of Emotion
+PSYC21|Adulthood and Aging
+PSYC22|Infancy
+PSYC23|Developmental Psychobiology
+PSYC27|Social Development
+PSYC28|Emotional Development
+PSYC30|Advanced Personality Psychology
+PSYC34|The Psychology of Happiness and Meaning
+PSYC36|Psychotherapy
+PSYC37|Psychological Assessment
+PSYC38|Adult Psychopathology
+PSYC39|Psychology and the Law
+PSYC50|Higher-Level Cognition
+PSYC52|Cognitive Neuroscience of Attention
+PSYC54|Auditory Cognitive Neuroscience
+PSYC57|Cognitive Neuroscience of Decision Making
+PSYC62|Drugs and the Brain
+PSYC70|Advanced Research Methods Laboratory
+PSYC71|Social Psychology Laboratory
+PSYC72|Developmental Psychology Lab
+PSYC73|Wellness and Resilience Laboratory
+PSYC74|Human Movement Laboratory
+PSYC81|Psychology for Sustainability
+PSYC85|History of Psychology
+PSYC86|The Unconscious Mind
+PSYC90|Supervised Study in Psychology
+PSYC93|Supervised Study in Psychology
+PSYD10|Community and Applied Social Psychology
+PSYD14|Psychology of Morality
+PSYD15|Current Topics in Social Psychology
+PSYD16|Critical Analysis in Social Psychology
+PSYD20|Current Topics in Developmental Psychology
+PSYD23|Dyadic Processes in Psychological Development
+PSYD24|Seeing, Hearing, and Moving in Children
+PSYD30|Current Topics in Personality Psychology
+PSYD31|Cultural-Clinical Psychology
+PSYD32|Personality Disorders
+PSYD33|Current Topics in Clinical Psychology
+PSYD35|Clinical Psychopharmacology
+PSYD37|Social Context of Mental Health and Illness
+PSYD39|Cognitive Behavioural Therapy
+PSYD55|Functional Magnetic Resonance Imaging Laboratory
+PSYD59|Psychology of Gambling
+PSYD62|Neuroscience of Pleasure and Reward
+PSYD66|Current Topics in Human Brain and Behaviour
+PSYD98|Thesis in Psychology
+RLGA01|World Religions I
+RLGA02|World Religions II
+SOCA05|The Sociological Imagination
+SOCB05|Logic of Social Inquiry
+SOCB22|Sociology of Gender
+SOCB35|Numeracy and Society
+SOCB37|Economy, Culture, and Society
+SOCB42|Theory I: Discovering the Social
+SOCB43|Theory II: Big Ideas in Sociology
+SOCB44|Sociology of Cities and Urban Life
+SOCB47|Social Inequality
+SOCB49|Sociology of Family
+SOCB58|Sociology of Culture
+SOCB59|Sociology of Law
+SOCB60|Issues in Critical Migration Studies
+SOCC11|Policing and Security
+SOCC15|Work, Employment and Society
+SOCC23|Practicum in Qualitative Research Methods
+SOCC26|Sociology of Urban Cultural Policies
+SOCC27|Sociology of Suburbs and Suburbanization
+SOCC29|Family and Gender in the Middle East
+SOCC31|Practicum in Quantitative Research Methods
+SOCC32|Human Rights and Counterterrorism
+SOCC49|Indigenous Health
+SOCC50|Sociology of Religion
+SOCC51|Special Topics in Health and Society
+SOCC61|The Sociology of the Truth and Reconciliation Commission
+SOCC70|Models of the Social World
+SOCD01|Advanced Seminar in Culture and Cities
+SOCD05|Advanced Seminar in Criminology and Sociology of Law
+SOCD08|Scarborough Place-Making: Indigenous Sovereignty and Settler Landholding
+SOCD12|Sociology of Art
+SOCD13|Sociology of Finance
+SOCD18|The History and Evolution of Reconciliation: The Indian Residential School Settlement
+SOCD21|Immigrant Scarborough
+SOCD40|Supervised Independent Research
+SOCD41|Supervised Independent Research
+SOCD44|Advanced Seminar on Issues in Contemporary Sociology
+STAA57|Introduction to Data Science
+STAB22|Statistics I
+STAB23|Introduction to Statistics for the Social Sciences
+STAB27|Statistics II
+STAB41|Financial Derivatives
+STAB52|Introduction to Probability
+STAB53|Introduction to Applied Probability
+STAB57|An Introduction to Statistics
+STAC32|Applications of Statistical Methods
+STAC33|Introduction to Applied Statistics
+STAC50|Data Collection
+STAC51|Categorical Data Analysis
+STAC53|Applied Data Collection
+STAC58|Statistical Inference
+STAC62|Probability and Stochastic Processes I
+STAC63|Probability and Stochastic Processes II
+STAC67|Regression Analysis
+STAC70|Statistics and Finance I
+STAD29|Statistics for Life &amp; Social Scientists
+STAD37|Multivariate Analysis
+STAD57|Time Series Analysis
+STAD68|Advanced Machine Learning and Data Mining
+STAD70|Statistics and Finance II
+STAD78|Machine Learning Theory
+STAD80|Analysis of Big Data
+STAD81|Causal Inference
+STAD92|Readings in Statistics
+STAD93|Readings in Statistics
+STAD94|Statistics Project
+STAD95|Statistics Project
+THRA10|Introduction to Theatre
+THRA11|Introduction to Performance
+THRB20|Wrestling with the Western Canon
+THRB22|Theatre in Canada
+THRB31|Intermediate Performance: Devising Theatre
+THRB32|Intermediate Performance: Improvisation - The Power of Play
+THRB41|Theatre-Making with Communities: A Survey
+THRB50|Stagecraft
+THRB55|Creating a Production: Actors in Action I
+THRB56|Creating a Production: Conception, Design, and Execution I
+THRC21|Reimagining Theatre Criticism
+THRC30|Theatrical Design
+THRC40|Performance and Activism
+THRC50|Advanced Workshop: Performance
+THRC55|Creating a Production: Actors in Action II
+THRC56|Creating a Production: Conception, Design, and Execution II
+THRD55|Creating a Production: Actors in Action III
+THRD56|Creating a Production: Conception, Design, and Execution III
+THRD60|Advanced Seminar in Theatre and Performance
+VPAA10|Introduction to Arts and Media Management
+VPAA12|Developing Audience, Resources, and  Community
+VPAB10|Equity and Inclusivity in Arts and Media Organizations
+VPAB13|Financial Management for Arts Managers
+VPAB16|Managing and Leading in Cultural Organizations
+VPAB17|From Principles to Practices in Arts Management
+VPAB18|Becoming a Producer
+VPAC13|Planning and Project Management in the Arts and Cultural Sector
+VPAC15|Cultural Policy
+VPAC16|Contracts and Copyright
+VPAC17|Marketing in the Arts and Media
+VPAC18|Raising Funds in the Arts and Media
+VPAC21|Special Topics in Arts Management I
+VPAC22|Special Topics in Arts Management II
+VPAD10|Good, Better, Best: Case Study Senior Seminar
+VPAD11|Focus on the Field: Senior Research Seminar
+VPAD12|Senior Collaborative Projects
+VPAD14|Independent Studies in Arts Management
+VPHA46|Ways of Seeing: Introduction to Art Histories
+VPHB39|Ten Key Words in Art History: Unpacking Methodology
+VPHB58|Modern Art and Culture
+VPHB59|Current Art Practices
+VPHB63|Fame and Glory: Objects of the Italian Renaissance
+VPHB64|Baroque Visions
+VPHB77|Modern Asian Art
+VPHC42|Gothic Art and Architecture
+VPHC49|Advanced Studies in Art Theory
+VPHC73|Home, Away and In Between: Diaspora and Visual Culture
+VPHC75|The Artist, Maker, Creator
+VPHD42|Supervised Reading in Art History
+VPHD48|Advanced Seminar in Art History and Visual Culture
+VPSA62|Foundation Studies in Studio
+VPSA63|But Why Is It Art?
+VPSB01|The Artist
+VPSB02|Image Culture
+VPSB56|Digital Studio I
+VPSB58|Video I
+VPSB59|Sculpture I
+VPSB61|Painting I
+VPSB62|Painting II
+VPSB67|Photo I
+VPSB70|Drawing I
+VPSB73|Curatorial Perspectives I
+VPSB74|Drawing II
+VPSB75|Photo II
+VPSB76|Video II
+VPSB77|Performance Art
+VPSB80|Digital Studio II
+VPSB85|Text as Image/Language as Art
+VPSB86|Sculpture II
+VPSB88|Sound Art
+VPSB89|Digital Animation I
+VPSC53|Kinetic Sculpture
+VPSC56|Studio Practice
+VPSC69|Theory and Practice: Art in a Globalizing World
+VPSC70|Interdisciplinary Digital Art
+VPSC73|Interdisciplinary Drawing Concepts
+VPSC77|Interdisciplinary Photo Concepts
+VPSC85|Essential Skills for Emerging Artists
+VPSC91|Theory and Practice: Art and the Body
+VPSC92|Theory and Practice: Art and Materials
+VPSC93|Theory and Practice: Art and the Everyday
+VPSC94|Theory and Practice: Art and Place
+VPSC95|Theory and Practice: Art and Social Justice
+VPSD56|Advanced Studio Practice
+VPSD61|Advanced Studio Art Project
+WSTA01|Introduction to Women's and Gender Studies
+WSTA03|Introduction to Feminist Theories and Thought
+WSTB05|Power in Knowledge Production
+WSTB09|Gender, Race, and Colonialism
+WSTB10|Women, Power and Protest: Transnational Perspectives
+WSTB11|Intersections of Inequality
+WSTB20|Feminism and The Environment
+WSTB22|From Freedom Runners to #BlackLivesMatter: Histories of Black Feminism in Canada
+WSTB25|LGBTQ History, Theory and Activism
+WSTC02|Feminist Qualitative Research in Action
+WSTC13|Women, Gender and Islam
+WSTC22|Gender and Film
+WSTC25|Transnational Queer Sexualities
+WSTC26|Critical Race and Black Feminist Theories
+WSTC28|Language and Gender
+WSTC30|Special Topics in Women's and Gender Studies
+WSTC40|Gender and Disability
+WSTD01|Independent Project in Women's and Gender Studies
+WSTD03|Feminist Perspectives on Sex, Gender and the Body
+WSTD04|Critical Perspectives on Gender and Human Rights
+WSTD08|Abolition Feminisms
+WSTD09|Race, Gender, and Islamophobia
+WSTD10|Creating Stories for Social Change
+WSTD16|Socialist Feminism in Global Context
