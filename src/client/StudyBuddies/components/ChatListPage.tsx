@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Image, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, Image, Modal, TextInput } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
 import { CheckBox } from 'react-native-elements';
@@ -12,8 +12,14 @@ const ChatListScreen = ({ navigation }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedPeople, setSelectedPeople] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredChats, setFilteredChats] = useState(chats);
 
-  const people = ['Person 1', 'Person 2', 'Person 3'];
+  const people = ['Brandan', 'Chinmay', 'Damian', 'Ashwin'];
+
+  useEffect(() => {
+    setFilteredChats(chats);
+  }, [chats]);
 
   const handleAddChat = () => {
     if (selectedPeople.length === 0) {
@@ -37,12 +43,22 @@ const ChatListScreen = ({ navigation }) => {
     dispatch(addChat(newChat));
     setIsModalVisible(false);
     setSelectedPeople([]);
-    setErrorMessage(''); 
+    setErrorMessage('');
+    setSearchQuery('');
   };
 
   const handleDeleteChat = (id) => {
     dispatch(deleteChat(id));
     dispatch(deleteMessagesForChat(id));
+  };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (query === '') {
+      setFilteredChats(chats);
+    } else {
+      setFilteredChats(chats.filter(chat => chat.name.toLowerCase().includes(query.toLowerCase())));
+    }
   };
 
   const renderLeftActions = (progress, dragX, item) => {
@@ -76,6 +92,12 @@ const ChatListScreen = ({ navigation }) => {
           <Text style={chatListStyles.addButtonText}>Add Chat</Text>
         </TouchableOpacity>
       </View>
+      <TextInput
+        style={chatListStyles.searchBar}
+        placeholder="Search chats..."
+        value={searchQuery}
+        onChangeText={handleSearch}
+      />
       <Modal visible={isModalVisible} transparent={true} animationType="slide">
         <View style={chatListStyles.modalContainer}>
           <View style={chatListStyles.modalContent}>
@@ -105,7 +127,7 @@ const ChatListScreen = ({ navigation }) => {
         </View>
       </Modal>
       <FlatList
-        data={chats}
+        data={filteredChats}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
