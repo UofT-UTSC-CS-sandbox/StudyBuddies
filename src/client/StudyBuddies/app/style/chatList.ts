@@ -56,12 +56,10 @@ const chatListStyles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
   },
-  searchBarContainer: {
-    marginTop: 10,
-  },
   searchBar: {
     backgroundColor: '#f0f0f0',
     padding: 10,
+    margin: 10,
     borderRadius: 5,
   },
   modalContainer: {
