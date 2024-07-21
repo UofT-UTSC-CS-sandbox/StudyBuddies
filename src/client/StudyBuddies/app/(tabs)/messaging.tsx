@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import MessagingPage from '@/components/MessagingPage';
+import ChatListScreen from '@/components/ChatListPage';
+import { Provider } from 'react-redux';
+import store from '/Users/cgokhale/Desktop/chinmay/utsc_3year/c01/StudyBuddies/src/client/StudyBuddies/store.js';
+import AppNavigator from '@/components/AppNavigator';
 
 
-const MessagingScreen = () => {
+const ChatListScreen1 = () => {
   return (
-    <MessagingPage/>
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
   );
 };
 
+export default ChatListScreen1;
 
 
-export default MessagingScreen;
