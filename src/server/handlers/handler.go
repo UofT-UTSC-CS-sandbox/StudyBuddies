@@ -15,7 +15,6 @@ type Handler struct {
     websocketService model.WebsocketService
 	buildingService model.BuildingService
 	roomService     model.RoomService
-	groupService    model.GroupService
 }
 
 type Config struct {
@@ -27,7 +26,6 @@ type Config struct {
     WebsocketService model.WebsocketService
 	BuildingService model.BuildingService
 	RoomService     model.RoomService
-	GroupService    model.GroupService
 }
 
 func NewHandler(c *Config) {
@@ -39,7 +37,6 @@ func NewHandler(c *Config) {
         websocketService: c.WebsocketService,
 		buildingService: c.BuildingService,
 		roomService:     c.RoomService,
-		groupService:    c.GroupService,
 	}
 	c.R.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"message": "Not Found: Invalid API Route"})
@@ -51,7 +48,7 @@ func NewHandler(c *Config) {
 	accGroup.POST("/auth/callback", h.AuthCallbackHandler)
 	accGroup.POST("/login", h.Login)
 	accGroup.DELETE("/delete", h.Delete)
-	accGroup.GET("/courses", h.GetCourses)
+	accGroup.GET("/courses", h.GetUserCourses)
 	accGroup.POST("/courses/join", h.JoinCourse)
 	accGroup.POST("/courses/leave", h.LeaveCourse)
 	accGroup.POST("/courses/create", h.CreateCourse)
@@ -61,6 +58,9 @@ func NewHandler(c *Config) {
 	accGroup.GET("/courses/students", h.GetStudents)
 	accGroup.PUT("/courses/add_student", h.AddStudent)
 	accGroup.PUT("/courses/remove_student", h.RemoveStudent)
+    accGroup.POST("/addFriend", h.AddFriend)
+    accGroup.DELETE("/removeFriend", h.RemoveFriend)
+    accGroup.GET("/getFriends", h.GetFriends)
 
     //chat routes
     chatGroup := c.R.Group("api/chat")

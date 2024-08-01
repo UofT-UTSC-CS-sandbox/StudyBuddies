@@ -34,6 +34,22 @@ func (u *userService) LeaveCourse(userID string, courseName string) error {
 	return u.UserStore.LeaveCourse(userID, courseName)
 }
 
+func (u *userService) AddFriend(userID, friendID string) error {
+    return u.UserStore.AddFriend(userID, friendID)
+}
+
+func (u *userService) RemoveFriend(userID, friendID string) error {
+    return u.UserStore.RemoveFriend(userID, friendID)
+}
+
+func (u *userService) GetFriends(userID string) ([]model.User, error) {
+    return u.UserStore.GetFriends(userID)
+}
+
+func (u *userService) GetFriendByUsername(username string) (*model.User, error) {
+    return u.UserStore.GetFriendByUsername(username)
+}
+
 func NewUserService(us *UserServiceConfig) model.UserService {
 	return &userService{
 		UserStore: us.UserStore,

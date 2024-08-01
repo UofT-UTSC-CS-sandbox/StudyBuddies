@@ -1,7 +1,6 @@
 package model
 
 import (
-
 	"github.com/VibeMerchants/StudyBuddies/utils"
 )
 
@@ -13,6 +12,7 @@ type User struct {
 	Name     string    `json:"name"`
 	Courses  []Course  `gorm:"many2many:user_courses;"`
     Message  []Message `gorm:"foreignKey:SenderId" json:"-"`
+    Friends []User `gorm:"many2many:friends;"`
 }
 
 type UserResponse struct {
@@ -21,6 +21,7 @@ type UserResponse struct {
 	Avatar   string   `json:"image"`
 	Name     string   `json:"name"`
 	Courses  []Course `json:"courses"`
+    Friends []User `json:"friends"`
 }
 
 func (u *User) Serialize() *UserResponse {
@@ -45,6 +46,10 @@ type UserService interface {
 	GetCourses(id string) ([]Course, error)
 	JoinCourse(userID string, courseName string) error
 	LeaveCourse(userID string, courseName string) error
+    AddFriend(userID, friendID string) error
+    GetFriendByUsername(username string) (*User, error)
+    RemoveFriend(userID, friendID string) error
+    GetFriends(userID string) ([]User, error)
 }
 
 type UserDataStore interface {
@@ -54,4 +59,8 @@ type UserDataStore interface {
 	GetCourses(id string) ([]Course, error)
 	JoinCourse(userID string, courseName string) error
 	LeaveCourse(userID string, courseName string) error
+    AddFriend(userID, friendID string) error
+    GetFriendByUsername(username string) (*User, error)
+    RemoveFriend(userID, friendID string) error
+    GetFriends(userID string) ([]User, error)
 }
