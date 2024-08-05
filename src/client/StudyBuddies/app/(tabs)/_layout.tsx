@@ -2,10 +2,8 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-import StudyNavigator from '@/navigation/StudyNavigator'; // Adjust the path based on your project structure
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -30,20 +28,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="logout"
-        options={{
-          title: 'Logout',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'map' : 'map-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="Study"
         options={{
           title: 'Study',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'book' : 'book-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Group Chat"
+        options={{
+          title: 'Chat',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'chatbubbles' : 'chatbubbles-outline'} color={color} />
           ),
         }}
       />

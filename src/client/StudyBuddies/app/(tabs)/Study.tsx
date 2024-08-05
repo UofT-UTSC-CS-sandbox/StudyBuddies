@@ -1,22 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import StudyScreen from '@/components/StudyScreen'
-import { View, Text } from 'react-native';
-import { NavigationProp } from '@react-navigation/native';
-import GoalsMenu from '@/components/GoalsMenu'
-import SwipeUpMenu2 from '@/components/SwipeUpMenu2'
+import StudyScreen from '@/components/StudyScreen';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CourseScreen from '@/components/CourseScreen';
 
+const Stack = createStackNavigator();
 
-const Study = () => {
+export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <StudyScreen />
-      <SwipeUpMenu2 />
-
-    </View>
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="Study">
+        <Stack.Screen
+          name="Study"
+          component={StudyScreen}
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen
+          name="Course"
+          component={CourseScreen}
+          options={({ route }) => ({
+            title: route.params?.courseName || 'Course Details',
+            headerStyle: {
+              backgroundColor: '#1c1c1e', // Change the header background color
+            },
+            headerTintColor: '#fff', // Change the text color of the header title
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          })}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-
-
-export default Study;
-
+}
