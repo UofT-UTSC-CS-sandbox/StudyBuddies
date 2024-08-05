@@ -72,6 +72,14 @@ func NewHandler(c *Config) {
     accGroup.GET("/getStudyLogsByCourseForAllStudents", h.getStudyLogsByCourseForAllStudents)
     accGroup.GET("/getFriendsLocations", h.GetFriendsLocations)
     accGroup.POST("/updateLocation", h.UpdateLocation)
+
+
+    accGroup.GET("/getGoals", h.GetGoals)
+    accGroup.GET("/getAccountInfo", h.GetAccountInfo)
+    accGroup.POST("/addGoal", h.AddGoal)
+    accGroup.POST("/removeGoal", h.RemoveGoal)
+    accGroup.POST("/updateGoal", h.UpdateGoal)
+    accGroup.POST("/updateAccountInfo", h.UpdateAccountInfo)
     //chat routes
     chatGroup := c.R.Group("api/chat")
 

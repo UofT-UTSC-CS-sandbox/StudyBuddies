@@ -557,3 +557,134 @@ func (h *Handler) GetFriendsLocations(ctx *gin.Context) {
 
     ctx.JSON(http.StatusOK, gin.H{"locations": response})
 }
+
+func (h *Handler) UpdateAccountInfo(ctx *gin.Context) {
+
+    
+    name := ctx.DefaultQuery("name", "UNKNOWN")
+    bio := ctx.Query("bio")
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    err = h.userService.UpdateAccountInfo(id, name, bio)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "Successfully updated account info"})
+}
+
+func (h *Handler) GetAccountInfo(ctx *gin.Context) {
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    name, bio, err := h.userService.GetAccountInfo(id)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    type AccountInfo struct {
+        Name string `json:"name"`
+        Bio string `json:"bio"`
+    }
+
+
+    ctx.JSON(http.StatusOK, gin.H{"info": AccountInfo{
+        Name: name,
+        Bio: bio,
+    }})
+
+}
+
+func (h *Handler) AddGoal(ctx *gin.Context) {
+
+    var g model.Goal
+
+
+    if err := ctx.ShouldBindJSON(&g); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+    
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+    
+    if err = h.userService.AddGoal(id, g); err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error Adding Goal"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "Successfully added goal"})
+
+}
+
+func (h *Handler) RemoveGoal(ctx *gin.Context) {
+
+    var g model.Goal
+
+
+    if err := ctx.ShouldBindJSON(&g); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+    
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+    
+    if err = h.userService.RemoveGoal(id, g); err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error Adding Goal"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "Successfully added goal"})
+
+}
+
+func (h *Handler) UpdateGoal(ctx *gin.Context) {
+
+    var g model.Goal
+
+    if err := ctx.ShouldBindJSON(&g); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+    
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+    
+    if err = h.userService.UpdateGoal(id, g); err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Error Adding Goal"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "Successfully added goal"})
+
+}
+
+func (h *Handler) GetGoals(ctx *gin.Context) {
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    goals, err := h.userService.GetGoals(id)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"goals": goals})
+
+}

@@ -329,6 +329,80 @@ func (u *UserDatastore) GetFriendsLocations(userID string) ([]model.FriendLocati
 }
 
 
+func (u *UserDatastore) UpdateAccountInfo(userID, name, bio string) error {
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+       return err 
+    }
+
+    user.UpdateAccountInfo(name, bio)
+
+    user, err = u.UpdateUser(user)
+
+    return err
+}
+
+func (u *UserDatastore) GetAccountInfo(userID string) (string, string, error) {
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+       return "", "", err 
+    }
+
+    return user.Name, user.Bio, nil
+
+}
+
+func (u *UserDatastore) AddGoal(userID string, goal model.Goal) error {
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+       return err 
+    }
+    user.AddGoal(goal)
+
+    user, err = u.UpdateUser(user)
+
+    return err
+}
+func (u *UserDatastore) RemoveGoal(userID string, goal model.Goal) error {
+
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+       return err 
+    }
+    user.RemoveGoal(goal)
+
+    user, err = u.UpdateUser(user)
+
+    return err
+}
+func (u *UserDatastore) UpdateGoal(userID string, goal model.Goal) error {
+
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+       return err 
+    }
+    user.UpdateGoal(goal)
+
+    user, err = u.UpdateUser(user)
+
+    return err
+}
+
+func (u *UserDatastore) GetGoals(userID string) ([]model.Goal, error) {
+
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+       return nil, err 
+    }
+    
+    return user.Goals, err
+}
 func duplicateKeyError(err error) bool {
 	duplicateKeyError := "SQLSTATE 23505"
 
