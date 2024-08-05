@@ -61,7 +61,17 @@ func NewHandler(c *Config) {
     accGroup.POST("/addFriend", h.AddFriend)
     accGroup.DELETE("/removeFriend", h.RemoveFriend)
     accGroup.GET("/getFriends", h.GetFriends)
-
+    accGroup.GET("/getUserCourses", h.GetAllUserCourses)
+    accGroup.GET("/getStudyLogs", h.GetAllStudyLogs)
+    accGroup.GET("/getStudyLogByCourse", h.GetStudyLogByCourse)
+    accGroup.POST("/updateStudyLogs", h.UpdateStudyLogs)
+    accGroup.POST("/addUserCourse", h.AddUserCourse)
+    accGroup.DELETE("/removeUserCourse", h.RemoveUserCourse)
+    accGroup.GET("/getUserCourseByName:name", h.GetUserCourseByName)
+    accGroup.DELETE("/removeAssignment", h.RemoveAssignment)
+    accGroup.GET("/getStudyLogsByCourseForAllStudents", h.getStudyLogsByCourseForAllStudents)
+    accGroup.GET("/getFriendsLocations", h.GetFriendsLocations)
+    accGroup.POST("/updateLocation", h.UpdateLocation)
     //chat routes
     chatGroup := c.R.Group("api/chat")
 

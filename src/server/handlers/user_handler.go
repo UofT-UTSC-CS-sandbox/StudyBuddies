@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 
 	"github.com/VibeMerchants/StudyBuddies/model"
 	jwt "github.com/dgrijalva/jwt-go"
@@ -209,6 +211,13 @@ func (h *Handler) JoinCourse(ctx *gin.Context) {
 		return
 	}
 
+    if _, err := h.userService.AddUserCourse(auth0ID, model.UserCourseData{
+        Course: courseData.CourseName,
+    }); err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+        return
+    }
+
 	ctx.JSON(http.StatusOK, gin.H{"message": "Course joined successfully"})
 }
 
@@ -320,4 +329,231 @@ func (h *Handler) GetFriends(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{"friends": friends})
+}
+ 
+func (h *Handler) GetAllStudyLogs(ctx *gin.Context) {
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    logs, err := h.userService.GetAllStudyLogs(id)
+    
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+    
+    ctx.JSON(http.StatusOK, gin.H{"logs": logs})
+}
+
+func (h *Handler) GetStudyLogByCourse(ctx *gin.Context) {
+
+    course := ctx.DefaultQuery("course", "UNKNOWN")
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    log, err := h.userService.GetStudyLogByCourse(id, course) 
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"log": log})
+}
+
+func (h *Handler) UpdateStudyLogs(ctx *gin.Context) {
+
+    var log struct {
+        Course string `json:"name"`
+        Time uint `json:"time"`
+        CurrentGrade float32 `json:"grade"`
+    }
+	
+    if err := ctx.ShouldBindJSON(&log); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+
+    logs, err := h.userService.UpdateStudyLogs(id, model.StudyLog(log))
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"logs": logs})
+
+}
+
+func (h *Handler) AddUserCourse(ctx *gin.Context) {
+    
+    var ucData struct {
+        Course string `json:"course"`
+        Assignment string `json:"assignment"`
+        Grade uint `json:"grade"`
+        Weight float32 `json:"weight"`
+    }
+    
+    if err := ctx.ShouldBindJSON(&ucData); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+    
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    uc, err := h.userService.AddUserCourse(id, model.UserCourseData(ucData))
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"user_courses": uc})
+}
+
+func (h *Handler) RemoveUserCourse(ctx *gin.Context) {
+
+	var course struct {
+		Name string `json:"name"`
+	}
+
+	if err := ctx.ShouldBindJSON(&course); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    courses, err := h.userService.RemoveUserCourse(id, course.Name)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"courses": courses})
+}
+
+func (h *Handler) GetAllUserCourses(ctx *gin.Context) {
+    
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    courses, err := h.userService.GetAllUserCourses(id)
+    
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+    
+    ctx.JSON(http.StatusOK, gin.H{"courses": courses})
+}
+
+func (h *Handler) GetUserCourseByName(ctx *gin.Context) {
+
+    name := strings.Trim(ctx.Param("name"), ":")
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    uc, err := h.userService.GetUserCourseByName(id, name)
+
+    fmt.Printf("UC: %v", uc)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"user_course": uc})
+}
+func (h *Handler) getStudyLogsByCourseForAllStudents(ctx *gin.Context) {
+    
+    course := ctx.DefaultQuery("course", "UNKNOWN")
+
+    fmt.Printf("RECEIVED COURSE: %v", course)
+
+    logs, err := h.userService.GetStudyLogsByCourseForAllStudents(course) 
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"log": logs})
+}
+
+func (h *Handler) RemoveAssignment(ctx *gin.Context) {
+
+    course := ctx.DefaultQuery("course", "UNKNOWN")
+    assignment := ctx.Query("assignment")
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+    
+    _, err = h.userService.RemoveAssignment(id, course, assignment) 
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "Assignment Removed"})
+
+}
+
+func (h *Handler) UpdateLocation(ctx *gin.Context) {
+    
+    lat, err := strconv.ParseFloat(ctx.DefaultQuery("lat", "UNKNOWN"), 64)
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to parse Latitude as float"})
+    }
+    long, err := strconv.ParseFloat(ctx.Query("long"), 64)
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Unable to parse Longitude as float"})
+    }
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    err = h.userService.UpdateLocation(id, lat, long)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "successfully updated your location"})
+
+}
+
+func (h *Handler) GetFriendsLocations(ctx *gin.Context) {
+    
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    response, err := h.userService.GetFriendsLocations(id)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"locations": response})
 }
