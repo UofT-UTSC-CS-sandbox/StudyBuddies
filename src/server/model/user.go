@@ -15,6 +15,7 @@ type StudyLog struct {
     Time uint
     CurrentGrade float32
 }
+
 type UserCourses map[string]UserCourse
 type UserCourse map[string]CourseData
 type CourseData struct {
@@ -27,17 +28,6 @@ type UserCourseData struct {
     Grade uint
     Weight float32
 }
-// exmaple
-//  UserCourses: {
-//    "MATA31": {
-//      "A1": 75,
-//      "Midterm": 65
-//    },
-//    "CSCA08": {
-//      "TT1": 95
-//    }
-// 
-//}
 
 // Necessary interfaace implementations to use maps in postgres
 
@@ -81,6 +71,14 @@ type User struct {
     UserCourses UserCourses `json:"usercourses"`
     Lat float64 `json:"lat"`
     Long float64 `json:"long"`
+    Bio string `json:"bio"`
+    Goals []Goal `json:"goal"`
+}
+
+type Goal struct {
+    Title string `json:"title"`
+    Description string `json:"desc"`
+    Progress uint `json:"progress"`
 }
 
 type UserResponse struct {
@@ -211,8 +209,33 @@ func (u *User) GetId() string {
     return utils.IdToString(u.ID) 
 }
 
+func (u *User) UpdateAccountInfo(name, bio string) {
+    u.Bio = bio
+    u.Name = name
+}
+
+func (u *User) AddGoal(goal Goal) {
+    u.Goals = append(u.Goals, goal)
+}
+
+func (u *User) RemoveGoal(goal Goal) {
+    for i, g := range u.Goals {
+        if g == goal {
+            u.Goals = append(u.Goals[:i], u.Goals[i+1:]...)
+            return
+        }
+    }
+}
+
+func (u *User) UpdateGoal(goal Goal) {
+    for i, g := range u.Goals {
+        if g.Title == goal.Title {
+            u.Goals[i].Progress = goal.Progress
+        }
+    }
+}
+
 // Handler Functions
-//TODO: Removing Assignments
 type UserService interface {
 	Register(user *User) (*User, error)
 	GetUser(id string) (*User, error)
@@ -236,6 +259,12 @@ type UserService interface {
     GetStudyLogsByCourseForAllStudents(course string) ([]StudyLog, error)
     GetFriendsLocations(userID string) ([]FriendLocationResponse, error)
     UpdateLocation(userID string, lat, long float64) error
+    UpdateAccountInfo(userID, name, bio string) error
+    GetAccountInfo(userID string) (string, string, error)
+    AddGoal(userID string, goal Goal) error
+    RemoveGoal(userID string, goal Goal) error
+    UpdateGoal(userID string, goal Goal) error
+    GetGoals(userID string) ([]Goal, error)
 }
 
 type UserDataStore interface {
@@ -261,4 +290,10 @@ type UserDataStore interface {
     GetStudyLogsByCourseForAllStudents(course string) ([]StudyLog, error)
     GetFriendsLocations(userID string) ([]FriendLocationResponse, error)
     UpdateLocation(userID string, lat, long float64) error
+    UpdateAccountInfo(userID, name, bio string) error
+    GetAccountInfo(userID string) (string, string, error)
+    AddGoal(userID string, goal Goal) error
+    RemoveGoal(userID string, goal Goal) error
+    UpdateGoal(userID string, goal Goal) error
+    GetGoals(userID string) ([]Goal, error)
 }

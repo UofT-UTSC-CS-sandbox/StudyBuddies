@@ -95,6 +95,26 @@ func (u *userService) GetFriendsLocations(userID string) ([]model.FriendLocation
 func (u *userService) UpdateLocation(userID string, lat, long float64) error {
     return u.UserStore.UpdateLocation(userID, lat, long)
 }
+func (u *userService) UpdateAccountInfo(userID, name, bio string) error {
+    return u.UserStore.UpdateAccountInfo(userID, name, bio)
+}
+func (u *userService) GetAccountInfo(userID string) (string, string, error) {
+    return u.UserStore.GetAccountInfo(userID)
+}
+func (u *userService) AddGoal(userID string, goal model.Goal) error {
+    return u.UserStore.AddGoal(userID, goal)
+}
+func (u *userService) RemoveGoal(userID string, goal model.Goal) error {
+
+    return u.UserStore.RemoveGoal(userID, goal)
+}
+func (u *userService) UpdateGoal(userID string, goal model.Goal) error {
+    return u.UserStore.UpdateGoal(userID, goal)
+}
+func (u *userService) GetGoals(userID string) ([]model.Goal, error) {
+    return u.UserStore.GetGoals(userID)
+}
+
 func NewUserService(us *UserServiceConfig) model.UserService {
 	return &userService{
 		UserStore: us.UserStore,
