@@ -1,48 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, StyleSheet, TextInput } from 'react-native';
-import { Auth0Provider, useAuth0 } from 'react-native-auth0';
-import * as SecureStore from 'expo-secure-store';
-import axios from 'axios';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Text, View, StyleSheet } from 'react-native';
+import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 
 const styles = StyleSheet.create({
-    container: {
-      ...StyleSheet.absoluteFillObject,
-      flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
-    map: {
-      ...StyleSheet.absoluteFillObject,
-    }
-  });
-  
-  export default function GoogleMapsScreen() {
+  container: {
+    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  }
+});
 
-    
-    return (
-      <View style={styles.container}>
-        <MapView 
-          
-          style={styles.map} 
+export default function GoogleMapsScreen() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let loc = await Location.getCurrentPositionAsync({});
+      setLocation(loc.coords);
+    })();
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
+  return (
+    <View style={styles.container}>
+      {location ? (
+        <MapView
+          style={styles.map}
           region={{
-            latitude: 43.841420,
-            longitude: -79.003680,
+            latitude: location.latitude,
+            longitude: location.longitude,
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           }}
-          >
-      
+        >
           <Marker
             coordinate={{
-              latitude: 43.841420,
-              longitude: -79.003680,
+              latitude: location.latitude,
+              longitude: location.longitude,
             }}
             title="Current Location"
             description="This is where you are."
@@ -57,7 +69,6 @@ const styles = StyleSheet.create({
             description="Where the academic weapons come to work."
           />
 
-
           <Marker
             coordinate={{
               latitude: 43.783900,
@@ -67,7 +78,6 @@ const styles = StyleSheet.create({
             description="Book a day keeps the bad grades away."
           />
 
-
           <Marker
             coordinate={{
               latitude: 43.790901,
@@ -76,13 +86,10 @@ const styles = StyleSheet.create({
             title="Pan Am Centre"
             description="Come Ball Up Fam."
           />
-
-  
-      
         </MapView>
-      </View>
-    );
-  
-  }
-
-  
+      ) : (
+        <Text>{text}</Text>
+      )}
+    </View>
+  );
+}
