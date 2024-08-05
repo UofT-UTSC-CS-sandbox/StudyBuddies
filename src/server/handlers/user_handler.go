@@ -237,7 +237,7 @@ func (h *Handler) LeaveCourse(ctx *gin.Context) {
 }
 
 func (h *Handler) AddFriend(ctx *gin.Context) {
-    
+
 	var friendData struct {
 		Username string `json:"username"`
 	}
@@ -247,11 +247,11 @@ func (h *Handler) AddFriend(ctx *gin.Context) {
 		return
 	}
 
-    friend, err := h.userService.GetFriendByUsername(friendData.Username)
+	friend, err := h.userService.GetFriendByUsername(friendData.Username)
 
-    if err != nil {
-        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Could Not Find a User With That Name"})
-    }
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Could Not Find a User With That Name"})
+	}
 
 	auth0ID, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
 	if err != nil {
@@ -268,7 +268,7 @@ func (h *Handler) AddFriend(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{"message": "Friend Added successfully"})
-    
+
 }
 
 func (h *Handler) RemoveFriend(ctx *gin.Context) {
@@ -282,11 +282,11 @@ func (h *Handler) RemoveFriend(ctx *gin.Context) {
 		return
 	}
 
-    friend, err := h.userService.GetFriendByUsername(friendData.Username)
+	friend, err := h.userService.GetFriendByUsername(friendData.Username)
 
-    if err != nil {
-        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Could Not Find a User With That Name"})
-    }
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Could Not Find a User With That Name"})
+	}
 
 	auth0ID, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
 	if err != nil {
@@ -306,19 +306,18 @@ func (h *Handler) RemoveFriend(ctx *gin.Context) {
 }
 
 func (h *Handler) GetFriends(ctx *gin.Context) {
-    
-    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
 
-    if err != nil {
-        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
-    } 
+	id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
 
-    friends, err := h.userService.GetFriends(id)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+	}
 
-    if err != nil {
-        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
-    }
+	friends, err := h.userService.GetFriends(id)
 
-    ctx.JSON(http.StatusOK, gin.H{"friends": friends})
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database Error"})
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"friends": friends})
 }
-
