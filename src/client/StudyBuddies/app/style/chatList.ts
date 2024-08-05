@@ -2,27 +2,31 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
-const chatListStyles = StyleSheet.create({
+const chatList = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#1c1c1e',
+    paddingTop: 0, // Add padding to move content lower
   },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginBottom: 20, // Add margin to create space below the header
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#333',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#fff',
   },
   addButton: {
     padding: 10,
-    backgroundColor: '#007aff',
-    borderRadius: 5,
+    backgroundColor: '#A259FF',
+    borderRadius: 12,
   },
   addButtonText: {
     color: '#fff',
@@ -33,7 +37,7 @@ const chatListStyles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#333',
   },
   profileImage: {
     width: 50,
@@ -47,20 +51,22 @@ const chatListStyles = StyleSheet.create({
   chatName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#fff',
   },
   chatMessage: {
     fontSize: 14,
-    color: '#555',
+    color: '#aaa',
   },
   chatTime: {
     fontSize: 12,
-    color: '#999',
+    color: '#999', // Lighter grey text
   },
   searchBar: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#333',
     padding: 10,
     margin: 10,
     borderRadius: 5,
+    color: '#fff',
   },
   modalContainer: {
     flex: 1,
@@ -71,26 +77,29 @@ const chatListStyles = StyleSheet.create({
   modalContent: {
     width: '80%',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#2c2c2e',
     borderRadius: 10,
   },
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#fff',
     marginBottom: 20,
+    color: '#fff', // White text
   },
   modalItem: {
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#333',
   },
   modalItemText: {
     fontSize: 18,
+    color: '#fff',
   },
   modalCloseButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#007aff',
+    backgroundColor: '#A259FF',
     borderRadius: 5,
     alignItems: 'center',
   },
@@ -101,7 +110,7 @@ const chatListStyles = StyleSheet.create({
   modalAddButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#007aff',
+    backgroundColor: '#A259FF',
     borderRadius: 5,
     alignItems: 'center',
   },
@@ -135,4 +144,4 @@ const chatListStyles = StyleSheet.create({
   },
 });
 
-export default chatListStyles;
+export default chatList;
