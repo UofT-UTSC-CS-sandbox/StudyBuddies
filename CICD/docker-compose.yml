@@ -1,0 +1,22 @@
+
+version: '3'
+services:
+  client:
+    build:
+      context: ./src/client/StudyBuddies/
+      dockerfile: Dockerfile
+    image: damian717/studybuddies-client:v0.1
+    ports:
+      - "19000:19000"
+    environment:
+      - EXPO_DEBUG=true
+
+  server:
+    build:
+      context: ./src/server
+      dockerfile: Dockerfile
+    image: damian717/studybuddies-server:v0.1
+    ports:
+      - "8081:8081"
+    environment:
+      - GIN_MODE=release
