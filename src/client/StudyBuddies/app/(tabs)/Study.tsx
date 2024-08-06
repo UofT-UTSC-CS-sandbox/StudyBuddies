@@ -21,9 +21,9 @@ export default function App() {
           options={({ route }) => ({
             title: route.params?.courseName || 'Course Details',
             headerStyle: {
-              backgroundColor: '#1c1c1e', // Change the header background color
+              backgroundColor: '#1c1c1e', 
             },
-            headerTintColor: '#fff', // Change the text color of the header title
+            headerTintColor: '#fff', 
             headerTitleStyle: {
               fontWeight: 'bold',
             },

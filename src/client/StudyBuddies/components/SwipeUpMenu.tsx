@@ -115,7 +115,7 @@ const App = () => {
     <SwipeUpDown
       itemMini={(show) => (
         <View style={styles.itemMini}>
-          <Text>Swipe up for more</Text>
+          <Text>Swipe Up To View Buildings</Text>
         </View>
       )}
       itemFull={(hide) => (

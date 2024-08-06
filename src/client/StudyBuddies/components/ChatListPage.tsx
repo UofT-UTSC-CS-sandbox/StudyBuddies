@@ -51,7 +51,7 @@ const ChatListScreen = ({ navigation }) => {
       return;
     }
 
-    const groupName = selectedPeople.join(', ');
+    const groupName = selectedPeople.map(person => person.name).join(', ');
     const chatExists = chats.some(chat => chat.name === groupName);
     if (chatExists) {
       setErrorMessage('Chat already exists');
@@ -63,6 +63,7 @@ const ChatListScreen = ({ navigation }) => {
       name: groupName,
       message: '',
       time: new Date().toLocaleTimeString(),
+      image: selectedPeople.map(person => person.image).find(image => image) || '' // Use the first non-empty image or an empty string
     };
     dispatch(addChat(newChat));
     setIsModalVisible(false);
@@ -95,23 +96,23 @@ const ChatListScreen = ({ navigation }) => {
     );
   };
 
-  const renderItem = ({ item }) => (
-    <Swipeable renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item)}>
-      <TouchableOpacity style={chatListStyles.chatItem} onPress={() => navigation.navigate('MessagingPage', { chatId: item.id })}>
-        <Image source={require('@/assets/images/default_pic.png')} style={chatListStyles.profileImage} />
-        <View style={chatListStyles.chatDetails}>
-          <Text style={chatListStyles.chatName}>{item.name}</Text>
-          <Text style={chatListStyles.chatMessage} numberOfLines={1}>{item.message}</Text>
-        </View>
-        <Text style={chatListStyles.chatTime}>{item.time}</Text>
-      </TouchableOpacity>
-    </Swipeable>
-  );
+  const renderItem = ({ item }) => {
+    console.log('Item image:', item.image);
 
-  const getAvailableFriends = () => {
-    const existingFriends = new Set(chats.flatMap(chat => chat.name.split(', ')));
-    return friends.filter(friend => !existingFriends.has(friend.name));
+    return (
+      <Swipeable renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item)}>
+        <TouchableOpacity style={chatListStyles.chatItem} onPress={() => navigation.navigate('MessagingPage', { chatId: item.id })}>
+          <Image source={{ uri: item.image ? item.image : require('@/assets/images/default_pic.png') }} style={chatListStyles.profileImage} />
+          <View style={chatListStyles.chatDetails}>
+            <Text style={chatListStyles.chatName}>{item.name}</Text>
+            <Text style={chatListStyles.chatMessage} numberOfLines={1}>{item.message}</Text>
+          </View>
+          <Text style={chatListStyles.chatTime}>{item.time}</Text>
+        </TouchableOpacity>
+      </Swipeable>
+    );
   };
+
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#1c1c1e' }}>
@@ -134,17 +135,17 @@ const ChatListScreen = ({ navigation }) => {
           <View style={chatListStyles.modalContainer}>
             <View style={chatListStyles.modalContent}>
               <Text style={chatListStyles.modalTitle}>Select People</Text>
-              {getAvailableFriends().length > 0 ? (
-                getAvailableFriends().map((friend) => (
+              {friends.length > 0 ? (
+                friends.map((friend) => (
                   <CheckBox
                     key={friend.id}
                     title={friend.name}
-                    checked={selectedPeople.includes(friend.name)}
+                    checked={selectedPeople.some(person => person.name === friend.name)}
                     onPress={() => {
-                      if (selectedPeople.includes(friend.name)) {
-                        setSelectedPeople(selectedPeople.filter(person => person !== friend.name));
+                      if (selectedPeople.some(person => person.name === friend.name)) {
+                        setSelectedPeople(selectedPeople.filter(person => person.name !== friend.name));
                       } else {
-                        setSelectedPeople([...selectedPeople, friend.name]);
+                        setSelectedPeople([...selectedPeople, { name: friend.name, image: friend.image }]);
                       }
                     }}
                   />

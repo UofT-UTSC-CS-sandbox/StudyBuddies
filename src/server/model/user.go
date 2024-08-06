@@ -29,7 +29,22 @@ type UserCourseData struct {
     Weight float32
 }
 
+type Goals []Goal
 // Necessary interfaace implementations to use maps in postgres
+func (g Goals) Value() (driver.Value, error) {
+	return json.Marshal(g)
+}
+
+func (g *Goals) Scan(value interface{}) error {
+	bytes, ok := value.([]byte)
+	if !ok {
+		return errors.New("type assertion to []byte failed")
+	}
+
+	return json.Unmarshal(bytes, g)
+}
+
+
 
 func (s StudyLogs) Value() (driver.Value, error) {
 	return json.Marshal(s)
@@ -72,7 +87,7 @@ type User struct {
     Lat float64 `json:"lat"`
     Long float64 `json:"long"`
     Bio string `json:"bio"`
-    Goals []Goal `json:"goal"`
+    Goals Goals `json:"goal"`
 }
 
 type Goal struct {
@@ -95,6 +110,7 @@ type FriendLocationResponse struct {
     Name string `json:"name"`
     Lat float64 `json:"lat"`
     Long float64 `json:"long"`
+    Img string `json:"img"`
 }
 
 func (u *User) ToLocationResponse() *FriendLocationResponse {
@@ -103,6 +119,7 @@ func (u *User) ToLocationResponse() *FriendLocationResponse {
         Name: u.Name,
         Lat: u.Lat,
         Long: u.Long,
+        Img: u.Avatar,
     }
 }
 
@@ -117,9 +134,7 @@ func (u *User) Serialize() *UserResponse {
 }
 
 func (u *User) GetLogByCourse(name string) *StudyLog {
-    fmt.Printf("LOGS: %v",u.StudyLogs)
     if _, ok := u.StudyLogs[name]; !ok {
-        fmt.Printf("HERE")
         return &StudyLog{"", 0, 0}
     }
 
@@ -137,11 +152,8 @@ func (u *User) GetGrade(course string) float32 {
     for _, info := range grades {
         grade += float32(info.Grade) * (info.Weight / 100) 
         totalWeight += info.Weight
-        fmt.Printf("GRADE: %v\n", grade)
-        fmt.Printf("WEIGHT: %v\n", totalWeight)
     }
 
-    fmt.Printf("RESULT: %v", (grade / totalWeight) * 100)
     return (grade / totalWeight) * 100
 }
 
@@ -201,7 +213,6 @@ func (u *User) RemoveUserCourse(name string) {
 }
 
 func (u *User) GetUserCourseByName(name string) UserCourse {
-    fmt.Printf("MAP AT NAME(%v): %v", name, u.UserCourses[name])
     return u.UserCourses[name]
 }
 
@@ -264,7 +275,9 @@ type UserService interface {
     AddGoal(userID string, goal Goal) error
     RemoveGoal(userID string, goal Goal) error
     UpdateGoal(userID string, goal Goal) error
-    GetGoals(userID string) ([]Goal, error)
+    GetGoals(userID string) (Goals, error)
+    UpdateProfilePicture(userID, url string) error
+    GetProfilePicture(userID string) (string, error)
 }
 
 type UserDataStore interface {
@@ -295,5 +308,7 @@ type UserDataStore interface {
     AddGoal(userID string, goal Goal) error
     RemoveGoal(userID string, goal Goal) error
     UpdateGoal(userID string, goal Goal) error
-    GetGoals(userID string) ([]Goal, error)
+    GetGoals(userID string) (Goals, error)
+    UpdateProfilePicture(userID, url string) error
+    GetProfilePicture(userID string) (string, error)
 }

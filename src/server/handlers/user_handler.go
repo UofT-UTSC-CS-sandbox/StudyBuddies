@@ -203,9 +203,6 @@ func (h *Handler) JoinCourse(ctx *gin.Context) {
 		return
 	}
 
-	fmt.Println("Auth0 ID: ", auth0ID)
-	fmt.Println("Course Name: ", courseData.CourseName)
-
 	if err := h.userService.JoinCourse(auth0ID, courseData.CourseName); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
@@ -268,9 +265,6 @@ func (h *Handler) AddFriend(ctx *gin.Context) {
 		return
 	}
 
-	fmt.Println("Auth0 ID: ", auth0ID)
-	fmt.Println("Course Name: ", friendData.Username)
-
 	if err := h.userService.AddFriend(auth0ID, friend.Auth0ID); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
@@ -302,9 +296,6 @@ func (h *Handler) RemoveFriend(ctx *gin.Context) {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
 		return
 	}
-
-	fmt.Println("Auth0 ID: ", auth0ID)
-	fmt.Println("Course Name: ", friendData.Username)
 
 	if err := h.userService.RemoveFriend(auth0ID, friend.Auth0ID); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
@@ -605,9 +596,7 @@ func (h *Handler) GetAccountInfo(ctx *gin.Context) {
 }
 
 func (h *Handler) AddGoal(ctx *gin.Context) {
-
     var g model.Goal
-
 
     if err := ctx.ShouldBindJSON(&g); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -688,3 +677,37 @@ func (h *Handler) GetGoals(ctx *gin.Context) {
     ctx.JSON(http.StatusOK, gin.H{"goals": goals})
 
 }
+
+func (h *Handler) UpdateProfilePicture(ctx *gin.Context) {
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    url := ctx.DefaultQuery("profileImage", "")
+
+    err = h.userService.UpdateProfilePicture(id, url)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error" : "Database error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"message": "Succesfully updated image"})
+
+}
+
+func (h *Handler) GetProfilePicture(ctx *gin.Context) {
+
+    id, err := getAuth0IDFromToken(ctx.Request.Header.Get("Authorization"), ctx)
+    if err != nil {
+        ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Token"})
+    }
+
+    url, err := h.userService.GetProfilePicture(id)
+
+    if err != nil {
+        ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+    }
+
+    ctx.JSON(http.StatusOK, gin.H{"img" : url})
+} 

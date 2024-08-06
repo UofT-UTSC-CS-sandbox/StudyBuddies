@@ -80,6 +80,8 @@ func NewHandler(c *Config) {
     accGroup.POST("/removeGoal", h.RemoveGoal)
     accGroup.POST("/updateGoal", h.UpdateGoal)
     accGroup.POST("/updateAccountInfo", h.UpdateAccountInfo)
+    accGroup.GET("/getProfileImage", h.GetProfilePicture)
+    accGroup.POST("/updateProfileImage", h.UpdateProfilePicture)
     //chat routes
     chatGroup := c.R.Group("api/chat")
 

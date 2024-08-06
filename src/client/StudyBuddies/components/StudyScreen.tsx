@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert, FlatList, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert, FlatList, TextInput, StatusBar } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Modal from 'react-native-modal';
@@ -166,6 +166,7 @@ const StudyScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#1c1c1e" />
       <View style={styles.header}>
         <Text style={styles.title}>Study</Text>
         <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.addButton}>
@@ -180,15 +181,6 @@ const StudyScreen: React.FC = () => {
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
         />
-      </View>
-      <View style={styles.additionalInfoContainer}>
-        <Text style={styles.additionalInfoText}>Overall Analytics</Text>
-        <TouchableOpacity onPress={() => setInputModalVisible(true)} style={styles.apiButton}>
-          <Text style={styles.apiButtonText}>Add Course</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={apiCall2} style={styles.apiButton}>
-          <Text style={styles.apiButtonText}>API Call 2</Text>
-        </TouchableOpacity>
       </View>
       <Modal
         isVisible={isModalVisible}
@@ -217,23 +209,6 @@ const StudyScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
       </Modal>
-      <Modal
-        isVisible={isInputModalVisible}
-        onBackdropPress={() => setInputModalVisible(false)}
-      >
-        <View style={styles.inputModalContent}>
-          <Text style={styles.modalTitle}>Enter Input</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your input"
-            value={inputValue}
-            onChangeText={handleInputChange}
-          />
-          <TouchableOpacity onPress={handleApiCall1} style={styles.submitButton}>
-            <Text style={styles.submitButtonText}>Submit</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
     </View>
   );
 };
@@ -250,6 +225,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+    paddingTop: 50,
     backgroundColor: '#1c1c1e',
   },
   title: {
@@ -276,7 +252,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   courseListContainer: {
-    maxHeight: 240,
+    maxHeight: 600,
     marginBottom: 20,
   },
   itemContainer: {
@@ -327,7 +303,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2c2c2e',
     padding: 20,
     borderRadius: 10,
-    maxHeight: '80%', // Limit the height of the modal
+    maxHeight: '60%', 
   },
   inputModalContent: {
     backgroundColor: '#2c2c2e',
