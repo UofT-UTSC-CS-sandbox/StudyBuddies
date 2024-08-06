@@ -135,7 +135,7 @@ const CourseScreen: React.FC = () => {
           }
         });
         fetchGrades();
-        setSelectedGrade(null); // Reset selectedGrade
+        setSelectedGrade(null); 
         setEditGradeModalVisible(false);
       } catch (error) {
         console.error('Failed to edit grade:', error);
@@ -183,7 +183,6 @@ const CourseScreen: React.FC = () => {
   );
 
   const handleStop = async () => {
-    const timeInSecs = timer;
     setTimerRunning(false);
     setTimer(0);
     try {

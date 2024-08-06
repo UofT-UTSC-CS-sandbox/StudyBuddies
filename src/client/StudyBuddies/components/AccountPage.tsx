@@ -1,18 +1,76 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, Modal, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, Modal, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
+import * as ImagePicker from 'expo-image-picker';
+import AWS from 'aws-sdk';
+
+const awsConfig = {
+  region: 'us-east-1',
+  accessKeyId: 'AKIA4T2YRUXKBWWVDY4H',
+  secretAccessKey: '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',
+  bucketName: 'studybuddies123',
+};
+
+AWS.config.update({
+  region: awsConfig.region,
+  accessKeyId: awsConfig.accessKeyId,
+  secretAccessKey: awsConfig.secretAccessKey
+});
+
+const s3 = new AWS.S3();
 
 const ProfileScreen: React.FC = () => {
   const [isProfileModalVisible, setProfileModalVisible] = useState(false);
   const [isFriendsModalVisible, setFriendsModalVisible] = useState(false);
+  const [isGoalsModalVisible, setGoalsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [friends, setFriends] = useState<{ id: number; name: string; username: string }[]>([]);
+  const [goals, setGoals] = useState<{ id: string; name: string; description: string }[]>([]);
+  const [newGoal, setNewGoal] = useState({ id: '', name: '', description: '' });
+  const [selectedGoal, setSelectedGoal] = useState<{ id: string; name: string; description: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newFriendUsername, setNewFriendUsername] = useState<string>('');
+  const [accountInfo, setAccountInfo] = useState({ name: '', bio: '' });
+  const [profileImage, setProfileImage] = useState<string>('');
 
-  const toggleProfileModal = () => {
-    setProfileModalVisible(!isProfileModalVisible);
+  useEffect(() => {
+    fetchAccountInfo();
+    fetchProfileImage();
+    fetchFriends();
+  }, []);
+
+  const fetchAccountInfo = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('userToken');
+      const response = await axios.get('http://localhost:8080/api/account/getAccountInfo', {
+        headers: {
+          Authorization: `${token}`
+        }
+      });
+      console.log("ACCOUNT INFO RECEIVED: ", response.data)
+      setAccountInfo(response.data.info);
+    } catch (error) {
+      console.error('Error fetching account info:', error);
+      setError(error.response ? error.response.data.error : error.message);
+    }
+  };
+
+  const fetchProfileImage = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('userToken');
+      const response = await axios.get('http://localhost:8080/api/account/getProfileImage', {
+        headers: {
+          Authorization: `${token}`
+        }
+      });
+      console.log("RESPONSE: ", response.data)
+      setProfileImage(response.data.img);
+    } catch (error) {
+      console.error('Error fetching profile image:', error);
+      setError(error.response ? error.response.data.error : error.message);
+    }
   };
 
   const fetchFriends = async () => {
@@ -33,7 +91,6 @@ const ProfileScreen: React.FC = () => {
       });
       console.log('Friends response:', response.data);
       setFriends(response.data.friends || []);
-      setFriendsModalVisible(true);
     } catch (error) {
       console.error('Error fetching friends:', error.response ? error.response.data : error.message);
       setError(error.response ? error.response.data.error : error.message);
@@ -87,10 +144,8 @@ const ProfileScreen: React.FC = () => {
         },
       });
 
-      // Optionally, you can update the friends list after adding a new friend
       await fetchFriends();
 
-      // Reset the input field
       setNewFriendUsername('');
       setError(null);
     } catch (error) {
@@ -103,33 +158,168 @@ const ProfileScreen: React.FC = () => {
     }
   };
 
+  const updateAccountInfo = async (name: string, bio: string) => {
+    try {
+      const token = await SecureStore.getItemAsync('userToken');
+      console.log('Fetched Token:', token);
+
+      if (!token) {
+        console.error('No token found');
+        setError('No token found');
+        return;
+      }
+
+      await axios.post(`http://localhost:8080/api/account/updateAccountInfo?name=${name}&bio=${bio}`, null, {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      setAccountInfo({ name, bio });
+      setProfileModalVisible(false);
+    } catch (error) {
+      console.error('Error updating account info:', error.response ? error.response.data : error.message);
+      setError(error.response ? error.response.data.error : error.message);
+    }
+  };
+
+  const updateProfileImage = async (imageUrl: string) => {
+    try {
+      const token = await SecureStore.getItemAsync('userToken');
+      await axios.post(`http://localhost:8080/api/account/updateProfileImage?profileImage=${imageUrl}`, null, {
+        headers: {
+          Authorization: `${token}`
+        }
+      });
+      setProfileImage(imageUrl);
+      fetchProfileImage();
+    } catch (error) {
+      console.error('Error updating profile image:', error);
+      setError(error.response ? error.response.data.error : error.message);
+    }
+  };
+
+  const handleImagePicker = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      Alert.alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      const selectedImageUri = result.assets[0].uri;
+      setIsLoading(true);
+      const uploadTimeout = setTimeout(() => {
+        setIsLoading(false);
+        Alert.alert("Upload Timeout", "The image upload process is taking too long. Please try again.");
+      }, 10000); // 10 seconds timeout
+
+      try {
+        const imageUrl = await uploadImageToS3(selectedImageUri);
+        clearTimeout(uploadTimeout);
+        updateProfileImage(imageUrl);
+      } catch (error) {
+        clearTimeout(uploadTimeout);
+        Alert.alert("Upload Error", "There was an error uploading the image. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const uploadImageToS3 = async (uri: string) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    const fileName = uri.split('/').pop();
+    const s3Params = {
+      Bucket: awsConfig.bucketName,
+      Key: fileName,
+      Body: blob,
+      ContentType: blob.type,
+      ACL: 'public-read'
+    };
+
+    return new Promise<string>((resolve, reject) => {
+      s3.upload(s3Params, (err: any, data: any) => {
+        if (err) {
+          console.error('Error uploading to S3:', err);
+          reject(err);
+        } else {
+          console.log('Successfully uploaded to S3:', data);
+          resolve(data.Location);
+        }
+      });
+    });
+  };
+
+  const addGoal = () => {
+    setGoals([...goals, { ...newGoal, id: `${goals.length + 1}` }]);
+    setNewGoal({ id: '', name: '', description: '' });
+ //   setGoalsModalVisible(false);
+  };
+
+  const editGoal = () => {
+    if (selectedGoal) {
+      setGoals(goals.map(goal => (goal.id === selectedGoal.id ? selectedGoal : goal)));
+      setSelectedGoal(null);
+      setGoalsModalVisible(false);
+    }
+  };
+
+  const deleteGoal = (id: string) => {
+    setGoals(goals.filter(goal => goal.id !== id));
+  };
+
+  const renderRightActions = (goal: { id: string; name: string; description: string }) => (
+    <View style={styles.rightActionContainer}>
+      <TouchableOpacity onPress={() => setSelectedGoal(goal)} style={styles.editButton}>
+        <Text style={styles.editButtonText}>Edit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => deleteGoal(goal.id)} style={styles.deleteButton}>
+        <Text style={styles.deleteButtonText}>Delete</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image
-          source={{ uri: 'https://example.com/path/to/your/profile-picture.png' }} // replace with your pfp image URI
-          style={styles.profileImage}
-        />
+        <TouchableOpacity onPress={handleImagePicker}>
+          {profileImage ? (
+            <Image source={{ uri: profileImage }} style={styles.profileImage} />
+          ) : (
+            <View style={styles.profileImagePlaceholder} />
+          )}
+        </TouchableOpacity>
       </View>
       <View style={styles.accountInfoContainer}>
         <View style={styles.accountInfo}>
-          <Text style={styles.label}>Account Name</Text>
-          <Text style={styles.label}>Bio</Text>
+          <Text style={styles.infoTitle}>Name</Text>
+          <Text style={styles.infoText}>{accountInfo.name}</Text>
+          <Text style={styles.infoTitle}>Bio</Text>
+          <Text style={styles.infoText}>{accountInfo.bio}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={[styles.editButton, styles.editProfileButton]} onPress={toggleProfileModal}>
+          <TouchableOpacity style={styles.editButton} onPress={() => setProfileModalVisible(true)}>
             <Icon name="pencil" size={16} color="#fff" style={styles.icon} />
             <Text style={styles.buttonText}>Edit Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.section}>
-        <TouchableOpacity style={styles.card} onPress={fetchFriends}>
+        <TouchableOpacity style={styles.card} onPress={() => setFriendsModalVisible(true)}>
           <Text style={styles.cardText}>Your Friends</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <TouchableOpacity style={styles.card} onPress={() => {}}>
+        <TouchableOpacity style={styles.card} onPress={() => setGoalsModalVisible(true)}>
           <Text style={styles.cardText}>Goals</Text>
         </TouchableOpacity>
       </View>
@@ -140,13 +330,25 @@ const ProfileScreen: React.FC = () => {
         animationType="slide"
         transparent={true}
         visible={isProfileModalVisible}
-        onRequestClose={toggleProfileModal}
+        onRequestClose={() => setProfileModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TextInput style={styles.input} placeholder="Edit Name" placeholderTextColor="#888" />
-            <TextInput style={styles.input} placeholder="Edit Bio" placeholderTextColor="#888" />
-            <TouchableOpacity style={styles.saveButton} onPress={toggleProfileModal}>
+            <TextInput
+              style={styles.input}
+              placeholder="Edit Name"
+              placeholderTextColor="#888"
+              value={accountInfo.name}
+              onChangeText={(text) => setAccountInfo((prev) => ({ ...prev, name: text }))}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Edit Bio"
+              placeholderTextColor="#888"
+              value={accountInfo.bio}
+              onChangeText={(text) => setAccountInfo((prev) => ({ ...prev, bio: text }))}
+            />
+            <TouchableOpacity style={styles.saveButton} onPress={() => updateAccountInfo(accountInfo.name, accountInfo.bio)}>
               <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -193,6 +395,94 @@ const ProfileScreen: React.FC = () => {
           </View>
         </View>
       </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isGoalsModalVisible}
+        onRequestClose={() => setGoalsModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <ScrollView>
+              {goals.map((goal) => (
+                <View key={goal.id} style={styles.goalCard}>
+                  <Text style={styles.goalName}>{goal.name}</Text>
+                  <Text style={styles.goalDescription}>{goal.description}</Text>
+                  <View style={styles.goalButtonContainer}>
+                    <TouchableOpacity style={styles.goalButton} onPress={() => setSelectedGoal(goal)}>
+                      <Icon name="pencil" size={16} color="#fff" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.goalButton, styles.deleteButton]} onPress={() => deleteGoal(goal.id)}>
+                      <Icon name="trash" size={16} color="#fff" />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              ))}
+            </ScrollView>
+            <TextInput
+              style={styles.input}
+              placeholder="Goal Name"
+              placeholderTextColor="#888"
+              value={newGoal.name}
+              onChangeText={(text) => setNewGoal((prev) => ({ ...prev, name: text }))}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Goal Description"
+              placeholderTextColor="#888"
+              value={newGoal.description}
+              onChangeText={(text) => setNewGoal((prev) => ({ ...prev, description: text }))}
+            />
+            <TouchableOpacity style={styles.saveButton} onPress={addGoal}>
+              <Text style={styles.saveButtonText}>Add Goal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.closeButton} onPress={() => setGoalsModalVisible(false)}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="none"
+        transparent={true}
+        visible={isLoading}
+        onRequestClose={() => setIsLoading(false)}
+      >
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#A259FF" />
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={selectedGoal !== null}
+        onRequestClose={() => setSelectedGoal(null)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <TextInput
+              style={styles.input}
+              placeholder="Edit Goal Name"
+              placeholderTextColor="#888"
+              value={selectedGoal?.name}
+              onChangeText={(text) => setSelectedGoal((prev) => ({ ...prev, name: text }))}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Edit Goal Description"
+              placeholderTextColor="#888"
+              value={selectedGoal?.description}
+              onChangeText={(text) => setSelectedGoal((prev) => ({ ...prev, description: text }))}
+            />
+            <TouchableOpacity style={styles.saveButton} onPress={editGoal}>
+              <Text style={styles.saveButtonText}>Save Goal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.closeButton} onPress={() => setSelectedGoal(null)}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -201,41 +491,54 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: 60, // Added padding to move everything down
-    backgroundColor: '#2c2c2e', // Updated background color
+    paddingTop: 60, 
+    backgroundColor: '#2c2c2e',
   },
   header: {
-    alignItems: 'flex-start', // Align items to the left
+    alignItems: 'flex-start', 
     marginVertical: 20,
   },
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: '#ccc', // Placeholder color
-    marginLeft: 20, // Move the profile picture to the right
+    backgroundColor: '#ccc', 
+    marginLeft: 20, 
+  },
+  profileImagePlaceholder: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#ccc', 
+    marginLeft: 20, 
   },
   accountInfoContainer: {
     borderWidth: 1,
-    borderColor: '#3a3a3c', // Updated border color
+    borderColor: '#3a3a3c', 
     borderRadius: 10,
-    padding: 30, // Further increased padding
+    padding: 30, 
     marginBottom: 20,
-    backgroundColor: '#3a3a3c', // Updated background color
-    minHeight: 200, // Further increased minimum height
-    justifyContent: 'space-between', // Ensure content is spaced out
+    backgroundColor: '#3a3a3c', 
+    minHeight: 200, 
+    justifyContent: 'space-between', 
   },
   accountInfo: {
-    alignItems: 'flex-start', // Align content to the left
+    alignItems: 'flex-start', 
   },
-  label: {
-    fontSize: 18,
-    marginVertical: 5,
-    color: '#fff', // Updated text color
+  infoTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 5,
+  },
+  infoText: {
+    fontSize: 16,
+    color: '#fff',
+    marginBottom: 15,
   },
   buttonContainer: {
-    flexDirection: 'row', // Align buttons in a row
-    justifyContent: 'center', // Center the buttons horizontally
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginTop: 10,
   },
   editButton: {
@@ -243,10 +546,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#A259FF',
     padding: 10,
-    borderRadius: 25, // Make corners very rounded
-    marginHorizontal: 10, // Add horizontal margin to space buttons apart
-    width: 200, // Make the button longer
-    justifyContent: 'center', // Center the text and icon
+    borderRadius: 25, 
+    marginHorizontal: 10,
+    width: 200, 
+    justifyContent: 'center', 
   },
   icon: {
     marginRight: 5,
@@ -260,15 +563,15 @@ const styles = StyleSheet.create({
   },
   card: {
     borderWidth: 1,
-    borderColor: '#3a3a3c', // Updated border color
+    borderColor: '#3a3a3c', 
     borderRadius: 10,
     padding: 20,
     alignItems: 'flex-start',
-    backgroundColor: '#3a3a3c', // Updated background color
+    backgroundColor: '#3a3a3c',
   },
   cardText: {
     fontSize: 18,
-    color: '#fff', // Updated text color
+    color: '#fff',
   },
   modalContainer: {
     flex: 1,
@@ -341,7 +644,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: '#444',
-    borderRadius: 25, // Very rounded corners
+    borderRadius: 25, 
     backgroundColor: '#3a3a3c',
     color: '#fff',
     marginRight: 10,
@@ -349,7 +652,7 @@ const styles = StyleSheet.create({
   sendButton: {
     backgroundColor: '#5275c4',
     padding: 10,
-    borderRadius: 15, // Slightly rounded corners
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -368,6 +671,41 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginTop: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  goalCard: {
+    borderWidth: 1,
+    borderColor: '#3a3a3c',
+    borderRadius: 10,
+    padding: 15,
+    backgroundColor: '#3a3a3c',
+    marginBottom: 10,
+  },
+  goalName: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  goalDescription: {
+    fontSize: 14,
+    color: '#fff',
+  },
+  goalButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  goalButton: {
+    backgroundColor: '#A259FF',
+    padding: 10,
+    borderRadius: 25,
+    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

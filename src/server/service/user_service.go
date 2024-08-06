@@ -111,10 +111,16 @@ func (u *userService) RemoveGoal(userID string, goal model.Goal) error {
 func (u *userService) UpdateGoal(userID string, goal model.Goal) error {
     return u.UserStore.UpdateGoal(userID, goal)
 }
-func (u *userService) GetGoals(userID string) ([]model.Goal, error) {
+func (u *userService) GetGoals(userID string) (model.Goals, error) {
     return u.UserStore.GetGoals(userID)
 }
 
+func (u *userService) UpdateProfilePicture(userID, url string) error {
+    return u.UserStore.UpdateProfilePicture(userID, url)
+}
+func (u *userService) GetProfilePicture(userID string) (string, error) {
+    return u.UserStore.GetProfilePicture(userID)
+}
 func NewUserService(us *UserServiceConfig) model.UserService {
 	return &userService{
 		UserStore: us.UserStore,

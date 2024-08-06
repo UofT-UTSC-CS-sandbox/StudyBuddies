@@ -20,7 +20,7 @@ const StudyVsGradeChart: React.FC = () => {
       <Text style={styles.title}>Time Studied vs. Current Grade (All Students)</Text>
       <LineChart
         data={sampleData}
-        width={width - 60} // Adjust width to fit your design
+        width={width - 60} 
         height={220}
         chartConfig={{
           backgroundColor: '#2c2c1e',
