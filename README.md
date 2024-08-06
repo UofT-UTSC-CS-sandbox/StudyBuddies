@@ -80,7 +80,8 @@ Navigate to `src/server` and run `go mod tidy`
 In a new terminal:
 
 
-1. Run `docker run --name postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:alpine` 
+1. Run `docker run --name postgres -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:alpine`
+2. Run `docker run --name redis -d -p 6379:6379 redis:alpine redis-server --save 60 1` 
 1. Confirm that the docker container exists by running `docker ps`
     - Output should look like the below:
     ``` bash
