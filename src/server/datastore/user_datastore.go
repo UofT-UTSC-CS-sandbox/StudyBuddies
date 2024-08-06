@@ -213,8 +213,6 @@ func (u *UserDatastore) AddUserCourse(userID string, uc model.UserCourseData) (*
 
     user.UpdateUserCourse(uc)
 
-    fmt.Printf("UPDATED USER COURSE (AddUserCourse): %v", user.UserCourses)
-
     user, err = u.UpdateUser(user)
     if err != nil {
         return nil, err
@@ -280,11 +278,8 @@ func (u *UserDatastore) GetStudyLogsByCourseForAllStudents(course string) ([]mod
         return nil, result 
     }
 
-    fmt.Printf("USERS: %v,", users)
-
     for _, user := range users {
         logs = append(logs, *user.GetLogByCourse(course))
-        fmt.Printf("NEW LOGS: %v", logs)
     }
 
     return logs, nil
@@ -393,7 +388,7 @@ func (u *UserDatastore) UpdateGoal(userID string, goal model.Goal) error {
     return err
 }
 
-func (u *UserDatastore) GetGoals(userID string) ([]model.Goal, error) {
+func (u *UserDatastore) GetGoals(userID string) (model.Goals, error) {
 
     user, err := u.GetUserByID(userID)
 
@@ -403,6 +398,34 @@ func (u *UserDatastore) GetGoals(userID string) ([]model.Goal, error) {
     
     return user.Goals, err
 }
+
+func (u *UserDatastore) UpdateProfilePicture(userID, url string) error {
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+        return err
+    }
+
+    user.Avatar = url
+
+    user, err = u.UpdateUser(user)
+
+    return err
+}
+
+func (u *UserDatastore) GetProfilePicture(userID string) (string, error) {
+    user, err := u.GetUserByID(userID)
+
+    if err != nil {
+        return "", err
+    }
+
+    url := user.Avatar
+
+    return url, nil 
+
+}
+
 func duplicateKeyError(err error) bool {
 	duplicateKeyError := "SQLSTATE 23505"
 
