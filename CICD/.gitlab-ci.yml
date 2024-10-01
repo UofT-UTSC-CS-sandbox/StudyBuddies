@@ -1,0 +1,41 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_CLIENT_IMAGE: damian717/studybuddies-client
+  DOCKER_SERVER_IMAGE: damian717/studybuddies-server
+
+build_client:
+  stage: build
+  script:
+    - cd src/client
+    - docker build -t $DOCKER_CLIENT_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - docker tag $DOCKER_CLIENT_IMAGE:$CI_COMMIT_SHORT_SHA $DOCKER_CLIENT_IMAGE:latest
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_CLIENT_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $DOCKER_CLIENT_IMAGE:latest
+
+build_server:
+  stage: build
+  script:
+    - cd src/server
+    - docker build -t $DOCKER_SERVER_IMAGE:$CI_COMMIT_SHORT_SHA .
+    - docker tag $DOCKER_SERVER_IMAGE:$CI_COMMIT_SHORT_SHA $DOCKER_SERVER_IMAGE:latest
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $DOCKER_SERVER_IMAGE:$CI_COMMIT_SHORT_SHA
+    - docker push $DOCKER_SERVER_IMAGE:latest
+
+test_server:
+  stage: test
+  image: $DOCKER_SERVER_IMAGE:latest
+  script:
+    - go test ./...
+
+deploy:
+  stage: deploy
+  only:
+    - main 
+  script:
+    - docker-compose -f docker-compose.yml up -d

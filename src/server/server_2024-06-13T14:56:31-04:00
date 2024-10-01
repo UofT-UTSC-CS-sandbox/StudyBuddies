@@ -1,0 +1,13 @@
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/account/register     --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).Register-fm (4 handlers)
+[GIN-debug] POST   /api/account/auth/callback --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).AuthCallbackHandler-fm (4 handlers)
+[GIN-debug] POST   /api/account/login        --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).Login-fm (4 handlers)
+[GIN-debug] DELETE /api/account/delete       --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).Delete-fm (4 handlers)
+[GIN-debug] GET    /api/account/courses      --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).GetCourses-fm (4 handlers)
+[GIN-debug] POST   /api/account/courses/join --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).JoinCourse-fm (4 handlers)
+[GIN-debug] POST   /api/account/courses/leave --> github.com/VibeMerchants/StudyBuddies/handlers.(*Handler).LeaveCourse-fm (4 handlers)
